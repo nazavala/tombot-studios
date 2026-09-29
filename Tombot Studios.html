@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tombot Studios | Indie Dossier & Game Dev</title>
+  
+  <!-- FUENTES DE GOOGLE FONTS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bahianita&family=Caacupe+One&family=Frijole&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       VARIABLES DE COLOR Y TIPOGRAFÍAS
+       ========================================================================== */
+    :root {
+      /* PALETA 1: "PULP ARCADE 80s" (Por defecto) */
+      --bg-main: #1c1d22;            /* Carbón azulado mate */
+      --bg-card: #252830;            /* Pizarra desgastada */
+      --dark-ink: #111217;           /* Tinta densa */
+      
+      --accent-primary: #c99846;     /* Mostaza retro opaco */
+      --accent-primary-hover: #dbaa55;
+      --accent-secondary: #4b787c;   /* Cerceta empolvada */
+      --accent-secondary-hover: #5a8e93;
+      --accent-alert: #a65646;       /* Terracota / óxido */
+      --newsprint-bg: #cfc2aa;       /* Papel periódico amarillento */
+      --newsprint-ink: #191714;      /* Tinta negra de imprenta */
+
+      /* Jerarquía Tipográfica */
+      --font-display: 'Frijole', cursive;                    /* Títulos principales del estudio y assets */
+      --font-dcb: 'Bahianita', cursive;                      /* Exclusiva: Sección Drunk City Bastards */
+      --font-caacupe: 'Caacupe One', cursive, sans-serif;    /* Subtítulos legibles, etiquetas y lemas */
+      --font-tech: 'Share Tech Mono', monospace;             /* Cuerpo de texto y datos técnicos */
+
+      /* Bordes y Sombras Duras de Novela Gráfica */
+      --comic-border: 4px solid var(--dark-ink);
+      --comic-shadow: 6px 6px 0px var(--dark-ink);
+      --comic-shadow-lg: 8px 8px 0px var(--dark-ink);
+      --comic-shadow-sm: 4px 4px 0px var(--dark-ink);
+    }
+
+    /* PALETA 2: "ACID PUNK 90s" (Activada con el interruptor) */
+    body:has(#theme-toggle:checked) {
+      --bg-main: #19161d;            /* Púrpura carbón profundo */
+      --bg-card: #241f2a;            /* Ciruela mate */
+      --dark-ink: #0f0c13;           /* Tinta negra violeta */
+      
+      --accent-primary: #9ebd42;     /* Verde ácido radiactivo opaco */
+      --accent-primary-hover: #b0d14b;
+      --accent-secondary: #ba4e6b;   /* Magenta / frambuesa cenizo */
+      --accent-secondary-hover: #ce5a79;
+      --accent-alert: #478b94;       /* Cian grisáceo */
+      --newsprint-bg: #d7dacb;       /* Papel hueso tóxico */
+      --newsprint-ink: #161318;
+    }
+
+    /* Reset y Estructura Base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg-main);
+      background-image: radial-gradient(var(--accent-primary) 1.2px, transparent 1.2px);
+      background-size: 16px 16px;
+      color: var(--newsprint-bg);
+      font-family: var(--font-tech);
+      font-size: 1.15rem;
+      line-height: 1.45;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      transition: background-color 0.25s ease, color 0.25s ease;
+    }
+
+    .logic-input {
+      display: none;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* ==========================================================================
+       HEADER: LOGO + SWITCH CON FUENTE CAACUPÉ ONE
+       ========================================================================== */
+    .main-header {
+      background: var(--dark-ink);
+      border-bottom: 4px solid #000000;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 75px;
+      gap: 1rem;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .logo-frame {
+      width: 48px;
+      height: 48px;
+      border: 3px solid var(--accent-primary);
+      background: var(--bg-card);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 3px 3px 0px var(--dark-ink);
+    }
+
+    .logo-frame svg {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .logo-title {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      color: var(--accent-primary);
+      letter-spacing: 0.5px;
+      line-height: 1.1;
+    }
+
+    .theme-switch-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--bg-card);
+      border: 2px solid var(--accent-secondary);
+      padding: 0.35rem 0.8rem;
+      box-shadow: 3px 3px 0px var(--dark-ink);
+      user-select: none;
+    }
+
+    .theme-label-txt {
+      font-family: var(--font-caacupe);
+      font-size: 0.95rem;
+      letter-spacing: 1px;
+      color: var(--accent-primary);
+      text-transform: uppercase;
+      line-height: 1;
+    }
+
+    .theme-pill-btn {
+      width: 46px;
+      height: 24px;
+      background: var(--dark-ink);
+      border: 2px solid var(--accent-primary);
+      border-radius: 12px;
+      cursor: pointer;
+      position: relative;
+      display: inline-block;
+    }
+
+    .theme-pill-btn::after {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 16px;
+      height: 16px;
+      background: var(--accent-primary);
+      border-radius: 50%;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    body:has(#theme-toggle:checked) .theme-pill-btn::after {
+      transform: translateX(22px);
+    }
+
+    /* ==========================================================================
+       BARRA DE PESTAÑAS (COMIC DOSSIER)
+       ========================================================================== */
+    .tabs-nav-bar {
+      background: #141318;
+      border-bottom: var(--comic-border);
+      padding: 0.8rem 0 0 0;
+    }
+
+    .tabs-list {
+      display: flex;
+      gap: 0.6rem;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .tabs-list::-webkit-scrollbar { display: none; }
+
+    .tab-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      letter-spacing: 0.5px;
+      padding: 0.8rem 1.5rem;
+      background: var(--bg-card);
+      color: var(--newsprint-bg);
+      border-top: var(--comic-border);
+      border-left: var(--comic-border);
+      border-right: var(--comic-border);
+      border-bottom: none;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.15s ease;
+      position: relative;
+      bottom: -4px;
+      border-radius: 4px 4px 0 0;
+      white-space: nowrap;
+    }
+
+    .tab-label:hover {
+      background: #312b39;
+      color: var(--accent-primary);
+    }
+
+    #tab-studio:checked ~ .tabs-nav-bar label[for="tab-studio"],
+    #tab-games:checked ~ .tabs-nav-bar label[for="tab-games"],
+    #tab-assets:checked ~ .tabs-nav-bar label[for="tab-assets"] {
+      background: var(--accent-primary);
+      color: var(--dark-ink);
+      box-shadow: 4px -2px 0px var(--dark-ink);
+      transform: translateY(-4px);
+      z-index: 5;
+    }
+
+    /* ==========================================================================
+       PANELES DE CONTENIDO
+       ========================================================================== */
+    main {
+      flex: 1;
+      padding: 2.5rem 0;
+    }
+
+    .tab-panel {
+      display: none;
+      animation: comicEnter 0.22s ease-out forwards;
+    }
+
+    @keyframes comicEnter {
+      from {
+        opacity: 0;
+        transform: translateY(8px) scale(0.99);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    #tab-studio:checked ~ main #panel-studio { display: block; }
+    #tab-games:checked ~ main #panel-games { display: block; }
+    #tab-assets:checked ~ main #panel-assets { display: block; }
+
+    /* ==========================================================================
+       BOTONES ESTILO CÓMIC
+       ========================================================================== */
+    .comic-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 0.85rem 1.6rem;
+      background: var(--accent-primary);
+      color: var(--dark-ink);
+      border: var(--comic-border);
+      box-shadow: var(--comic-shadow);
+      cursor: pointer;
+      min-height: 52px;
+      transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.15s ease;
+      line-height: 1.2;
+      text-align: center;
+    }
+
+    .comic-btn:hover {
+      background: var(--accent-primary-hover);
+      transform: translate(-2px, -2px);
+      box-shadow: var(--comic-shadow-lg);
+    }
+
+    .comic-btn:active {
+      transform: translate(2px, 2px);
+      box-shadow: 2px 2px 0px var(--dark-ink);
+    }
+
+    .comic-btn.btn-sec {
+      background: var(--accent-secondary);
+      color: var(--newsprint-bg);
+    }
+
+    .comic-btn.btn-sec:hover {
+      background: var(--accent-secondary-hover);
+    }
+
+    .comic-btn.btn-news {
+      background: var(--newsprint-bg);
+      color: var(--newsprint-ink);
+    }
+
+    /* ==========================================================================
+       PESTAÑA 1: EL ESTUDIO & MANIFIESTO
+       ========================================================================== */
+    .studio-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 2.5rem;
+      align-items: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .studio-badge {
+      display: inline-block;
+      background: var(--dark-ink);
+      color: var(--accent-primary);
+      font-family: var(--font-caacupe);
+      font-size: 0.95rem;
+      letter-spacing: 1px;
+      padding: 0.35rem 0.9rem;
+      border: 2px solid var(--accent-primary);
+      box-shadow: var(--comic-shadow-sm);
+      transform: rotate(-2deg);
+      margin-bottom: 1rem;
+    }
+
+    .studio-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 4.8vw, 3.8rem);
+      line-height: 1.1;
+      color: var(--accent-primary);
+      text-transform: uppercase;
+      text-shadow: 5px 5px 0px var(--dark-ink);
+      margin-bottom: 1.2rem;
+    }
+
+    /* SUBTÍTULO MODIFICADO: AHORA EN CAACUPÉ ONE (100% LEGIBLE) */
+    .studio-tagline {
+      font-family: var(--font-caacupe);
+      font-size: clamp(1.15rem, 2.2vw, 1.45rem);
+      letter-spacing: 1.2px;
+      color: var(--newsprint-bg);
+      margin-bottom: 1.5rem;
+      line-height: 1.35;
+      text-transform: uppercase;
+    }
+
+    .newsprint-box {
+      background: var(--newsprint-bg);
+      color: var(--newsprint-ink);
+      border: var(--comic-border);
+      box-shadow: var(--comic-shadow);
+      padding: 1.5rem;
+      margin-bottom: 1.8rem;
+    }
+
+    .newsprint-box p {
+      font-size: 1.25rem;
+      font-weight: bold;
+    }
+
+    .action-row {
+      display: flex;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+    }
+
+    .studio-card-hq {
+      background: var(--bg-card);
+      border: var(--comic-border);
+      box-shadow: var(--comic-shadow-lg);
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .studio-card-hq::before {
+      content: "TOMBOT // BASE OPERATIVA";
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--accent-secondary);
+      color: var(--newsprint-bg);
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      padding: 0.2rem 1rem;
+      border: 2px solid var(--dark-ink);
+      white-space: nowrap;
+    }
+
+    .studio-big-logo {
+      width: 140px;
+      height: 140px;
+      margin: 0 auto 1.5rem auto;
+      border: 4px solid var(--accent-primary);
+      background: var(--dark-ink);
+      box-shadow: var(--comic-shadow-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .studio-big-logo svg {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .studio-motto {
+      font-family: var(--font-display);
+      font-size: 1.45rem;
+      color: var(--accent-primary);
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+
+    .studio-stats {
+      display: flex;
+      justify-content: space-around;
+      border-top: 2px dashed var(--accent-secondary);
+      padding-top: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .stat-item h4 {
+      font-family: var(--font-caacupe);
+      font-size: 1.3rem;
+      letter-spacing: 1px;
+      color: var(--accent-primary);
+    }
+
+    .manifesto-box {
+      background: var(--newsprint-bg);
+      border: var(--comic-border);
+      box-shadow: var(--comic-shadow-lg);
+      padding: clamp(1.8rem, 4vw, 2.5rem);
+      position: relative;
+    }
+
+    .manifesto-box::before {
+      content: 'MANIFIESTO PUNK';
+      position: absolute;
+      top: -15px;
+      left: 25px;
+      background: var(--dark-ink);
+      color: var(--accent-primary);
+      font-family: var(--font-caacupe);
+      font-size: 0.95rem;
+      letter-spacing: 1px;
+      padding: 0.2rem 0.9rem;
+      border: 2px solid var(--newsprint-bg);
+    }
+
+    .manifesto-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 2.8vw, 2.2rem);
+      color: var(--newsprint-ink);
+      margin-bottom: 0.8rem;
+      line-height: 1.2;
+    }
+
+    .manifesto-text {
+      color: var(--newsprint-ink);
+      font-size: 1.25rem;
+      font-weight: bold;
+    }
+
+    /* ==========================================================================
+       PESTAÑA 2: JUEGOS DESARROLLADOS
+       (DRUNK CITY BASTARDS: FORMATO POSTER COMPLETO CON BAHIANITA)
+       ========================================================================== */
+    .flagship-panel {
+      background: var(--bg-card);
+      border: var(--comic-border);
+      box-shadow: var(--comic-shadow-lg);
+      padding: clamp(2rem, 4vw, 3rem);
+      margin-bottom: 2.5rem;
+      position: relative;
+    }
+
+    .flagship-panel::before {
+      content: "Proximamente en Steam";
+      position: absolute;
+      top: -15px;
+      right: 25px;
+      background: var(--accent-alert);
+      color: var(--newsprint-bg);
+      font-family: var(--font-dcb);
+      font-size: 1.35rem;
+      letter-spacing: 2px;
+      padding: 0.15rem 1rem;
+      border: 2px solid var(--dark-ink);
+    }
+
+    .flagship-content {
+      max-width: 950px;
+    }
+
+    /* TÍTULO PRINCIPAL EN BAHIANITA */
+    .flagship-title {
+      font-family: var(--font-dcb);
+      font-size: clamp(3.5rem, 7.5vw, 6rem);
+      letter-spacing: 3px;
+      color: var(--accent-primary);
+      line-height: 0.9;
+      margin-bottom: 0.8rem;
+      text-shadow: 4px 4px 0px var(--dark-ink);
+      text-transform: uppercase;
+    }
+
+    .flagship-tagline {
+      font-family: var(--font-dcb);
+      font-size: clamp(1.5rem, 2.6vw, 2.1rem);
+      letter-spacing: 1.5px;
+      color: var(--accent-secondary);
+      margin-bottom: 1.2rem;
+      line-height: 1.2;
+    }
+
+    .flagship-tags-bar {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.4rem;
+    }
+
+    .flagship-tag {
+      background: var(--dark-ink);
+      color: var(--accent-primary);
+      border: 2px solid var(--accent-primary);
+      font-family: var(--font-dcb);
+      font-size: 1.25rem;
+      letter-spacing: 1.5px;
+      padding: 0.2rem 0.8rem;
+      text-transform: uppercase;
+    }
+
+    .flagship-synopsis {
+      background: var(--newsprint-bg);
+      color: var(--newsprint-ink);
+      border: var(--comic-border);
+      box-shadow: var(--comic-shadow-sm);
+      padding: 1.5rem;
+      font-size: 1.25rem;
+      font-weight: bold;
+      margin-bottom: 1.8rem;
+      line-height: 1.5;
+    }
+
+    /* Sub-juegos desarrollados con Frijole */
+    .games-subgrid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+
+    .game-card {
+      background: var(--bg-card);
+      border: var(--comic-border);
+      box-shadow: var(--comic-shadow);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .game-card-thumb {
+      height: 160px;
+      background: var(--dark-ink);
+      border-bottom: var(--comic-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      color: var(--accent-secondary);
+    }
+
+    .game-card-body {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      justify-content: space-between;
+    }
+
+    .game-card-title {
+      font-family: var(--font-display);
+      font-size: 1.45rem;
+      color: var(--accent-primary);
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
+    }
+
+    .game-card-desc {
+      font-size: 1.15rem;
+      color: var(--newsprint-bg);
+      margin-bottom: 1.5rem;
+    }
+
+    /* ==========================================================================
+       PESTAÑA 3: ASSETS & TOOLS UNITY (QeController & SISTEMAS)
+       ========================================================================== */
+    .assets-intro-bar {
+      margin-bottom: 2rem;
+    }
+
+    .assets-intro-badge {
+      display: inline-block;
+      background: var(--dark-ink);
+      color: var(--accent-primary);
+      font-family: var(--font-caacupe);
+      font-size: 1rem;
+      letter-spacing: 1px;
+      padding: 0.3rem 0.9rem;
+      border: 2px solid var(--accent-primary);
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+    }
+
+    .assets-intro-title {
+      font-family: var(--font-caacupe);
+      font-size: clamp(1.2rem, 2.2vw, 1.55rem);
+      letter-spacing: 1.2px;
+      color: var(--newsprint-bg);
+      text-transform: uppercase;
+      line-height: 1.3;
+    }
+
+    .assets-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .asset-card {
+      background: var(--newsprint-bg);
+      border: var(--comic-border);
+      box-shadow: var(--comic-shadow);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    /* Resaltado especial para QeController */
+    .asset-card.card-featured {
+      border: 4px solid var(--accent-primary);
+      box-shadow: 8px 8px 0px var(--dark-ink);
+    }
+
+    .asset-header {
+      background: var(--dark-ink);
+      color: var(--accent-secondary);
+      padding: 0.8rem 1.2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: var(--comic-border);
+      font-family: var(--font-caacupe);
+      font-size: 0.85rem;
+      letter-spacing: 0.8px;
+    }
+
+    .asset-card.card-featured .asset-header {
+      color: var(--accent-primary);
+      border-bottom: 3px solid var(--accent-primary);
+    }
+
+    .asset-star-tag {
+      background: var(--accent-primary);
+      color: var(--dark-ink);
+      padding: 0.1rem 0.5rem;
+      font-family: var(--font-caacupe);
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      border: 1px solid var(--dark-ink);
+      font-weight: bold;
+    }
+
+    .asset-body {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .asset-title {
+      font-family: var(--font-display);
+      font-size: 1.45rem;
+      color: var(--newsprint-ink);
+      margin-bottom: 0.6rem;
+      line-height: 1.2;
+    }
+
+    .asset-desc {
+      font-size: 1.15rem;
+      color: var(--newsprint-ink);
+      font-weight: bold;
+      margin-bottom: 1.5rem;
+      flex-grow: 1;
+      line-height: 1.45;
+    }
+
+    .asset-footer {
+      border-top: 2px dashed var(--dark-ink);
+      padding-top: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.8rem;
+    }
+
+    .asset-price {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      color: var(--newsprint-ink);
+    }
+
+    .asset-price.free-tag {
+      color: var(--accent-alert);
+    }
+
+    /* ==========================================================================
+       FOOTER
+       ========================================================================== */
+    .main-footer {
+      background: var(--dark-ink);
+      border-top: 4px solid #000000;
+      padding: 40px 0;
+      text-align: center;
+      margin-top: auto;
+    }
+
+    .footer-logo-center {
+      width: 60px;
+      height: 60px;
+      border: 3px solid var(--accent-primary);
+      background: var(--bg-card);
+      box-shadow: 4px 4px 0px #000000;
+      margin: 0 auto 1rem auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .footer-logo-center svg {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .footer-studio-name {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      color: var(--accent-primary);
+      letter-spacing: 1px;
+      margin-bottom: 0.3rem;
+    }
+
+    .footer-quote {
+      font-family: var(--font-caacupe);
+      font-size: 1.1rem;
+      letter-spacing: 1px;
+      color: var(--accent-secondary);
+      max-width: 650px;
+      margin: 0 auto 1rem auto;
+      text-transform: uppercase;
+      line-height: 1.35;
+    }
+
+    .footer-legal {
+      font-size: 1.05rem;
+      color: #777a87;
+    }
+
+    /* ==========================================================================
+       MEDIA QUERIES (MÓVILES & TABLETS)
+       ========================================================================== */
+    @media (max-width: 992px) {
+      .studio-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+
+      .assets-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .navbar {
+        height: auto;
+        padding: 0.8rem 0;
+        flex-wrap: wrap;
+      }
+
+      .tabs-list {
+        justify-content: stretch;
+      }
+
+      .tab-label {
+        flex: 1;
+        text-align: center;
+        justify-content: center;
+        padding: 0.7rem 0.5rem;
+        font-size: 0.9rem;
+      }
+
+      .games-subgrid,
+      .assets-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .comic-btn {
+        width: 100%;
+      }
+
+      .asset-footer {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .asset-price {
+        text-align: center;
+        margin-bottom: 0.4rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- CONTROL DE PALETA DE COLORES -->
+  <input type="checkbox" id="theme-toggle" class="logic-input">
+
+  <!-- CONTROL DE PESTAÑAS (CSS PURO) -->
+  <input type="radio" name="site_tabs" id="tab-studio" class="logic-input" checked>
+  <input type="radio" name="site_tabs" id="tab-games" class="logic-input">
+  <input type="radio" name="site_tabs" id="tab-assets" class="logic-input">
+
+  <!-- ==========================================================================
+       HEADER CON PALETA RETRO EN CAACUPÉ ONE
+       ========================================================================== */
+  <header class="main-header">
+    <div class="container navbar">
+      <label for="tab-studio" class="logo-container" title="Inicio / Estudio">
+        <div class="logo-frame">
+          <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="100" height="100" fill="#252830"/>
+            <rect x="20" y="25" width="60" height="50" rx="6" fill="#c99846" stroke="#111217" stroke-width="6"/>
+            <circle cx="38" cy="45" r="7" fill="#111217"/>
+            <circle cx="62" cy="45" r="7" fill="#111217"/>
+            <rect x="35" y="62" width="30" height="6" fill="#4b787c"/>
+            <path d="M50 10 V25" stroke="#c99846" stroke-width="6" stroke-linecap="round"/>
+            <circle cx="50" cy="10" r="5" fill="#a65646"/>
+          </svg>
+        </div>
+        <span class="logo-title">TOMBOT STUDIOS</span>
+      </label>
+
+      <!-- Interruptor con "PALETA RETRO" en Caacupé One -->
+      <div class="theme-switch-wrapper" title="Alternar entre Paleta Pulp 80s y Acid Punk 90s">
+        <span class="theme-label-txt">PALETA RETRO</span>
+        <label for="theme-toggle" class="theme-pill-btn"></label>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       BARRA DE PESTAÑAS (COMIC DOSSIER)
+       ========================================================================== -->
+  <nav class="tabs-nav-bar">
+    <div class="container">
+      <div class="tabs-list">
+        <label for="tab-studio" class="tab-label">
+          <span>01 //</span> EL ESTUDIO
+        </label>
+        <label for="tab-games" class="tab-label">
+          <span>02 //</span> JUEGOS
+        </label>
+        <label for="tab-assets" class="tab-label">
+          <span>03 //</span> ASSETS UNITY
+        </label>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ==========================================================================
+       VISTAS DINÁMICAS POR PESTAÑAS (MAIN)
+       ========================================================================== -->
+  <main>
+    <div class="container">
+
+      <!-- ====================================================================
+           PESTAÑA 1: EL ESTUDIO
+           ==================================================================== -->
+      <section id="panel-studio" class="tab-panel">
+        <div class="studio-grid">
+          <div class="studio-intro">
+            <span class="studio-badge">ESTUDIO INDIE INDEPENDIENTE // EST. 2025</span>
+            <h1 class="studio-title">TOMBOT STUDIOS</h1>
+            
+            <!-- SUBTÍTULO CON ALTA LEGIBILIDAD (CAACUPÉ ONE) -->
+            <p class="studio-tagline">"Videojuegos crudos, arte gráfico visceral y código abierto a la comunidad"</p>
+
+            <div class="newsprint-box">
+              <p>
+                Somos un taller artesanal forjado en el amor por los 16 bits de arcade, el entintado callejero y el diseño de sistemas implacables. Desarrollamos títulos con identidad implacable y creamos herramientas listas para producción en Unity.
+              </p>
+            </div>
+
+            <div class="action-row">
+              <label for="tab-games" class="comic-btn">VER JUEGOS DESARROLLADOS ➔</label>
+              <label for="tab-assets" class="comic-btn btn-sec">EXPLORAR ASSETS</label>
+            </div>
+          </div>
+
+          <div class="studio-card-hq">
+            <div class="studio-big-logo">
+              <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="100" height="100" fill="#252830"/>
+                <rect x="20" y="25" width="60" height="50" rx="6" fill="#c99846" stroke="#111217" stroke-width="6"/>
+                <circle cx="38" cy="45" r="7" fill="#111217"/>
+                <circle cx="62" cy="45" r="7" fill="#111217"/>
+                <rect x="35" y="62" width="30" height="6" fill="#4b787c"/>
+                <path d="M50 10 V25" stroke="#c99846" stroke-width="6" stroke-linecap="round"/>
+                <circle cx="50" cy="10" r="5" fill="#a65646"/>
+              </svg>
+            </div>
+            <h2 class="studio-motto">TINTA, CÓDIGO Y CAOS</h2>
+            <p style="font-size: 1.1rem; color: var(--newsprint-bg);">Desarrollo sin inversores ni ataduras.</p>
+
+            <div class="studio-stats">
+              <div class="stat-item">
+                <h4>3</h4>
+                <span>PROYECTOS</span>
+              </div>
+              <div class="stat-item">
+                <h4>URP</h4>
+                <span>ESPECIALISTAS</span>
+              </div>
+              <div class="stat-item">
+                <h4>100%</h4>
+                <span>INDIE</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Manifiesto de Filosofía Indie -->
+        <div class="manifesto-box">
+          <h3 class="manifesto-title">FILOSOFÍA: NUNCA DILUIDA, SIEMPRE DESAFIANTE</h3>
+          <p class="manifesto-text">
+            Repudiamos los títulos diseñados para engancharte con recompensas automáticas. Nuestros juegos demandan dominio de controles, comprensión espacial y toma de decisiones táctica bajo presión. Cero microtransacciones abusivas.
+          </p>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           PESTAÑA 2: JUEGOS DESARROLLADOS
+           (DRUNK CITY BASTARDS: PRESENTACIÓN TIPO POSTER CON BAHIANITA)
+           ==================================================================== -->
+      <section id="panel-games" class="tab-panel">
+        
+        <article class="flagship-panel">
+          <div class="flagship-content">
+            <h2 class="flagship-title">DRUNK CITY BASTARDS</h2>
+            <p class="flagship-tagline">"Contribuye a que la humanidad cause su propia ruina."</p>
+            
+            <!-- Etiquetas tácticas del juego -->
+            <div class="flagship-tags-bar">
+              <span class="flagship-tag">EXPLORA Y DESCUBRE</span>
+              <span class="flagship-tag">COMBATE URBANO</span>
+              <span class="flagship-tag">RETRO PUNK</span>
+              <span class="flagship-tag">PC & MAC</span>
+            </div>
+
+            <div class="flagship-synopsis">
+              <p>
+                Drunk City Bastards es un videojuego de acción y supervivencia táctica en perspectiva isométrica y Tercera Persona ambientado en una metrópolis en decadencia.
+                En un mundo colapsado por la apatía y el vicio, tu misión es infiltrarte en campamentos hostiles utilizando el sigilo, sabotear sus suministros y evitar alertar a las hordas enemigas.
+              </p>
+            </div>
+
+            <!-- ENLACE DIRECTO A ITCH.IO -->
+            <div class="action-row">
+              <a href="https://tombot-studios.itch.io/drunk-city-bastards" target="_blank" rel="noopener noreferrer" class="comic-btn">
+                OBTENER EN ITCH.IO ➔
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Otros Proyectos -->
+        <div class="games-subgrid">
+          <article class="game-card">
+            <div class="game-card-thumb">
+              <span>[ PROTO-STEALTH ]</span>
+            </div>
+            <div class="game-card-body">
+              <div>
+                <h3 class="game-card-title">ALLEYWAY SKULKERS</h3>
+                <p class="game-card-desc">
+                  Infiltración táctica isométrica con marcado estilo cómic noir. Desactiva redes de vigilancia y sabotea nodos corporativos.
+                </p>
+              </div>
+              <a href="https://itch.io" target="_blank" rel="noopener noreferrer" class="comic-btn btn-news">PROBAR EN ITCH.IO</a>
+            </div>
+          </article>
+
+          <article class="game-card">
+            <div class="game-card-thumb">
+              <span>[ GAME JAM 48H ]</span>
+            </div>
+            <div class="game-card-body">
+              <div>
+                <h3 class="game-card-title">HANGOVER PROTOCOL</h3>
+                <p class="game-card-desc">
+                  Endless brawler arcade creado en un fin de semana. Mantén activo a un robot con cortocircuitos recargando su batería en combate continuo.
+                </p>
+              </div>
+              <a href="#" class="comic-btn btn-news">JUGAR EN NAVEGADOR</a>
+            </div>
+          </article>
+        </div>
+
+      </section>
+
+      <!-- ====================================================================
+           PESTAÑA 3: ASSETS & TOOLS UNITY (QeController & SISTEMAS)
+           ==================================================================== -->
+      <section id="panel-assets" class="tab-panel">
+        
+        <!-- Encabezado aclaratorio de herramientas Unity -->
+        <div class="assets-intro-bar">
+          <span class="assets-intro-badge">HERRAMIENTAS PARA DESARROLLADORES EN UNITY</span>
+          <p class="assets-intro-title">
+            Frameworks de movimiento, inteligencia artificial y módulos de interacción optimizados para producción en C#
+          </p>
+        </div>
+
+        <div class="assets-grid">
+          
+          <!-- ASSET 1: QeController (HERRAMIENTA PRINCIPAL CON ENLACE DE DESCARGA) -->
+          <article class="asset-card card-featured">
+            <div class="asset-header">
+              <span>CONTROLLER // C#</span>
+              <span class="asset-star-tag">★ PRINCIPAL</span>
+            </div>
+            <div class="asset-body">
+              <h3 class="asset-title">QeController</h3>
+              <p class="asset-desc">
+                CharacterController integral para Unity en perspectiva de tercera persona e isométrica. Arquitectura desacoplada basada en máquina de estados: locomoción fluida, transiciones de combate, giros de cámara de precisión, soporte para el nuevo Input System e inspector modular listo para extender.
+              </p>
+              <div class="asset-footer">
+                <span class="asset-price">$9.99 USD</span>
+                <!-- Enlace directo para descargar el UnityPackage -->
+                <a href="https://tombot-studios.itch.io/httpsalive-noise-e5dnotionsiteqecontroller-manual-de-desarrollador-2db4af2" target="_blank" rel="noopener noreferrer" class="comic-btn">DESCARGAR</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- ASSET 2: IA DE ENEMIGOS -->
+          <article class="asset-card">
+            <div class="asset-header">
+              <span>ENEMY AI // C#</span>
+              <span>v1.4</span>
+            </div>
+            <div class="asset-body">
+              <h3 class="asset-title">Tactical Enemy AI Core</h3>
+              <p class="asset-desc">
+                Sistema modular de inteligencia artificial para enemigos humanoides y patrullas tácticas. Incluye percepción sensorial (conos de visión y audición de pasos), navegación de cobertura, estados de alerta/combate y evasión de obstáculos con mínimo consumo de CPU.
+              </p>
+              <div class="asset-footer">
+                <span class="asset-price">$6.99 USD</span>
+                <a href="#" class="comic-btn">COMPRAR</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- ASSET 3: INTERACCIÓN Y PROPS -->
+          <article class="asset-card">
+            <div class="asset-header">
+              <span>PROPS & LOGIC // UTILITY</span>
+              <span>v1.0</span>
+            </div>
+            <div class="asset-body">
+              <h3 class="asset-title">Smart Props & Interaction Kit</h3>
+              <p class="asset-desc">
+                Utilidad lista para conectar cualquier prop del escenario: puertas bloqueadas, cajas de suministros, terminales y trampas reactivas. Incluye disparadores configurables listos para integrarse sin fricción con QeController mediante eventos de Unity.
+              </p>
+              <div class="asset-footer">
+                <span class="asset-price free-tag">GRATIS</span>
+                <a href="#" class="comic-btn btn-sec">DESCARGAR</a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ==========================================================================
+       FOOTER
+       ========================================================================== -->
+  <footer class="main-footer">
+    <div class="container">
+      <div class="footer-logo-center">
+        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="100" height="100" fill="#252830"/>
+          <rect x="20" y="25" width="60" height="50" rx="6" fill="#c99846" stroke="#111217" stroke-width="6"/>
+          <circle cx="38" cy="45" r="7" fill="#111217"/>
+          <circle cx="62" cy="45" r="7" fill="#111217"/>
+          <rect x="35" y="62" width="30" height="6" fill="#4b787c"/>
+          <path d="M50 10 V25" stroke="#c99846" stroke-width="6" stroke-linecap="round"/>
+          <circle cx="50" cy="10" r="5" fill="#a65646"/>
+        </svg>
+      </div>
+      
+      <h3 class="footer-studio-name">TOMBOT STUDIOS</h3>
+      
+      <!-- LEMA DEL FOOTER EN CAACUPÉ ONE -->
+      <p class="footer-quote">
+        FORJADO CON CAFÉ NEGRO, CÓDIGO BRUTAL Y ORGULLO INDEPENDIENTE.
+      </p>
+
+      <p class="footer-legal">
+        &copy; 2026 Tombot Studios. Todos los derechos reservados. "Drunk City Bastards" es una marca registrada.
+      </p>
+    </div>
+  </footer>
+
+</body>
+</html>
