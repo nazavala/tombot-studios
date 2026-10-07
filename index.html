@@ -2,10 +2,10 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
   <title>Tombot Studios | Game Menu & Indie Hub</title>
   
-  <!-- FUENTES DE GOOGLE FONTS -->
+  <!-- FUENTES OFICIALES DE GOOGLE FONTS -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bahianita&family=Caacupe+One&family=Frijole&family=Share+Tech+Mono&display=swap" rel="stylesheet">
@@ -15,16 +15,16 @@
        VARIABLES DE COLOR Y TEMA RETRO GAME UI
        ========================================================================== */
     :root {
-      /* PALETA 1: "PULP ARCADE 80s" */
+      /* PALETA 1: "PULP ARCADE 80s" (Default) */
       --bg-main: #18191f;            /* Fondo oscuro consola retro */
       --bg-card: #232630;            /* Placa de interfaz metálica */
-      --dark-ink: #0d0e12;           /* Negro de pantalla apagada */
+      --dark-ink: #0d0e12;           /* Negro de pantalla de tubo */
       
-      --accent-primary: #c99846;     /* Dorado / Mostaza de HUD */
+      --accent-primary: #c99846;     /* Mostaza / Dorado HUD */
       --accent-primary-hover: #e0ac53;
       --accent-secondary: #4b787c;   /* Cian militar opaco */
       --accent-secondary-hover: #5d9297;
-      --accent-alert: #a65646;       /* Alerta / Vida crítica */
+      --accent-alert: #a65646;       /* Terracota / Alerta */
       --newsprint-bg: #d2c5ae;       /* Pantalla de datos analógica */
       --newsprint-ink: #161411;      /* Tinta de datos */
 
@@ -34,14 +34,14 @@
       --font-caacupe: 'Caacupe One', cursive, sans-serif;
       --font-tech: 'Share Tech Mono', monospace;
 
-      /* Bordes y Sombras Duras de UI de Juego */
+      /* Bordes y Sombras Duras de UI Arcade */
       --comic-border: 4px solid var(--dark-ink);
       --comic-shadow: 6px 6px 0px var(--dark-ink);
       --comic-shadow-lg: 8px 8px 0px var(--dark-ink);
       --comic-shadow-sm: 4px 4px 0px var(--dark-ink);
     }
 
-    /* PALETA 2: "ACID PUNK 90s" */
+    /* PALETA 2: "ACID PUNK 90s" (Activada con el switch) */
     body:has(#theme-toggle:checked) {
       --bg-main: #141117;
       --bg-card: #1f1b25;
@@ -56,19 +56,27 @@
       --newsprint-ink: #141116;
     }
 
-    * {
+    /* Reset Global y Bloqueo de Desbordamiento */
+    *, *::before, *::after {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
       -webkit-tap-highlight-color: transparent;
     }
 
+    html {
+      width: 100%;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
     body {
+      width: 100%;
+      overflow-x: hidden;
       background-color: var(--bg-main);
-      /* Halftone + Scanlines sutiles de pantalla CRT de Arcade */
       background-image: 
         radial-gradient(var(--accent-primary) 1.2px, transparent 1.2px),
-        linear-gradient(rgba(0, 0, 0, 0.25) 50%, transparent 50%);
+        linear-gradient(rgba(0, 0, 0, 0.22) 50%, transparent 50%);
       background-size: 16px 16px, 100% 4px;
       color: var(--newsprint-bg);
       font-family: var(--font-tech);
@@ -84,9 +92,10 @@
       display: none;
     }
 
+    /* Contenedor Universal Centrado (Equilibrio perfecto en PC y Móvil) */
     .container {
       width: 100%;
-      max-width: 1200px;
+      max-width: 1150px;
       margin: 0 auto;
       padding: 0 1.5rem;
     }
@@ -114,7 +123,7 @@
     .hud-indicator {
       display: inline-flex;
       align-items: center;
-      gap: 0.4rem;
+      gap: 0.45rem;
     }
 
     .hud-blink-dot {
@@ -136,13 +145,21 @@
       color: var(--accent-primary);
       font-family: var(--font-tech);
       font-size: 0.75rem;
-      padding: 0.15rem 0.5rem;
+      padding: 0.2rem 0.6rem;
       cursor: pointer;
       text-transform: uppercase;
+      min-height: 28px;
+      touch-action: manipulation;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+
+    .sfx-toggle-btn:hover {
+      background: var(--accent-primary);
+      color: var(--dark-ink);
     }
 
     /* ==========================================================================
-       HEADER PRINCIPAL: LOGO + SWITCH DE TEMA
+       HEADER PRINCIPAL: LOGO + SWITCH
        ========================================================================== */
     .main-header {
       background: var(--dark-ink);
@@ -150,7 +167,7 @@
       position: sticky;
       top: 0;
       z-index: 1000;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.5);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.5);
     }
 
     .navbar {
@@ -164,14 +181,16 @@
     .logo-container {
       display: flex;
       align-items: center;
-      gap: 0.8rem;
+      gap: 0.9rem;
       cursor: pointer;
       text-decoration: none;
+      min-width: 0;
     }
 
     .logo-frame {
       width: 52px;
       height: 52px;
+      flex-shrink: 0;
       border: 3px solid var(--accent-primary);
       background: var(--bg-card);
       display: flex;
@@ -179,7 +198,6 @@
       justify-content: center;
       box-shadow: 3px 3px 0px var(--dark-ink);
       overflow: hidden;
-      position: relative;
     }
 
     .logo-frame img {
@@ -191,11 +209,12 @@
 
     .logo-title {
       font-family: var(--font-display);
-      font-size: 1.4rem;
+      font-size: clamp(1.2rem, 3vw, 1.45rem);
       color: var(--accent-primary);
       letter-spacing: 0.5px;
       line-height: 1.1;
       text-shadow: 2px 2px 0px var(--dark-ink);
+      white-space: nowrap;
     }
 
     .theme-switch-wrapper {
@@ -204,9 +223,11 @@
       gap: 0.6rem;
       background: var(--bg-card);
       border: 2px solid var(--accent-secondary);
-      padding: 0.35rem 0.8rem;
+      padding: 0.35rem 0.75rem;
       box-shadow: 3px 3px 0px var(--dark-ink);
       user-select: none;
+      flex-shrink: 0;
+      touch-action: manipulation;
     }
 
     .theme-label-txt {
@@ -219,7 +240,7 @@
     }
 
     .theme-pill-btn {
-      width: 46px;
+      width: 44px;
       height: 24px;
       background: var(--dark-ink);
       border: 2px solid var(--accent-primary);
@@ -242,47 +263,43 @@
     }
 
     body:has(#theme-toggle:checked) .theme-pill-btn::after {
-      transform: translateX(22px);
+      transform: translateX(20px);
     }
 
     /* ==========================================================================
-       BARRA DE MENÚ TIPO VIDEOJUEGO (STAGE SELECT MENU)
+       BARRA DE NAVEGACIÓN ESTILO MENÚ DE JUEGO (MAIN MENU)
        ========================================================================== */
     .tabs-nav-bar {
       background: #101116;
       border-bottom: var(--comic-border);
-      padding: 0.6rem 0 0 0;
-      position: relative;
+      padding-top: 0.8rem;
     }
 
-    .tabs-nav-bar::before {
-      content: "MAIN MENU // SELECT DIRECTORY:";
-      display: block;
-      max-width: 1200px;
-      margin: 0 auto 0.4rem auto;
-      padding: 0 1.5rem;
+    .tabs-nav-header-label {
       font-size: 0.85rem;
       color: var(--accent-secondary);
       letter-spacing: 2px;
       text-transform: uppercase;
+      margin-bottom: 0.4rem;
+      display: block;
     }
 
     .tabs-list {
       display: flex;
       gap: 0.6rem;
-      overflow-x: auto;
-      scrollbar-width: none;
+      align-items: flex-end;
     }
-    .tabs-list::-webkit-scrollbar { display: none; }
 
     .tab-label {
+      flex: 1;
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 0.5rem;
       font-family: var(--font-caacupe);
       font-size: 1.15rem;
-      letter-spacing: 1.5px;
-      padding: 0.75rem 1.6rem;
+      letter-spacing: 1.2px;
+      padding: 0.85rem 1.2rem;
       background: var(--bg-card);
       color: var(--newsprint-bg);
       border-top: var(--comic-border);
@@ -293,10 +310,12 @@
       user-select: none;
       transition: all 0.15s ease;
       position: relative;
-      bottom: -4px;
+      bottom: -4px; /* Empalma con el borde inferior en PC */
       border-radius: 4px 4px 0 0;
       white-space: nowrap;
       text-transform: uppercase;
+      min-height: 50px;
+      touch-action: manipulation;
     }
 
     .tab-label .menu-cursor {
@@ -315,7 +334,7 @@
       transform: translateX(2px);
     }
 
-    /* PESTAÑA ACTIVA (INDICADOR DE CURSOR DE JUEGO) */
+    /* PESTAÑA ACTIVA */
     #tab-studio:checked ~ .tabs-nav-bar label[for="tab-studio"],
     #tab-games:checked ~ .tabs-nav-bar label[for="tab-games"],
     #tab-assets:checked ~ .tabs-nav-bar label[for="tab-assets"],
@@ -336,7 +355,7 @@
     }
 
     /* ==========================================================================
-       PANELES DE CONTENIDO TIPO HUD
+       PANELES DE CONTENIDO
        ========================================================================== */
     main {
       flex: 1;
@@ -364,19 +383,26 @@
     #tab-assets:checked ~ main #panel-assets { display: block; }
     #tab-devlog:checked ~ main #panel-devlog { display: block; }
 
+    /* Contenedor unificado para pantallas individuales (DCB, Assets, Devlog) */
+    .unified-card-wrapper {
+      width: 100%;
+      max-width: 1050px;
+      margin: 0 auto;
+    }
+
     /* ==========================================================================
-       BOTONES ESTILO ARCADE / HUD
+       BOTONES ESTILO ARCADE
        ========================================================================== */
     .comic-btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       font-family: var(--font-caacupe);
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       text-decoration: none;
       text-transform: uppercase;
-      letter-spacing: 1.5px;
-      padding: 0.85rem 1.8rem;
+      letter-spacing: 1.2px;
+      padding: 0.85rem 1.6rem;
       background: var(--accent-primary);
       color: var(--dark-ink);
       border: var(--comic-border);
@@ -384,9 +410,9 @@
       cursor: pointer;
       min-height: 52px;
       transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.15s ease;
-      line-height: 1;
+      line-height: 1.2;
       text-align: center;
-      position: relative;
+      touch-action: manipulation;
     }
 
     .comic-btn:hover {
@@ -415,7 +441,7 @@
     }
 
     /* ==========================================================================
-       PESTAÑA 1: EL ESTUDIO (STATUS HUD)
+       PESTAÑA 1: EL ESTUDIO
        ========================================================================== */
     .studio-grid {
       display: grid;
@@ -431,27 +457,27 @@
       color: var(--accent-primary);
       font-family: var(--font-caacupe);
       font-size: 0.95rem;
-      letter-spacing: 1.5px;
+      letter-spacing: 1.2px;
       padding: 0.35rem 0.9rem;
       border: 2px solid var(--accent-primary);
       box-shadow: var(--comic-shadow-sm);
-      transform: rotate(-1deg);
       margin-bottom: 1rem;
     }
 
     .studio-title {
       font-family: var(--font-display);
-      font-size: clamp(2.4rem, 4.8vw, 3.8rem);
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
       line-height: 1.1;
       color: var(--accent-primary);
       text-transform: uppercase;
       text-shadow: 5px 5px 0px var(--dark-ink);
       margin-bottom: 1.2rem;
+      overflow-wrap: break-word;
     }
 
     .studio-tagline {
       font-family: var(--font-caacupe);
-      font-size: clamp(1.15rem, 2.2vw, 1.45rem);
+      font-size: clamp(1.1rem, 2.2vw, 1.4rem);
       letter-spacing: 1.2px;
       color: var(--newsprint-bg);
       margin-bottom: 1.5rem;
@@ -464,27 +490,27 @@
       color: var(--newsprint-ink);
       border: var(--comic-border);
       box-shadow: var(--comic-shadow);
-      padding: 1.5rem;
+      padding: clamp(1.2rem, 2.5vw, 1.6rem);
       margin-bottom: 1.8rem;
       position: relative;
     }
 
-    /* Esquinas tipo mira telescópica HUD */
     .newsprint-box::before,
     .flagship-panel::after,
     .asset-featured-showcase::after {
       content: "[ + ]";
       position: absolute;
-      top: 6px;
-      right: 8px;
+      top: 8px;
+      right: 10px;
       font-family: var(--font-tech);
       font-size: 0.85rem;
       opacity: 0.65;
     }
 
     .newsprint-box p {
-      font-size: 1.25rem;
+      font-size: 1.2rem;
       font-weight: bold;
+      line-height: 1.5;
     }
 
     .action-row {
@@ -497,7 +523,7 @@
       background: var(--bg-card);
       border: var(--comic-border);
       box-shadow: var(--comic-shadow-lg);
-      padding: 2.5rem 1.5rem;
+      padding: clamp(1.8rem, 3.5vw, 2.5rem) 1.5rem;
       text-align: center;
       position: relative;
     }
@@ -519,8 +545,8 @@
     }
 
     .studio-big-logo {
-      width: 155px;
-      height: 155px;
+      width: clamp(120px, 15vw, 155px);
+      height: clamp(120px, 15vw, 155px);
       margin: 0 auto 1.5rem auto;
       border: 4px solid var(--accent-primary);
       background: var(--dark-ink);
@@ -540,7 +566,7 @@
 
     .studio-motto {
       font-family: var(--font-display);
-      font-size: 1.45rem;
+      font-size: clamp(1.2rem, 2.5vw, 1.45rem);
       color: var(--accent-primary);
       line-height: 1.2;
       margin-bottom: 0.5rem;
@@ -552,11 +578,12 @@
       border-top: 2px dashed var(--accent-secondary);
       padding-top: 1rem;
       margin-top: 1.5rem;
+      gap: 0.5rem;
     }
 
     .stat-item h4 {
       font-family: var(--font-caacupe);
-      font-size: 1.4rem;
+      font-size: 1.35rem;
       letter-spacing: 1px;
       color: var(--accent-primary);
     }
@@ -565,7 +592,7 @@
       background: var(--newsprint-bg);
       border: var(--comic-border);
       box-shadow: var(--comic-shadow-lg);
-      padding: clamp(1.8rem, 4vw, 2.5rem);
+      padding: clamp(1.5rem, 3vw, 2.5rem);
       position: relative;
     }
 
@@ -573,7 +600,7 @@
       content: 'MANIFIESTO REBELDE';
       position: absolute;
       top: -15px;
-      left: 25px;
+      left: 20px;
       background: var(--dark-ink);
       color: var(--accent-primary);
       font-family: var(--font-caacupe);
@@ -585,31 +612,28 @@
 
     .manifesto-title {
       font-family: var(--font-display);
-      font-size: clamp(1.5rem, 2.8vw, 2.2rem);
+      font-size: clamp(1.3rem, 2.8vw, 2.2rem);
       color: var(--newsprint-ink);
       margin-bottom: 0.8rem;
       line-height: 1.2;
+      overflow-wrap: break-word;
     }
 
     .manifesto-text {
       color: var(--newsprint-ink);
-      font-size: 1.25rem;
+      font-size: 1.2rem;
       font-weight: bold;
+      line-height: 1.5;
     }
 
     /* ==========================================================================
        PESTAÑA 2: JUEGOS (MISIÓN: DRUNK CITY BASTARDS)
        ========================================================================== */
-    .games-single-wrapper {
-      max-width: 950px;
-      margin: 0 auto;
-    }
-
     .flagship-panel {
       background: var(--bg-card);
       border: var(--comic-border);
       box-shadow: var(--comic-shadow-lg);
-      padding: clamp(2rem, 4vw, 3rem);
+      padding: clamp(1.8rem, 4vw, 3rem);
       position: relative;
     }
 
@@ -621,10 +645,14 @@
       background: var(--accent-alert);
       color: var(--newsprint-bg);
       font-family: var(--font-dcb);
-      font-size: 1.35rem;
-      letter-spacing: 2px;
-      padding: 0.15rem 1rem;
+      font-size: clamp(1.1rem, 2vw, 1.35rem);
+      letter-spacing: 1.5px;
+      padding: 0.15rem 0.9rem;
       border: 2px solid var(--dark-ink);
+      max-width: 90%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .flagship-content {
@@ -633,19 +661,20 @@
 
     .flagship-title {
       font-family: var(--font-dcb);
-      font-size: clamp(3.5rem, 7.5vw, 6rem);
-      letter-spacing: 3px;
+      font-size: clamp(2.8rem, 7vw, 5.8rem);
+      letter-spacing: 2px;
       color: var(--accent-primary);
-      line-height: 0.9;
+      line-height: 0.95;
       margin-bottom: 0.8rem;
       text-shadow: 4px 4px 0px var(--dark-ink);
       text-transform: uppercase;
+      overflow-wrap: break-word;
     }
 
     .flagship-tagline {
       font-family: var(--font-dcb);
-      font-size: clamp(1.5rem, 2.6vw, 2.1rem);
-      letter-spacing: 1.5px;
+      font-size: clamp(1.35rem, 2.8vw, 2.1rem);
+      letter-spacing: 1.2px;
       color: var(--accent-secondary);
       margin-bottom: 1.2rem;
       line-height: 1.2;
@@ -653,7 +682,7 @@
 
     .flagship-tags-bar {
       display: flex;
-      gap: 0.8rem;
+      gap: 0.6rem;
       flex-wrap: wrap;
       margin-bottom: 1.4rem;
     }
@@ -663,9 +692,9 @@
       color: var(--accent-primary);
       border: 2px solid var(--accent-primary);
       font-family: var(--font-dcb);
-      font-size: 1.25rem;
-      letter-spacing: 1.5px;
-      padding: 0.2rem 0.8rem;
+      font-size: 1.15rem;
+      letter-spacing: 1.2px;
+      padding: 0.2rem 0.75rem;
       text-transform: uppercase;
     }
 
@@ -674,336 +703,18 @@
       color: var(--newsprint-ink);
       border: var(--comic-border);
       box-shadow: var(--comic-shadow-sm);
-      padding: 1.5rem;
-      font-size: 1.25rem;
+      padding: clamp(1.2rem, 2.5vw, 1.6rem);
+      font-size: 1.2rem;
       font-weight: bold;
       margin-bottom: 1.8rem;
       line-height: 1.5;
     }
 
     /* ==========================================================================
-       PESTAÑA 4: HUB DE AVANCES, DEVLOG Y COMMS
-       ========================================================================== */
-    .devlog-wrapper {
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-
-    .devlog-header {
-      background: var(--bg-card);
-      border: var(--comic-border);
-      box-shadow: var(--comic-shadow);
-      padding: 2rem;
-      margin-bottom: 2.5rem;
-      position: relative;
-    }
-
-    .devlog-header::before {
-      content: "DATABASE // LOG DE ACTUALIZACIONES";
-      position: absolute;
-      top: -15px;
-      left: 20px;
-      background: var(--accent-primary);
-      color: var(--dark-ink);
-      font-family: var(--font-dcb);
-      font-size: 1.2rem;
-      letter-spacing: 1.5px;
-      padding: 0.15rem 0.8rem;
-      border: 2px solid var(--dark-ink);
-    }
-
-    .devlog-main-title {
-      font-family: var(--font-dcb);
-      font-size: clamp(3rem, 6vw, 4.8rem);
-      letter-spacing: 2px;
-      color: var(--accent-primary);
-      line-height: 0.95;
-      margin-bottom: 0.5rem;
-    }
-
-    .devlog-subtitle {
-      font-family: var(--font-caacupe);
-      font-size: 1.25rem;
-      color: var(--accent-secondary);
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      margin-bottom: 1rem;
-    }
-
-    .devlog-gallery-title {
-      font-family: var(--font-caacupe);
-      font-size: 1.6rem;
-      color: var(--accent-primary);
-      margin: 2rem 0 1rem 0;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-    }
-
-    .devlog-gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-      margin-bottom: 2.5rem;
-    }
-
-    .gallery-panel {
-      background: var(--bg-card);
-      border: var(--comic-border);
-      box-shadow: var(--comic-shadow-sm);
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      transition: transform 0.15s ease;
-      position: relative;
-    }
-
-    .gallery-panel:hover {
-      transform: translateY(-4px);
-    }
-
-    .gallery-img-box {
-      width: 100%;
-      height: 180px;
-      background: #0f1015;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      border-bottom: 3px solid var(--dark-ink);
-      overflow: hidden;
-    }
-
-    .gallery-img-box svg {
-      opacity: 0.35;
-    }
-
-    .gallery-label {
-      position: absolute;
-      bottom: 8px;
-      left: 8px;
-      background: var(--dark-ink);
-      color: var(--accent-primary);
-      font-family: var(--font-dcb);
-      font-size: 1.1rem;
-      letter-spacing: 1px;
-      padding: 0.1rem 0.5rem;
-      border: 1px solid var(--accent-primary);
-    }
-
-    .gallery-caption {
-      padding: 1rem;
-      font-size: 1.1rem;
-      color: var(--newsprint-bg);
-      font-weight: bold;
-      line-height: 1.3;
-    }
-
-    .devlog-post {
-      background: var(--newsprint-bg);
-      color: var(--newsprint-ink);
-      border: var(--comic-border);
-      box-shadow: var(--comic-shadow);
-      padding: clamp(1.5rem, 3vw, 2.5rem);
-      margin-bottom: 2.5rem;
-      position: relative;
-    }
-
-    .post-badge {
-      display: inline-block;
-      background: var(--dark-ink);
-      color: var(--accent-primary);
-      font-family: var(--font-dcb);
-      font-size: 1.1rem;
-      letter-spacing: 1.5px;
-      padding: 0.2rem 0.8rem;
-      margin-bottom: 0.8rem;
-    }
-
-    .post-title {
-      font-family: var(--font-dcb);
-      font-size: clamp(2.2rem, 4.5vw, 3.4rem);
-      letter-spacing: 1.5px;
-      color: var(--newsprint-ink);
-      line-height: 1;
-      margin-bottom: 0.8rem;
-      text-transform: uppercase;
-    }
-
-    .post-meta {
-      font-family: var(--font-tech);
-      font-size: 1rem;
-      color: #554a3e;
-      margin-bottom: 1.2rem;
-      border-bottom: 2px dashed var(--dark-ink);
-      padding-bottom: 0.6rem;
-    }
-
-    .post-body {
-      font-size: 1.25rem;
-      line-height: 1.55;
-      font-weight: bold;
-      margin-bottom: 1.5rem;
-    }
-
-    /* Barra de Reacciones con estilo HUD de Arcade */
-    .interaction-bar {
-      border-top: 3px solid var(--dark-ink);
-      padding-top: 1.2rem;
-      display: flex;
-      gap: 1rem;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-
-    .like-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: var(--dark-ink);
-      color: #ff3344;
-      border: 3px solid var(--dark-ink);
-      font-family: var(--font-dcb);
-      font-size: 1.4rem;
-      letter-spacing: 1.5px;
-      padding: 0.4rem 1.2rem;
-      cursor: pointer;
-      box-shadow: var(--comic-shadow-sm);
-      transition: transform 0.1s ease;
-      user-select: none;
-    }
-
-    .like-btn:hover {
-      transform: scale(1.05);
-    }
-
-    .like-btn.liked {
-      background: #ff3344;
-      color: #ffffff;
-      border-color: var(--dark-ink);
-    }
-
-    .reaction-pill {
-      background: var(--bg-card);
-      color: var(--newsprint-bg);
-      border: 2px solid var(--dark-ink);
-      font-family: var(--font-tech);
-      font-size: 1rem;
-      padding: 0.35rem 0.8rem;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.3rem;
-      transition: background 0.15s ease;
-    }
-
-    .reaction-pill:hover {
-      background: var(--accent-primary);
-      color: var(--dark-ink);
-    }
-
-    .comments-wrapper {
-      background: var(--bg-card);
-      border: var(--comic-border);
-      box-shadow: var(--comic-shadow);
-      padding: clamp(1.5rem, 3vw, 2.5rem);
-      margin-bottom: 2rem;
-    }
-
-    .comments-header-title {
-      font-family: var(--font-dcb);
-      font-size: 2.6rem;
-      letter-spacing: 2px;
-      color: var(--accent-primary);
-      margin-bottom: 0.5rem;
-      line-height: 1;
-    }
-
-    .comment-form {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      margin: 1.5rem 0 2rem 0;
-      border-bottom: 3px dashed var(--accent-secondary);
-      padding-bottom: 2rem;
-    }
-
-    .comment-input,
-    .comment-textarea {
-      width: 100%;
-      background: var(--newsprint-bg);
-      color: var(--newsprint-ink);
-      border: 3px solid var(--dark-ink);
-      font-family: var(--font-tech);
-      font-size: 1.15rem;
-      padding: 0.8rem 1rem;
-      box-shadow: 3px 3px 0px var(--dark-ink);
-      outline: none;
-    }
-
-    .comment-input:focus,
-    .comment-textarea:focus {
-      border-color: var(--accent-primary);
-    }
-
-    .comment-textarea {
-      min-height: 100px;
-      resize: vertical;
-    }
-
-    .comments-feed {
-      display: flex;
-      flex-direction: column;
-      gap: 1.2rem;
-    }
-
-    .comment-card {
-      background: var(--newsprint-bg);
-      color: var(--newsprint-ink);
-      border: 3px solid var(--dark-ink);
-      box-shadow: var(--comic-shadow-sm);
-      padding: 1.2rem;
-      position: relative;
-    }
-
-    .comment-card-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 0.5rem;
-      border-bottom: 2px solid var(--dark-ink);
-      padding-bottom: 0.3rem;
-    }
-
-    .comment-author {
-      font-family: var(--font-dcb);
-      font-size: 1.5rem;
-      letter-spacing: 1px;
-      color: var(--dark-ink);
-      text-transform: uppercase;
-    }
-
-    .comment-date {
-      font-family: var(--font-tech);
-      font-size: 0.9rem;
-      color: #665b50;
-    }
-
-    .comment-msg {
-      font-size: 1.15rem;
-      font-weight: bold;
-      line-height: 1.4;
-    }
-
-    /* ==========================================================================
        PESTAÑA 3: ARSENAL / TOOLS UNITY (QeController)
        ========================================================================== */
-    .assets-single-wrapper {
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
     .assets-intro-bar {
-      margin-bottom: 2rem;
+      margin-bottom: 1.8rem;
       text-align: center;
     }
 
@@ -1012,18 +723,18 @@
       background: var(--dark-ink);
       color: var(--accent-primary);
       font-family: var(--font-caacupe);
-      font-size: 1.05rem;
+      font-size: 0.95rem;
       letter-spacing: 1.2px;
-      padding: 0.35rem 1rem;
+      padding: 0.35rem 0.9rem;
       border: 2px solid var(--accent-primary);
-      margin-bottom: 0.8rem;
+      margin-bottom: 0.6rem;
       text-transform: uppercase;
       box-shadow: var(--comic-shadow-sm);
     }
 
     .assets-intro-title {
       font-family: var(--font-caacupe);
-      font-size: clamp(1.3rem, 2.5vw, 1.75rem);
+      font-size: clamp(1.15rem, 2.4vw, 1.6rem);
       letter-spacing: 1px;
       color: var(--newsprint-bg);
       text-transform: uppercase;
@@ -1057,9 +768,9 @@
     .asset-star-tag {
       background: var(--accent-primary);
       color: var(--dark-ink);
-      padding: 0.2rem 0.7rem;
+      padding: 0.2rem 0.6rem;
       font-family: var(--font-caacupe);
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       letter-spacing: 1px;
       border: 1px solid var(--dark-ink);
       font-weight: bold;
@@ -1073,15 +784,16 @@
 
     .asset-title-showcase {
       font-family: var(--font-display);
-      font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+      font-size: clamp(1.8rem, 4.5vw, 3.2rem);
       color: var(--newsprint-ink);
-      margin-bottom: 0.8rem;
+      margin-bottom: 0.6rem;
       line-height: 1.1;
+      overflow-wrap: break-word;
     }
 
     .asset-tagline-showcase {
       font-family: var(--font-caacupe);
-      font-size: 1.3rem;
+      font-size: clamp(1.1rem, 2vw, 1.3rem);
       color: var(--accent-secondary);
       letter-spacing: 1px;
       text-transform: uppercase;
@@ -1101,26 +813,28 @@
       border: 2px solid var(--dark-ink);
       padding: 0.75rem 1rem;
       font-family: var(--font-tech);
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       font-weight: bold;
       color: var(--newsprint-ink);
       display: flex;
       align-items: center;
       gap: 0.5rem;
+      line-height: 1.25;
     }
 
     .feature-point span {
       color: var(--accent-alert);
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       line-height: 1;
+      flex-shrink: 0;
     }
 
     .asset-desc-showcase {
-      font-size: 1.25rem;
+      font-size: 1.2rem;
       color: var(--newsprint-ink);
       font-weight: bold;
-      margin-bottom: 2rem;
-      line-height: 1.55;
+      margin-bottom: 1.8rem;
+      line-height: 1.5;
     }
 
     .asset-footer-showcase {
@@ -1132,12 +846,336 @@
     }
 
     /* ==========================================================================
+       PESTAÑA 4: HUB DE AVANCES, DEVLOG Y COMMS
+       ========================================================================== */
+    .devlog-header {
+      background: var(--bg-card);
+      border: var(--comic-border);
+      box-shadow: var(--comic-shadow);
+      padding: clamp(1.5rem, 3vw, 2rem);
+      margin-bottom: 2.2rem;
+      position: relative;
+    }
+
+    .devlog-header::before {
+      content: "DATABASE // LOG DE ACTUALIZACIONES";
+      position: absolute;
+      top: -14px;
+      left: 18px;
+      background: var(--accent-primary);
+      color: var(--dark-ink);
+      font-family: var(--font-dcb);
+      font-size: 1.15rem;
+      letter-spacing: 1.2px;
+      padding: 0.15rem 0.8rem;
+      border: 2px solid var(--dark-ink);
+      max-width: 90%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .devlog-main-title {
+      font-family: var(--font-dcb);
+      font-size: clamp(2.4rem, 5.5vw, 4.5rem);
+      letter-spacing: 1.8px;
+      color: var(--accent-primary);
+      line-height: 0.95;
+      margin-bottom: 0.5rem;
+      overflow-wrap: break-word;
+    }
+
+    .devlog-subtitle {
+      font-family: var(--font-caacupe);
+      font-size: clamp(1.05rem, 2vw, 1.25rem);
+      color: var(--accent-secondary);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+    }
+
+    .devlog-gallery-title {
+      font-family: var(--font-caacupe);
+      font-size: clamp(1.3rem, 3vw, 1.6rem);
+      color: var(--accent-primary);
+      margin: 1.8rem 0 1rem 0;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+    }
+
+    .devlog-gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .gallery-panel {
+      background: var(--bg-card);
+      border: var(--comic-border);
+      box-shadow: var(--comic-shadow-sm);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transition: transform 0.15s ease;
+      position: relative;
+    }
+
+    .gallery-panel:hover {
+      transform: translateY(-4px);
+    }
+
+    .gallery-img-box {
+      width: 100%;
+      height: 170px;
+      background: #0f1015;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      border-bottom: 3px solid var(--dark-ink);
+      overflow: hidden;
+    }
+
+    .gallery-img-box svg {
+      opacity: 0.35;
+    }
+
+    .gallery-label {
+      position: absolute;
+      bottom: 8px;
+      left: 8px;
+      background: var(--dark-ink);
+      color: var(--accent-primary);
+      font-family: var(--font-dcb);
+      font-size: 1.1rem;
+      letter-spacing: 1px;
+      padding: 0.1rem 0.5rem;
+      border: 1px solid var(--accent-primary);
+    }
+
+    .gallery-caption {
+      padding: 1rem;
+      font-size: 1.05rem;
+      color: var(--newsprint-bg);
+      font-weight: bold;
+      line-height: 1.35;
+    }
+
+    .devlog-post {
+      background: var(--newsprint-bg);
+      color: var(--newsprint-ink);
+      border: var(--comic-border);
+      box-shadow: var(--comic-shadow);
+      padding: clamp(1.5rem, 3vw, 2.5rem);
+      margin-bottom: 2.5rem;
+      position: relative;
+    }
+
+    .post-badge {
+      display: inline-block;
+      background: var(--dark-ink);
+      color: var(--accent-primary);
+      font-family: var(--font-dcb);
+      font-size: 1.1rem;
+      letter-spacing: 1.2px;
+      padding: 0.2rem 0.8rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .post-title {
+      font-family: var(--font-dcb);
+      font-size: clamp(1.8rem, 4vw, 3.2rem);
+      letter-spacing: 1.2px;
+      color: var(--newsprint-ink);
+      line-height: 1;
+      margin-bottom: 0.8rem;
+      text-transform: uppercase;
+      overflow-wrap: break-word;
+    }
+
+    .post-meta {
+      font-family: var(--font-tech);
+      font-size: 0.95rem;
+      color: #554a3e;
+      margin-bottom: 1.2rem;
+      border-bottom: 2px dashed var(--dark-ink);
+      padding-bottom: 0.6rem;
+      line-height: 1.35;
+    }
+
+    .post-body {
+      font-size: 1.2rem;
+      line-height: 1.55;
+      font-weight: bold;
+      margin-bottom: 1.5rem;
+    }
+
+    .interaction-bar {
+      border-top: 3px solid var(--dark-ink);
+      padding-top: 1.2rem;
+      display: flex;
+      gap: 0.8rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .like-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      background: var(--dark-ink);
+      color: #ff3344;
+      border: 3px solid var(--dark-ink);
+      font-family: var(--font-dcb);
+      font-size: 1.35rem;
+      letter-spacing: 1.2px;
+      padding: 0.45rem 1.2rem;
+      cursor: pointer;
+      box-shadow: var(--comic-shadow-sm);
+      transition: transform 0.1s ease;
+      user-select: none;
+      min-height: 48px;
+      touch-action: manipulation;
+    }
+
+    .like-btn:hover {
+      transform: scale(1.04);
+    }
+
+    .like-btn.liked {
+      background: #ff3344;
+      color: #ffffff;
+      border-color: var(--dark-ink);
+    }
+
+    .reaction-pill {
+      background: var(--bg-card);
+      color: var(--newsprint-bg);
+      border: 2px solid var(--dark-ink);
+      font-family: var(--font-tech);
+      font-size: 0.95rem;
+      padding: 0.45rem 0.85rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      transition: background 0.15s ease;
+      min-height: 44px;
+      touch-action: manipulation;
+    }
+
+    .reaction-pill:hover {
+      background: var(--accent-primary);
+      color: var(--dark-ink);
+    }
+
+    .comments-wrapper {
+      background: var(--bg-card);
+      border: var(--comic-border);
+      box-shadow: var(--comic-shadow);
+      padding: clamp(1.5rem, 3vw, 2.5rem);
+      margin-bottom: 2rem;
+    }
+
+    .comments-header-title {
+      font-family: var(--font-dcb);
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      letter-spacing: 1.5px;
+      color: var(--accent-primary);
+      margin-bottom: 0.5rem;
+      line-height: 1.05;
+      overflow-wrap: break-word;
+    }
+
+    .comment-form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+      margin: 1.4rem 0 1.8rem 0;
+      border-bottom: 3px dashed var(--accent-secondary);
+      padding-bottom: 1.8rem;
+    }
+
+    .comment-input,
+    .comment-textarea {
+      width: 100%;
+      background: var(--newsprint-bg);
+      color: var(--newsprint-ink);
+      border: 3px solid var(--dark-ink);
+      font-family: var(--font-tech);
+      font-size: 16px;
+      padding: 0.8rem 1rem;
+      box-shadow: 3px 3px 0px var(--dark-ink);
+      outline: none;
+    }
+
+    .comment-input:focus,
+    .comment-textarea:focus {
+      border-color: var(--accent-primary);
+    }
+
+    .comment-textarea {
+      min-height: 95px;
+      resize: vertical;
+    }
+
+    .comments-feed {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .comment-card {
+      background: var(--newsprint-bg);
+      color: var(--newsprint-ink);
+      border: 3px solid var(--dark-ink);
+      box-shadow: var(--comic-shadow-sm);
+      padding: 1.2rem;
+      position: relative;
+    }
+
+    .comment-card-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.4rem;
+      border-bottom: 2px solid var(--dark-ink);
+      padding-bottom: 0.25rem;
+      gap: 0.5rem;
+    }
+
+    .comment-author {
+      font-family: var(--font-dcb);
+      font-size: 1.4rem;
+      letter-spacing: 1px;
+      color: var(--dark-ink);
+      text-transform: uppercase;
+      overflow-wrap: break-word;
+    }
+
+    .comment-date {
+      font-family: var(--font-tech);
+      font-size: 0.85rem;
+      color: #665b50;
+      white-space: nowrap;
+    }
+
+    .comment-msg {
+      font-size: 1.15rem;
+      font-weight: bold;
+      line-height: 1.4;
+      overflow-wrap: break-word;
+    }
+
+    /* ==========================================================================
        FOOTER Y REDES SOCIALES
        ========================================================================== */
     .main-footer {
       background: #0b0c10;
       border-top: 4px solid #000000;
-      padding: 45px 0 35px 0;
+      padding: 45px 0 calc(35px + env(safe-area-inset-bottom)) 0;
       text-align: center;
       margin-top: auto;
       position: relative;
@@ -1173,13 +1211,14 @@
 
     .footer-quote {
       font-family: var(--font-caacupe);
-      font-size: 1.1rem;
+      font-size: clamp(1rem, 2vw, 1.15rem);
       letter-spacing: 1px;
       color: var(--accent-secondary);
       max-width: 650px;
       margin: 0 auto 1.2rem auto;
       text-transform: uppercase;
       line-height: 1.35;
+      padding: 0 0.5rem;
     }
 
     .social-links-bar {
@@ -1206,6 +1245,8 @@
       text-transform: uppercase;
       transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.15s ease, color 0.15s ease;
       cursor: pointer;
+      min-height: 48px;
+      touch-action: manipulation;
     }
 
     .social-btn:hover {
@@ -1250,52 +1291,103 @@
     }
 
     .footer-legal {
-      font-size: 1.05rem;
+      font-size: 0.95rem;
       color: #777a87;
       margin-top: 1rem;
+      padding: 0 0.8rem;
     }
 
     /* ==========================================================================
-       MEDIA QUERIES (RESPONSIVE MÓVIL Y TABLET)
+       RESPONSIVE DESIGN (TABLETS & CELULARES)
        ========================================================================== */
     @media (max-width: 992px) {
       .studio-grid {
         grid-template-columns: 1fr;
-        gap: 2.5rem;
+        gap: 2.2rem;
+      }
+
+      .asset-features-grid,
+      .devlog-gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      :root {
+        --comic-border: 3px solid var(--dark-ink);
+        --comic-shadow: 4px 4px 0px var(--dark-ink);
+        --comic-shadow-lg: 5px 5px 0px var(--dark-ink);
+      }
+
+      .game-top-content {
+        justify-content: center;
+        text-align: center;
+        font-size: 0.78rem;
+      }
+
+      .navbar {
+        height: auto;
+        padding: 0.6rem 0;
+      }
+
+      /* MENÚ TÁCTIL MÓVIL 2X2 */
+      .tabs-nav-bar {
+        padding-top: 0.5rem;
+      }
+
+      .tabs-list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.45rem;
+      }
+
+      .tab-label {
+        bottom: 0;
+        border-radius: 4px;
+        border: 2px solid var(--dark-ink);
+        box-shadow: 3px 3px 0px var(--dark-ink);
+        font-size: 1rem;
+        padding: 0.65rem 0.4rem;
+        text-align: center;
+      }
+
+      .tab-label .menu-cursor {
+        display: none;
+      }
+
+      #tab-studio:checked ~ .tabs-nav-bar label[for="tab-studio"],
+      #tab-games:checked ~ .tabs-nav-bar label[for="tab-games"],
+      #tab-assets:checked ~ .tabs-nav-bar label[for="tab-assets"],
+      #tab-devlog:checked ~ .tabs-nav-bar label[for="tab-devlog"] {
+        transform: none;
+        box-shadow: 3px 3px 0px var(--dark-ink);
+      }
+
+      .action-row {
+        flex-direction: column;
+      }
+
+      .comic-btn {
+        width: 100%;
       }
 
       .asset-features-grid,
       .devlog-gallery-grid {
         grid-template-columns: 1fr;
       }
-    }
 
-    @media (max-width: 768px) {
-      .game-top-content {
-        justify-content: center;
-        text-align: center;
+      .gallery-img-box {
+        height: 150px;
       }
 
-      .navbar {
-        height: auto;
-        padding: 0.8rem 0;
-        flex-wrap: wrap;
+      .interaction-bar {
+        flex-direction: column;
+        align-items: stretch;
       }
 
-      .tabs-list {
-        justify-content: stretch;
-      }
-
-      .tab-label {
-        flex: 1;
-        text-align: center;
-        justify-content: center;
-        padding: 0.7rem 0.5rem;
-        font-size: 0.85rem;
-      }
-
-      .comic-btn {
+      .like-btn, .reaction-pill {
         width: 100%;
+        justify-content: center;
       }
 
       .social-links-bar {
@@ -1306,7 +1398,26 @@
       }
 
       .social-btn {
+        width: 100%;
         justify-content: center;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .logo-title {
+        font-size: 1rem;
+      }
+
+      .theme-label-txt {
+        display: none;
+      }
+
+      .flagship-panel::before {
+        position: static;
+        display: block;
+        margin-bottom: 0.8rem;
+        width: 100%;
+        text-align: center;
       }
     }
   </style>
@@ -1318,10 +1429,10 @@
     <div class="container game-top-content">
       <div class="hud-indicator">
         <span class="hud-blink-dot"></span>
-        <span>SYS.STATUS: ONLINE</span> // <span>DIFF: BRUTAL</span> // <span>FPS: 60</span>
+        <span>SYS.STATUS: ONLINE</span> // <span>DEV: INDIE STUDIO</span> // <span>SERVICES: ACTIVE</span>
       </div>
       <div class="hud-indicator">
-        <span>CREDITS: 02</span> // <span>ZONE: URBAN-HQ</span>
+        <span>ZONE: TOMBOT-HQ</span>
         <button class="sfx-toggle-btn" id="sfx-btn" onclick="toggleSFX()">SFX: ON</button>
       </div>
     </div>
@@ -1361,6 +1472,7 @@
        ========================================================================== -->
   <nav class="tabs-nav-bar">
     <div class="container">
+      <span class="tabs-nav-header-label">MAIN MENU // SELECT DIRECTORY:</span>
       <div class="tabs-list">
         <label for="tab-studio" class="tab-label" onclick="playUIBeep(640)">
           <span class="menu-cursor">►</span> 01 // EL ESTUDIO
@@ -1390,14 +1502,14 @@
       <section id="panel-studio" class="tab-panel">
         <div class="studio-grid">
           <div class="studio-intro">
-            <span class="studio-badge">ESTUDIO INDIE INDEPENDIENTE // EST. 2025</span>
+            <span class="studio-badge">ESTUDIO INDIE & SERVICIOS DEV // EST. 2025</span>
             <h1 class="studio-title">TOMBOT STUDIOS</h1>
             
-            <p class="studio-tagline">"Videojuegos crudos, arte gráfico visceral y código abierto a la comunidad"</p>
+            <p class="studio-tagline">"Videojuegos viscerales, herramientas para creadores y servicios de desarrollo independiente"</p>
 
             <div class="newsprint-box">
               <p>
-                Somos un taller artesanal forjado en el amor por los 16 bits de arcade, el entintado callejero y el diseño de sistemas implacables. Desarrollamos títulos con identidad implacable y creamos herramientas listas para producción en Unity.
+                Somos un estudio independiente forjado en el amor por los 16 bits de arcade, el entintado callejero y la arquitectura técnica sólida. Desarrollamos títulos propios con identidad implacable y brindamos servicios de desarrollo, programación y herramientas especializadas en Unity para otros estudios y creadores.
               </p>
             </div>
 
@@ -1412,7 +1524,7 @@
               <img src="image.png" alt="Tombot Studios Logo">
             </div>
             <h2 class="studio-motto">TINTA, CÓDIGO Y CAOS</h2>
-            <p style="font-size: 1.1rem; color: var(--newsprint-bg);">Desarrollo sin inversores ni ataduras.</p>
+            <p style="font-size: 1.1rem; color: var(--newsprint-bg);">Juegos propios y servicios para desarrolladores.</p>
 
             <div class="studio-stats">
               <div class="stat-item">
@@ -1424,8 +1536,8 @@
                 <span>ENGINE</span>
               </div>
               <div class="stat-item">
-                <h4>100%</h4>
-                <span>INDIE</span>
+                <h4>DEV</h4>
+                <span>SERVICES</span>
               </div>
             </div>
           </div>
@@ -1434,7 +1546,7 @@
         <div class="manifesto-box">
           <h3 class="manifesto-title">FILOSOFÍA: NUNCA DILUIDA, SIEMPRE DESAFIANTE</h3>
           <p class="manifesto-text">
-            Repudiamos los títulos diseñados para engancharte con recompensas automáticas. Nuestros juegos demandan dominio de controles, comprensión espacial y toma de decisiones táctica bajo presión. Cero microtransacciones abusivas.
+            Repudiamos los títulos diseñados para engancharte con recompensas automáticas. Nuestros juegos demandan dominio de controles, comprensión espacial y toma de decisiones táctica bajo presión. Cero microtransacciones abusivas y soporte técnico directo para la comunidad de desarrolladores.
           </p>
         </div>
       </section>
@@ -1443,8 +1555,7 @@
            PESTAÑA 2: JUEGOS (MISIÓN: DRUNK CITY BASTARDS)
            ==================================================================== -->
       <section id="panel-games" class="tab-panel">
-        
-        <div class="games-single-wrapper">
+        <div class="unified-card-wrapper">
           <article class="flagship-panel">
             <div class="flagship-content">
               <h2 class="flagship-title">DRUNK CITY BASTARDS</h2>
@@ -1464,7 +1575,6 @@
                 </p>
               </div>
 
-              <!-- BOTONES DE ACCIÓN: DESCARGA + DEVLOG -->
               <div class="action-row">
                 <a href="https://tombot-studios.itch.io/drunk-city-bastards" target="_blank" rel="noopener noreferrer" class="comic-btn" onclick="playUIBeep(800)">
                   OBTENER EN ITCH.IO ➔
@@ -1477,15 +1587,13 @@
             </div>
           </article>
         </div>
-
       </section>
 
       <!-- ====================================================================
            PESTAÑA 3: ARSENAL / TOOLS UNITY (QeController)
            ==================================================================== -->
       <section id="panel-assets" class="tab-panel">
-        
-        <div class="assets-single-wrapper">
+        <div class="unified-card-wrapper">
           <div class="assets-intro-bar">
             <span class="assets-intro-badge">EQUIPAMIENTO PARA DESARROLLADORES EN UNITY</span>
             <p class="assets-intro-title">
@@ -1493,7 +1601,6 @@
             </p>
           </div>
 
-          <!-- TARJETA SHOWCASE DESTACADA DE QeController -->
           <article class="asset-featured-showcase">
             <div class="asset-header-showcase">
               <span>UNITY PACKAGE // C# FRAMEWORK</span>
@@ -1523,7 +1630,6 @@
                 QeController es un framework diseñado para resolver el movimiento, control y transiciones de estados de personajes en juegos de acción, aventura y sigilo. Construido con buenas prácticas en C#, evita dependencias monolíticas y permite vincular armas, saltos, coberturas y eventos sin tocar la lógica central del controlador.
               </p>
 
-              <!-- BOTÓN DE DESCARGA DIRECTO -->
               <div class="asset-footer-showcase">
                 <a href="https://tombot-studios.itch.io/httpsalive-noise-e5dnotionsiteqecontroller-manual-de-desarrollador-2db4af2" target="_blank" rel="noopener noreferrer" class="comic-btn" onclick="playUIBeep(800)">
                   DESCARGAR UNITYPACKAGE ➔
@@ -1532,27 +1638,23 @@
             </div>
           </article>
         </div>
-
       </section>
 
       <!-- ====================================================================
            PESTAÑA 4: COMMS / DEVLOG Y COMUNIDAD
            ==================================================================== -->
       <section id="panel-devlog" class="tab-panel">
-        <div class="devlog-wrapper">
-
+        <div class="unified-card-wrapper">
           <div class="devlog-header">
             <h2 class="devlog-main-title">DRUNK CITY BASTARDS // DEVLOG</h2>
             <p class="devlog-subtitle">Transmisión de datos, avances visuales y red de comunicaciones</p>
-            <label for="tab-games" class="comic-btn btn-news" style="padding: 0.4rem 1rem; font-size: 0.95rem; cursor: pointer;" onclick="playUIBeep(500)">
+            <label for="tab-games" class="comic-btn btn-news" style="padding: 0.5rem 1.2rem; font-size: 1rem; cursor: pointer;" onclick="playUIBeep(500)">
               ← VOLVER A MISIÓN DCB
             </label>
           </div>
 
-          <!-- GALERÍA DE AVANCES / SCREENSHOTS -->
           <h3 class="devlog-gallery-title">LOG VISUAL DE DESARROLLO EN UNITY</h3>
           <div class="devlog-gallery-grid">
-            
             <article class="gallery-panel">
               <div class="gallery-img-box">
                 <svg width="65" height="65" viewBox="0 0 24 24" fill="none" stroke="#c99846" stroke-width="1.8">
@@ -1584,10 +1686,8 @@
               </div>
               <p class="gallery-caption">Modelado de autómatas defectuosos y patrullas de guardia con IA sensorial.</p>
             </article>
-
           </div>
 
-          <!-- ARTÍCULO DE DEVLOG -->
           <article class="devlog-post">
             <span class="post-badge">LOG #03 // TRANSMISIÓN</span>
             <h3 class="post-title">CÓMO EQUILIBRAMOS EL SIGILO Y LA ACCIÓN BRUTAL</h3>
@@ -1608,17 +1708,16 @@
             </div>
           </article>
 
-          <!-- SECCIÓN DE COMENTARIOS DE LA COMUNIDAD -->
           <div class="comments-wrapper">
             <h3 class="comments-header-title">COMMS FEED // OPINIONES Y FEEDBACK</h3>
-            <p style="font-family: var(--font-tech); font-size: 1.1rem; color: var(--newsprint-bg);">
+            <p style="font-family: var(--font-tech); font-size: 1.05rem; color: var(--newsprint-bg);">
               Transmite tus ideas, sugerencias y opiniones sobre los avances del juego.
             </p>
 
             <form class="comment-form" id="comment-form" onsubmit="postComment(event)">
               <input type="text" id="comment-author" class="comment-input" placeholder="Tu Alias de Jugador / Nombre..." required maxlength="40">
               <textarea id="comment-msg" class="comment-textarea" placeholder="Escribe tu feedback o pregunta sobre Drunk City Bastards..." required maxlength="300"></textarea>
-              <button type="submit" class="comic-btn" style="align-self: flex-start;" onclick="playUIBeep(740)">
+              <button type="submit" class="comic-btn" onclick="playUIBeep(740)">
                 ENVIAR TRANSMISIÓN ➔
               </button>
             </form>
@@ -1640,9 +1739,7 @@
                 <p class="comment-msg">Me encanta que la transición de sigilo a combate sea rápida y sin pantallas de carga. Ya quiero ver la build jugable en Steam.</p>
               </div>
             </div>
-
           </div>
-
         </div>
       </section>
 
@@ -1698,7 +1795,6 @@
        SCRIPTS: AUDIO SYNTH 8-BIT + LIKES + COMENTARIOS
        ========================================================================== -->
   <script>
-    // 1. SINTETIZADOR DE SONIDO 8-BITS RETRO ARCADE (WEB AUDIO API NATIVO)
     let sfxEnabled = true;
     let audioCtx = null;
 
@@ -1713,20 +1809,18 @@
         }
         const osc = audioCtx.createOscillator();
         const gain = audioCtx.createGain();
-        osc.type = 'square'; // Sonido característico de chip de 8 bits
+        osc.type = 'square';
         osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(freq * 0.5, audioCtx.currentTime + 0.06);
+        osc.frequency.exponentialRampToValueAtTime(freq * 0.5, audioCtx.currentTime + 0.05);
         
         gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.06);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.05);
         
         osc.connect(gain);
         gain.connect(audioCtx.destination);
         osc.start();
-        osc.stop(audioCtx.currentTime + 0.06);
-      } catch (e) {
-        // Audio deshabilitado en caso de bloqueo del navegador
-      }
+        osc.stop(audioCtx.currentTime + 0.05);
+      } catch (e) {}
     }
 
     function toggleSFX() {
@@ -1736,7 +1830,6 @@
       if (sfxEnabled) playUIBeep(600);
     }
 
-    // 2. SISTEMA DE LIKES Y REACCIONES
     let likeCount = parseInt(localStorage.getItem('dcb_likes') || '34');
     let isLiked = localStorage.getItem('dcb_user_liked') === 'true';
 
@@ -1777,7 +1870,6 @@
       el.textContent = count;
     }
 
-    // 3. COMENTARIOS EN VIVO PERSISTENTES
     function loadSavedComments() {
       const saved = JSON.parse(localStorage.getItem('dcb_user_comments') || '[]');
       const feed = document.getElementById('comments-feed');
