@@ -101,6 +101,64 @@
     }
 
     /* ==========================================================================
+       TOP HUD BAR: TELEMETRÍA DE VIDEOJUEGO
+       ========================================================================== */
+    .game-top-bar {
+      background: #000000;
+      border-bottom: 2px solid var(--accent-primary);
+      padding: 0.35rem 0;
+      font-size: 0.85rem;
+      color: var(--accent-primary);
+      letter-spacing: 1.5px;
+    }
+
+    .game-top-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+
+    .hud-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .hud-blink-dot {
+      width: 8px;
+      height: 8px;
+      background: #39ff14;
+      border-radius: 50%;
+      animation: blink 1.2s infinite ease-in-out;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.3; transform: scale(0.8); }
+    }
+
+    .sfx-toggle-btn {
+      background: transparent;
+      border: 1px solid var(--accent-primary);
+      color: var(--accent-primary);
+      font-family: var(--font-tech);
+      font-size: 0.75rem;
+      padding: 0.2rem 0.6rem;
+      cursor: pointer;
+      text-transform: uppercase;
+      min-height: 28px;
+      touch-action: manipulation;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+
+    .sfx-toggle-btn:hover {
+      background: var(--accent-primary);
+      color: var(--dark-ink);
+    }
+
+    /* ==========================================================================
        HEADER PRINCIPAL: LOGO + SWITCH
        ========================================================================== */
     .main-header {
@@ -419,10 +477,11 @@
       overflow-wrap: break-word;
     }
 
+    /* TÍTULO 1 REDUCIDO PARA EVITAR SALTO DE LÍNEA EXCESIVO */
     .studio-tagline {
       font-family: var(--font-caacupe);
-      font-size: clamp(1.1rem, 2.2vw, 1.4rem);
-      letter-spacing: 1.2px;
+      font-size: clamp(0.95rem, 1.8vw, 1.2rem);
+      letter-spacing: 1px;
       color: var(--newsprint-bg);
       margin-bottom: 1.5rem;
       line-height: 1.35;
@@ -509,9 +568,10 @@
       display: block;
     }
 
+    /* TÍTULO 2 REDUCIDO ("TINTA, CÓDIGO Y CAOS") */
     .studio-motto {
       font-family: var(--font-display);
-      font-size: clamp(1.2rem, 2.5vw, 1.45rem);
+      font-size: clamp(1.05rem, 2.1vw, 1.25rem);
       color: var(--accent-primary);
       line-height: 1.2;
       margin-bottom: 0.5rem;
@@ -555,9 +615,10 @@
       border: 2px solid var(--newsprint-bg);
     }
 
+    /* TÍTULO 3 REDUCIDO ("FILOSOFÍA: NUNCA DILUIDA...") */
     .manifesto-title {
       font-family: var(--font-display);
-      font-size: clamp(1.3rem, 2.8vw, 2.2rem);
+      font-size: clamp(1.1rem, 2.2vw, 1.65rem);
       color: var(--newsprint-ink);
       margin-bottom: 0.8rem;
       line-height: 1.2;
@@ -1292,7 +1353,7 @@
     }
 
     /* ==========================================================================
-       RESPONSIVE DESIGN (TABLETS & CELULARES)
+       MEDIA QUERIES (TABLETS & CELULARES)
        ========================================================================== */
     @media (max-width: 992px) {
       .studio-grid,
@@ -1312,12 +1373,6 @@
         --comic-border: 3px solid var(--dark-ink);
         --comic-shadow: 4px 4px 0px var(--dark-ink);
         --comic-shadow-lg: 5px 5px 0px var(--dark-ink);
-      }
-
-      .game-top-content {
-        justify-content: center;
-        text-align: center;
-        font-size: 0.78rem;
       }
 
       .navbar {
@@ -1494,7 +1549,7 @@
         <div class="studio-grid">
           <div class="studio-intro">
             <span class="studio-badge">ESTUDIO INDIE & SERVICIOS DEV // EST. 2025</span>
-            <h2 class="studio-title">TOMBOT STUDIOS</h2>
+            <h1 class="studio-title">TOMBOT STUDIOS</h1>
             
             <p class="studio-tagline">"Videojuegos viscerales, herramientas para creadores y servicios de desarrollo independiente"</p>
 
@@ -1514,7 +1569,7 @@
             <div class="studio-big-logo">
               <img src="image.png" alt="Tombot Studios Logo">
             </div>
-            <h3 class="studio-motto">TINTA, CÓDIGO Y CAOS</h3>
+            <h2 class="studio-motto">TINTA, CÓDIGO Y CAOS</h2>
             <p style="font-size: 1.1rem; color: var(--newsprint-bg);">Juegos propios y servicios para desarrolladores.</p>
 
             <div class="studio-stats">
@@ -1535,7 +1590,7 @@
         </div>
 
         <div class="manifesto-box">
-          <h4 class="manifesto-title">FILOSOFÍA: NUNCA DILUIDA, SIEMPRE DESAFIANTE</h4>
+          <h3 class="manifesto-title">FILOSOFÍA: NUNCA DILUIDA, SIEMPRE DESAFIANTE</h3>
           <p class="manifesto-text">
             Repudiamos los títulos diseñados para engancharte con recompensas automáticas. Nuestros juegos demandan dominio de controles, comprensión espacial y toma de decisiones táctica bajo presión. Cero microtransacciones abusivas y soporte técnico directo para la comunidad de desarrolladores.
           </p>
@@ -1998,7 +2053,7 @@
       msgInput.value = '';
     }
 
-    function escapeHTML(str) {
+    @keyframes escapeHTML(str) {
       return str.replace(/[&<>'"]/g, 
         tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
       );
