@@ -92,7 +92,6 @@
       display: none;
     }
 
-    /* Contenedor Universal Centrado (Equilibrio perfecto en PC y Móvil) */
     .container {
       width: 100%;
       max-width: 1150px;
@@ -286,7 +285,7 @@
 
     .tabs-list {
       display: flex;
-      gap: 0.6rem;
+      gap: 0.5rem;
       align-items: flex-end;
     }
 
@@ -295,11 +294,11 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 0.5rem;
+      gap: 0.4rem;
       font-family: var(--font-caacupe);
-      font-size: 1.15rem;
-      letter-spacing: 1.2px;
-      padding: 0.85rem 1.2rem;
+      font-size: 1.05rem;
+      letter-spacing: 1px;
+      padding: 0.85rem 0.8rem;
       background: var(--bg-card);
       color: var(--newsprint-bg);
       border-top: var(--comic-border);
@@ -338,6 +337,7 @@
     #tab-studio:checked ~ .tabs-nav-bar label[for="tab-studio"],
     #tab-games:checked ~ .tabs-nav-bar label[for="tab-games"],
     #tab-assets:checked ~ .tabs-nav-bar label[for="tab-assets"],
+    #tab-team:checked ~ .tabs-nav-bar label[for="tab-team"],
     #tab-devlog:checked ~ .tabs-nav-bar label[for="tab-devlog"] {
       background: var(--accent-primary);
       color: var(--dark-ink);
@@ -349,6 +349,7 @@
     #tab-studio:checked ~ .tabs-nav-bar label[for="tab-studio"] .menu-cursor,
     #tab-games:checked ~ .tabs-nav-bar label[for="tab-games"] .menu-cursor,
     #tab-assets:checked ~ .tabs-nav-bar label[for="tab-assets"] .menu-cursor,
+    #tab-team:checked ~ .tabs-nav-bar label[for="tab-team"] .menu-cursor,
     #tab-devlog:checked ~ .tabs-nav-bar label[for="tab-devlog"] .menu-cursor {
       color: var(--dark-ink);
       transform: scale(1.15);
@@ -381,6 +382,7 @@
     #tab-studio:checked ~ main #panel-studio { display: block; }
     #tab-games:checked ~ main #panel-games { display: block; }
     #tab-assets:checked ~ main #panel-assets { display: block; }
+    #tab-team:checked ~ main #panel-team { display: block; }
     #tab-devlog:checked ~ main #panel-devlog { display: block; }
 
     .unified-card-wrapper {
@@ -496,7 +498,8 @@
 
     .newsprint-box::before,
     .flagship-panel::after,
-    .asset-featured-showcase::after {
+    .asset-featured-showcase::after,
+    .team-card::after {
       content: "[ + ]";
       position: absolute;
       top: 8px;
@@ -626,36 +629,8 @@
     }
 
     /* ==========================================================================
-       PESTAÑA 2: JUEGOS DESARROLLADOS (CATÁLOGO OFICIAL)
+       PESTAÑA 2: JUEGOS (MISIÓN: DRUNK CITY BASTARDS)
        ========================================================================== */
-    .games-catalog-header {
-      margin-bottom: 2rem;
-      text-align: center;
-    }
-
-    .games-catalog-badge {
-      display: inline-block;
-      background: var(--dark-ink);
-      color: var(--accent-primary);
-      font-family: var(--font-caacupe);
-      font-size: 0.95rem;
-      letter-spacing: 1.2px;
-      padding: 0.35rem 0.9rem;
-      border: 2px solid var(--accent-primary);
-      margin-bottom: 0.6rem;
-      text-transform: uppercase;
-      box-shadow: var(--comic-shadow-sm);
-    }
-
-    .games-catalog-title {
-      font-family: var(--font-caacupe);
-      font-size: clamp(1.2rem, 2.4vw, 1.65rem);
-      letter-spacing: 1px;
-      color: var(--newsprint-bg);
-      text-transform: uppercase;
-      line-height: 1.35;
-    }
-
     .flagship-panel {
       background: var(--bg-card);
       border: var(--comic-border);
@@ -873,7 +848,79 @@
     }
 
     /* ==========================================================================
-       PESTAÑA 4: HUB DE AVANCES, DEVLOG Y COMMS
+       PESTAÑA 4: EQUIPO (CREW / MEMBERS)
+       ========================================================================== */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+
+    .team-card {
+      background: var(--newsprint-bg);
+      border: var(--comic-border);
+      box-shadow: var(--comic-shadow);
+      padding: 1.8rem;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .team-header {
+      display: flex;
+      gap: 1.2rem;
+      align-items: center;
+      margin-bottom: 1.2rem;
+      border-bottom: 3px solid var(--dark-ink);
+      padding-bottom: 1rem;
+    }
+
+    .team-avatar {
+      width: 85px;
+      height: 85px;
+      flex-shrink: 0;
+      border: 3px solid var(--dark-ink);
+      background: var(--dark-ink);
+      box-shadow: 3px 3px 0px var(--dark-ink);
+      overflow: hidden;
+    }
+
+    .team-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .team-info h3 {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      color: var(--newsprint-ink);
+      line-height: 1.15;
+      margin-bottom: 0.3rem;
+    }
+
+    .team-role {
+      display: inline-block;
+      background: var(--dark-ink);
+      color: var(--accent-primary);
+      font-family: var(--font-caacupe);
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      padding: 0.2rem 0.6rem;
+      text-transform: uppercase;
+      border: 1px solid var(--dark-ink);
+    }
+
+    .team-bio {
+      font-size: 1.1rem;
+      color: var(--newsprint-ink);
+      font-weight: bold;
+      line-height: 1.45;
+    }
+
+    /* ==========================================================================
+       PESTAÑA 5: HUB DE AVANCES, DEVLOG Y COMMS
        ========================================================================== */
     .devlog-header {
       background: var(--bg-card);
@@ -1305,7 +1352,8 @@
        MEDIA QUERIES (TABLETS & CELULARES)
        ========================================================================== */
     @media (max-width: 992px) {
-      .studio-grid {
+      .studio-grid,
+      .team-grid {
         grid-template-columns: 1fr;
         gap: 2.2rem;
       }
@@ -1334,7 +1382,7 @@
         padding: 0.6rem 0;
       }
 
-      /* MENÚ TÁCTIL MÓVIL 2X2 */
+      /* MENÚ TÁCTIL MÓVIL 5 PESTAÑAS (GRAN DISEÑO 2X2 + 1) */
       .tabs-nav-bar {
         padding-top: 0.5rem;
       }
@@ -1350,9 +1398,14 @@
         border-radius: 4px;
         border: 2px solid var(--dark-ink);
         box-shadow: 3px 3px 0px var(--dark-ink);
-        font-size: 1rem;
-        padding: 0.65rem 0.4rem;
+        font-size: 0.95rem;
+        padding: 0.65rem 0.3rem;
         text-align: center;
+      }
+
+      /* La última pestaña (Devlog) ocupa el ancho completo abajo en móviles */
+      .tab-label[for="tab-devlog"] {
+        grid-column: span 2;
       }
 
       .tab-label .menu-cursor {
@@ -1362,6 +1415,7 @@
       #tab-studio:checked ~ .tabs-nav-bar label[for="tab-studio"],
       #tab-games:checked ~ .tabs-nav-bar label[for="tab-games"],
       #tab-assets:checked ~ .tabs-nav-bar label[for="tab-assets"],
+      #tab-team:checked ~ .tabs-nav-bar label[for="tab-team"],
       #tab-devlog:checked ~ .tabs-nav-bar label[for="tab-devlog"] {
         transform: none;
         box-shadow: 3px 3px 0px var(--dark-ink);
@@ -1449,6 +1503,7 @@
   <input type="radio" name="site_tabs" id="tab-studio" class="logic-input" checked>
   <input type="radio" name="site_tabs" id="tab-games" class="logic-input">
   <input type="radio" name="site_tabs" id="tab-assets" class="logic-input">
+  <input type="radio" name="site_tabs" id="tab-team" class="logic-input">
   <input type="radio" name="site_tabs" id="tab-devlog" class="logic-input">
 
   <!-- ==========================================================================
@@ -1479,16 +1534,19 @@
       <span class="tabs-nav-header-label">MAIN MENU // SELECT DIRECTORY:</span>
       <div class="tabs-list">
         <label for="tab-studio" class="tab-label" onclick="playUIBeep(640)">
-          <span class="menu-cursor">►</span> 01 // EL ESTUDIO
+          <span class="menu-cursor">►</span> 01 // ESTUDIO
         </label>
         <label for="tab-games" class="tab-label" onclick="playUIBeep(640)">
           <span class="menu-cursor">►</span> 02 // JUEGOS
         </label>
         <label for="tab-assets" class="tab-label" onclick="playUIBeep(640)">
-          <span class="menu-cursor">►</span> 03 // ARSENAL UNITY
+          <span class="menu-cursor">►</span> 03 // ARSENAL
+        </label>
+        <label for="tab-team" class="tab-label" onclick="playUIBeep(640)">
+          <span class="menu-cursor">►</span> 04 // EQUIPO
         </label>
         <label for="tab-devlog" class="tab-label" onclick="playUIBeep(640)">
-          <span class="menu-cursor">►</span> 04 // COMMS: DEVLOG
+          <span class="menu-cursor">►</span> 05 // DEVLOG
         </label>
       </div>
     </div>
@@ -1501,7 +1559,7 @@
     <div class="container">
 
       <!-- ====================================================================
-           PESTAÑA 1: EL ESTUDIO (STATUS: HQ PROFILE)
+           PESTAÑA 1: EL ESTUDIO
            ==================================================================== -->
       <section id="panel-studio" class="tab-panel">
         <div class="studio-grid">
@@ -1556,16 +1614,10 @@
       </section>
 
       <!-- ====================================================================
-           PESTAÑA 2: JUEGOS DESARROLLADOS (CATÁLOGO OFICIAL)
+           PESTAÑA 2: JUEGOS
            ==================================================================== -->
       <section id="panel-games" class="tab-panel">
         <div class="unified-card-wrapper">
-          
-          <div class="games-catalog-header">
-            <span class="games-catalog-badge">CATÁLOGO OFICIAL DE LANZAMIENTOS</span>
-            <h2 class="games-catalog-title">Videojuegos desarrollados por Tombot Studios</h2>
-          </div>
-
           <article class="flagship-panel">
             <div class="flagship-content">
               <h2 class="flagship-title">DRUNK CITY BASTARDS</h2>
@@ -1651,7 +1703,87 @@
       </section>
 
       <!-- ====================================================================
-           PESTAÑA 4: COMMS / DEVLOG Y COMUNIDAD
+           PESTAÑA 4: EQUIPO (CREW / MEMBERS)
+           ==================================================================== -->
+      <section id="panel-team" class="tab-panel">
+        <div class="unified-card-wrapper">
+          <div class="assets-intro-bar">
+            <span class="assets-intro-badge">TALENTO CLAVE // CREW</span>
+            <p class="assets-intro-title">El equipo detrás de la tinta, el código y el caos</p>
+          </div>
+
+          <div class="team-grid">
+            
+            <!-- MIEMBRO 1 -->
+            <article class="team-card">
+              <div class="team-header">
+                <div class="team-avatar">
+                  <img src="nazj.png" alt="Nelson Andres Zavala Jimenez" onerror="this.src='image.png'">
+                </div>
+                <div class="team-info">
+                  <h3>Nelson Andres Zavala Jimenez</h3>
+                  <span class="team-role">Lead Developer & Game Director</span>
+                </div>
+              </div>
+              <p class="team-bio">
+                Arquitecto de sistemas de juego y director creativo. Encargado de la programación central en C#, diseño de mecánicas y la estructura técnica de los proyectos del estudio.
+              </p>
+            </article>
+
+            <!-- MIEMBRO 2 -->
+            <article class="team-card">
+              <div class="team-header">
+                <div class="team-avatar">
+                  <img src="efb.png" alt="Erendira Flores Banda" onerror="this.src='image.png'">
+                </div>
+                <div class="team-info">
+                  <h3>Erendira Flores Banda</h3>
+                  <span class="team-role">Marketing & Publishing Director</span>
+                </div>
+              </div>
+              <p class="team-bio">
+                Estratega de posicionamiento de marca y relaciones comerciales. Dirige la distribución global, campañas de lanzamiento y expansión comercial de los títulos.
+              </p>
+            </article>
+
+            <!-- MIEMBRO 3 -->
+            <article class="team-card">
+              <div class="team-header">
+                <div class="team-avatar">
+                  <img src="duzf.png" alt="Dante Uriel Zavala Flores" onerror="this.src='image.png'">
+                </div>
+                <div class="team-info">
+                  <h3>Dante Uriel Zavala Flores</h3>
+                  <span class="team-role">Lead Artist & Audio Director</span>
+                </div>
+              </div>
+              <p class="team-bio">
+                Visionario del apartado visual y sonoro. Da vida a los mundos decadentes del estudio mediante dirección de arte, diseño gráfico estilo cómic y composición musical inmersiva.
+              </p>
+            </article>
+
+            <!-- MIEMBRO 4 -->
+            <article class="team-card">
+              <div class="team-header">
+                <div class="team-avatar">
+                  <img src="semf.png" alt="Saul Emiliano Magallon Flores" onerror="this.src='image.png'">
+                </div>
+                <div class="team-info">
+                  <h3>Saul Emiliano Magallon Flores</h3>
+                  <span class="team-role">Community Manager & Social Media Lead</span>
+                </div>
+              </div>
+              <p class="team-bio">
+                Enlace directo con la comunidad de jugadores y desarrolladores. Coordina la comunicación en redes sociales, devlogs y la difusión de actualizaciones en tiempo real.
+              </p>
+            </article>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           PESTAÑA 5: COMMS / DEVLOG Y COMUNIDAD
            ==================================================================== -->
       <section id="panel-devlog" class="tab-panel">
         <div class="unified-card-wrapper">
@@ -1659,7 +1791,7 @@
             <h2 class="devlog-main-title">DRUNK CITY BASTARDS // DEVLOG</h2>
             <p class="devlog-subtitle">Transmisión de datos, avances visuales y red de comunicaciones</p>
             <label for="tab-games" class="comic-btn btn-news" style="padding: 0.5rem 1.2rem; font-size: 1rem; cursor: pointer;" onclick="playUIBeep(500)">
-              ← VOLVER A CATÁLOGO DE JUEGOS
+              ← VOLVER A JUEGOS
             </label>
           </div>
 
