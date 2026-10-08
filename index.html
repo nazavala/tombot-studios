@@ -92,6 +92,7 @@
       display: none;
     }
 
+    /* Contenedor Universal Centrado (Equilibrio perfecto en PC y Móvil) */
     .container {
       width: 100%;
       max-width: 1150px;
@@ -625,8 +626,36 @@
     }
 
     /* ==========================================================================
-       PESTAÑA 2: JUEGOS (MISIÓN: DRUNK CITY BASTARDS)
+       PESTAÑA 2: JUEGOS DESARROLLADOS (CATÁLOGO OFICIAL)
        ========================================================================== */
+    .games-catalog-header {
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .games-catalog-badge {
+      display: inline-block;
+      background: var(--dark-ink);
+      color: var(--accent-primary);
+      font-family: var(--font-caacupe);
+      font-size: 0.95rem;
+      letter-spacing: 1.2px;
+      padding: 0.35rem 0.9rem;
+      border: 2px solid var(--accent-primary);
+      margin-bottom: 0.6rem;
+      text-transform: uppercase;
+      box-shadow: var(--comic-shadow-sm);
+    }
+
+    .games-catalog-title {
+      font-family: var(--font-caacupe);
+      font-size: clamp(1.2rem, 2.4vw, 1.65rem);
+      letter-spacing: 1px;
+      color: var(--newsprint-bg);
+      text-transform: uppercase;
+      line-height: 1.35;
+    }
+
     .flagship-panel {
       background: var(--bg-card);
       border: var(--comic-border);
@@ -1273,7 +1302,7 @@
     }
 
     /* ==========================================================================
-       RESPONSIVE DESIGN (TABLETS & CELULARES)
+       MEDIA QUERIES (TABLETS & CELULARES)
        ========================================================================== */
     @media (max-width: 992px) {
       .studio-grid {
@@ -1305,6 +1334,7 @@
         padding: 0.6rem 0;
       }
 
+      /* MENÚ TÁCTIL MÓVIL 2X2 */
       .tabs-nav-bar {
         padding-top: 0.5rem;
       }
@@ -1452,7 +1482,7 @@
           <span class="menu-cursor">►</span> 01 // EL ESTUDIO
         </label>
         <label for="tab-games" class="tab-label" onclick="playUIBeep(640)">
-          <span class="menu-cursor">►</span> 02 // MISIÓN: DCB
+          <span class="menu-cursor">►</span> 02 // JUEGOS
         </label>
         <label for="tab-assets" class="tab-label" onclick="playUIBeep(640)">
           <span class="menu-cursor">►</span> 03 // ARSENAL UNITY
@@ -1526,10 +1556,16 @@
       </section>
 
       <!-- ====================================================================
-           PESTAÑA 2: JUEGOS (MISIÓN: DRUNK CITY BASTARDS)
+           PESTAÑA 2: JUEGOS DESARROLLADOS (CATÁLOGO OFICIAL)
            ==================================================================== -->
       <section id="panel-games" class="tab-panel">
         <div class="unified-card-wrapper">
+          
+          <div class="games-catalog-header">
+            <span class="games-catalog-badge">CATÁLOGO OFICIAL DE LANZAMIENTOS</span>
+            <h2 class="games-catalog-title">Videojuegos desarrollados por Tombot Studios</h2>
+          </div>
+
           <article class="flagship-panel">
             <div class="flagship-content">
               <h2 class="flagship-title">DRUNK CITY BASTARDS</h2>
@@ -1623,7 +1659,7 @@
             <h2 class="devlog-main-title">DRUNK CITY BASTARDS // DEVLOG</h2>
             <p class="devlog-subtitle">Transmisión de datos, avances visuales y red de comunicaciones</p>
             <label for="tab-games" class="comic-btn btn-news" style="padding: 0.5rem 1.2rem; font-size: 1rem; cursor: pointer;" onclick="playUIBeep(500)">
-              ← VOLVER A MISIÓN DCB
+              ← VOLVER A CATÁLOGO DE JUEGOS
             </label>
           </div>
 
@@ -1721,9 +1757,8 @@
   </main>
 
   <!-- ==========================================================================
-       FOOTER CON REDES SOCIALES (INCLUYE YOUTUBE)
-       ========================================================================== */
-  -->
+       FOOTER CON REDES SOCIALES
+       ========================================================================== -->
   <footer class="main-footer">
     <div class="container">
       <div class="footer-logo-center">
@@ -1737,7 +1772,6 @@
       </p>
 
       <div class="social-links-bar">
-        <!-- INSTAGRAM -->
         <a href="https://www.instagram.com/tombotstudios/" target="_blank" rel="noopener noreferrer" class="social-btn" title="Instagram" onclick="playUIBeep(550)">
           <svg viewBox="0 0 24 24">
             <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
@@ -1745,7 +1779,6 @@
           INSTAGRAM
         </a>
 
-        <!-- FACEBOOK -->
         <a href="https://www.facebook.com/profile.php?id=61569450278114" target="_blank" rel="noopener noreferrer" class="social-btn" title="Facebook" onclick="playUIBeep(550)">
           <svg viewBox="0 0 24 24">
             <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
@@ -1753,7 +1786,6 @@
           FACEBOOK
         </a>
 
-        <!-- TIKTOK -->
         <a href="https://www.tiktok.com/@tombotstudios" target="_blank" rel="noopener noreferrer" class="social-btn" title="TikTok" onclick="playUIBeep(550)">
           <svg viewBox="0 0 24 24">
             <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.24 1.07-.14 1.61.24 1.16 1.18 2.09 2.35 2.3 1.05.21 2.22-.07 2.99-.81.65-.62.99-1.49 1.01-2.37.03-4.14.01-8.28.02-12.42V.02z"/>
@@ -1761,7 +1793,6 @@
           TIKTOK
         </a>
 
-        <!-- YOUTUBE OFICIAL -->
         <a href="https://www.youtube.com/@TombotStudios" target="_blank" rel="noopener noreferrer" class="social-btn" title="YouTube" onclick="playUIBeep(550)">
           <svg viewBox="0 0 24 24">
             <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
