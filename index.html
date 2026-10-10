@@ -75,7 +75,6 @@
       display: none;
     }
 
-    /* Contenedor Universal Centrado */
     .container {
       width: 100%;
       max-width: 1150px;
@@ -142,7 +141,7 @@
     }
 
     /* ==========================================================================
-       BARRA DE NAVEGACIÓN ESTILO MENÚ DE JUEGO (MAIN MENU)
+       BARRA DE NAVEGACIÓN (4 PESTAÑAS SIMÉTRICAS)
        ========================================================================== */
     .tabs-nav-bar {
       background: #101116;
@@ -172,9 +171,9 @@
       justify-content: center;
       gap: 0.5rem;
       font-family: var(--font-caacupe);
-      font-size: 1.15rem;
-      letter-spacing: 1.2px;
-      padding: 0.85rem 1.2rem;
+      font-size: 1.1rem;
+      letter-spacing: 1px;
+      padding: 0.85rem 1rem;
       background: var(--bg-card);
       color: var(--newsprint-bg);
       border-top: var(--comic-border);
@@ -213,8 +212,7 @@
     #tab-studio:checked ~ .tabs-nav-bar label[for="tab-studio"],
     #tab-games:checked ~ .tabs-nav-bar label[for="tab-games"],
     #tab-assets:checked ~ .tabs-nav-bar label[for="tab-assets"],
-    #tab-team:checked ~ .tabs-nav-bar label[for="tab-team"],
-    #tab-devlog:checked ~ .tabs-nav-bar label[for="tab-devlog"] {
+    #tab-team:checked ~ .tabs-nav-bar label[for="tab-team"] {
       background: var(--accent-primary);
       color: var(--dark-ink);
       box-shadow: 4px -3px 0px var(--dark-ink);
@@ -225,8 +223,7 @@
     #tab-studio:checked ~ .tabs-nav-bar label[for="tab-studio"] .menu-cursor,
     #tab-games:checked ~ .tabs-nav-bar label[for="tab-games"] .menu-cursor,
     #tab-assets:checked ~ .tabs-nav-bar label[for="tab-assets"] .menu-cursor,
-    #tab-team:checked ~ .tabs-nav-bar label[for="tab-team"] .menu-cursor,
-    #tab-devlog:checked ~ .tabs-nav-bar label[for="tab-devlog"] .menu-cursor {
+    #tab-team:checked ~ .tabs-nav-bar label[for="tab-team"] .menu-cursor {
       color: var(--dark-ink);
       transform: scale(1.15);
     }
@@ -259,7 +256,6 @@
     #tab-games:checked ~ main #panel-games { display: block; }
     #tab-assets:checked ~ main #panel-assets { display: block; }
     #tab-team:checked ~ main #panel-team { display: block; }
-    #tab-devlog:checked ~ main #panel-devlog { display: block; }
 
     .unified-card-wrapper {
       width: 100%;
@@ -310,11 +306,6 @@
 
     .comic-btn.btn-sec:hover {
       background: var(--accent-secondary-hover);
-    }
-
-    .comic-btn.btn-news {
-      background: var(--newsprint-bg);
-      color: var(--newsprint-ink);
     }
 
     /* ==========================================================================
@@ -374,7 +365,7 @@
 
     .newsprint-box::before,
     .flagship-panel::after,
-    .asset-card::after,
+    .asset-featured-showcase::after,
     .team-card::after {
       content: "[ + ]";
       position: absolute;
@@ -505,7 +496,7 @@
     }
 
     /* ==========================================================================
-       PESTAÑA 2: JUEGOS (MISIÓN: DRUNK CITY BASTARDS)
+       PESTAÑA 2: JUEGOS (CON DEVLOG DESPLEGABLE / CHAT INTEGRADO)
        ========================================================================== */
     .flagship-panel {
       background: var(--bg-card);
@@ -513,6 +504,7 @@
       box-shadow: var(--comic-shadow-lg);
       padding: clamp(1.8rem, 4vw, 3rem);
       position: relative;
+      margin-bottom: 2.5rem;
     }
 
     .flagship-panel::before {
@@ -588,8 +580,48 @@
       line-height: 1.5;
     }
 
+    /* Acordeón Desplegable para el Devlog dentro de Juegos */
+    .devlog-accordion {
+      background: var(--bg-card);
+      border: var(--comic-border);
+      box-shadow: var(--comic-shadow);
+      margin-top: 2rem;
+    }
+
+    .devlog-accordion-toggle {
+      width: 100%;
+      background: var(--dark-ink);
+      color: var(--accent-primary);
+      border: none;
+      padding: 1.2rem 1.5rem;
+      font-family: var(--font-caacupe);
+      font-size: 1.2rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.15s ease;
+    }
+
+    .devlog-accordion-toggle:hover {
+      background: #1f222b;
+    }
+
+    .devlog-accordion-content {
+      display: none;
+      padding: 1.5rem;
+      background: var(--bg-main);
+      border-top: 3px solid var(--dark-ink);
+    }
+
+    .devlog-accordion-content.active {
+      display: block;
+    }
+
     /* ==========================================================================
-       PESTAÑA 3: ASSETS & TOOLS UNITY (GRILLA DE 2 COLUMNAS)
+       PESTAÑA 3: ARSENAL / TOOLS UNITY (QeController)
        ========================================================================== */
     .assets-intro-bar {
       margin-bottom: 1.8rem;
@@ -619,13 +651,7 @@
       line-height: 1.35;
     }
 
-    .assets-grid-2cols {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 2rem;
-    }
-
-    .asset-card {
+    .asset-featured-showcase {
       background: var(--newsprint-bg);
       border: var(--comic-border);
       box-shadow: var(--comic-shadow-lg);
@@ -634,59 +660,96 @@
       position: relative;
     }
 
-    .asset-header {
+    .asset-header-showcase {
       background: var(--dark-ink);
       color: var(--accent-primary);
-      padding: 0.9rem 1.3rem;
+      padding: 1rem 1.5rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
       border-bottom: 4px solid var(--dark-ink);
       font-family: var(--font-caacupe);
-      font-size: 0.95rem;
+      font-size: 1rem;
       letter-spacing: 1px;
       flex-wrap: wrap;
       gap: 0.5rem;
     }
 
-    .asset-body {
-      padding: clamp(1.4rem, 3vw, 2rem);
-      display: flex;
-      flex-direction: column;
-      flex-grow: 1;
-      justify-content: space-between;
+    .asset-star-tag {
+      background: var(--accent-primary);
+      color: var(--dark-ink);
+      padding: 0.2rem 0.6rem;
+      font-family: var(--font-caacupe);
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      border: 1px solid var(--dark-ink);
+      font-weight: bold;
     }
 
-    .asset-title {
+    .asset-body-showcase {
+      padding: clamp(1.5rem, 3.5vw, 2.5rem);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .asset-title-showcase {
       font-family: var(--font-display);
-      font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+      font-size: clamp(1.8rem, 4.5vw, 3.2rem);
       color: var(--newsprint-ink);
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.6rem;
       line-height: 1.1;
       overflow-wrap: break-word;
     }
 
-    .asset-tagline {
+    .asset-tagline-showcase {
       font-family: var(--font-caacupe);
-      font-size: 1.1rem;
+      font-size: clamp(1.1rem, 2vw, 1.3rem);
       color: var(--accent-secondary);
       letter-spacing: 1px;
       text-transform: uppercase;
-      margin-bottom: 1rem;
+      margin-bottom: 1.2rem;
       line-height: 1.3;
     }
 
-    .asset-desc {
-      font-size: 1.1rem;
-      color: var(--newsprint-ink);
-      font-weight: bold;
+    .asset-features-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
       margin-bottom: 1.5rem;
-      line-height: 1.45;
     }
 
-    .asset-footer {
+    .feature-point {
+      background: rgba(18, 17, 23, 0.08);
+      border: 2px solid var(--dark-ink);
+      padding: 0.75rem 1rem;
+      font-family: var(--font-tech);
+      font-size: 1.05rem;
+      font-weight: bold;
+      color: var(--newsprint-ink);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      line-height: 1.25;
+    }
+
+    .feature-point span {
+      color: var(--accent-alert);
+      font-size: 1.2rem;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .asset-desc-showcase {
+      font-size: 1.2rem;
+      color: var(--newsprint-ink);
+      font-weight: bold;
+      margin-bottom: 1.8rem;
+      line-height: 1.5;
+    }
+
+    .asset-footer-showcase {
       border-top: 3px dashed var(--dark-ink);
-      padding-top: 1.2rem;
+      padding-top: 1.5rem;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -765,54 +828,8 @@
     }
 
     /* ==========================================================================
-       PESTAÑA 5: HUB DE AVANCES, DEVLOG Y COMMS
+       DEVLOG, GALERÍA Y COMMS FEED ESTILOS
        ========================================================================== */
-    .devlog-header {
-      background: var(--bg-card);
-      border: var(--comic-border);
-      box-shadow: var(--comic-shadow);
-      padding: clamp(1.5rem, 3vw, 2rem);
-      margin-bottom: 2.2rem;
-      position: relative;
-    }
-
-    .devlog-header::before {
-      content: "DATABASE // LOG DE ACTUALIZACIONES";
-      position: absolute;
-      top: -14px;
-      left: 18px;
-      background: var(--accent-primary);
-      color: var(--dark-ink);
-      font-family: var(--font-dcb);
-      font-size: 1.15rem;
-      letter-spacing: 1.2px;
-      padding: 0.15rem 0.8rem;
-      border: 2px solid var(--dark-ink);
-      max-width: 90%;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .devlog-main-title {
-      font-family: var(--font-dcb);
-      font-size: clamp(2.4rem, 5.5vw, 4.5rem);
-      letter-spacing: 1.8px;
-      color: var(--accent-primary);
-      line-height: 0.95;
-      margin-bottom: 0.5rem;
-      overflow-wrap: break-word;
-    }
-
-    .devlog-subtitle {
-      font-family: var(--font-caacupe);
-      font-size: clamp(1.05rem, 2vw, 1.25rem);
-      color: var(--accent-secondary);
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      margin-bottom: 1.2rem;
-    }
-
     .devlog-gallery-title {
       font-family: var(--font-caacupe);
       font-size: clamp(1.3rem, 3vw, 1.6rem);
@@ -836,24 +853,18 @@
       display: flex;
       flex-direction: column;
       overflow: hidden;
-      transition: transform 0.15s ease;
       position: relative;
-    }
-
-    .gallery-panel:hover {
-      transform: translateY(-4px);
     }
 
     .gallery-img-box {
       width: 100%;
-      height: 170px;
+      height: 160px;
       background: #0f1015;
       display: flex;
       align-items: center;
       justify-content: center;
       position: relative;
       border-bottom: 3px solid var(--dark-ink);
-      overflow: hidden;
     }
 
     .gallery-img-box svg {
@@ -920,7 +931,6 @@
       margin-bottom: 1.2rem;
       border-bottom: 2px dashed var(--dark-ink);
       padding-bottom: 0.6rem;
-      line-height: 1.35;
     }
 
     .post-body {
@@ -953,20 +963,12 @@
       padding: 0.45rem 1.2rem;
       cursor: pointer;
       box-shadow: var(--comic-shadow-sm);
-      transition: transform 0.1s ease;
-      user-select: none;
       min-height: 48px;
-      touch-action: manipulation;
-    }
-
-    .like-btn:hover {
-      transform: scale(1.04);
     }
 
     .like-btn.liked {
       background: #ff3344;
       color: #ffffff;
-      border-color: var(--dark-ink);
     }
 
     .reaction-pill {
@@ -980,9 +982,6 @@
       display: inline-flex;
       align-items: center;
       gap: 0.3rem;
-      transition: background 0.15s ease;
-      min-height: 44px;
-      touch-action: manipulation;
     }
 
     .reaction-pill:hover {
@@ -995,7 +994,6 @@
       border: var(--comic-border);
       box-shadow: var(--comic-shadow);
       padding: clamp(1.5rem, 3vw, 2.5rem);
-      margin-bottom: 2rem;
     }
 
     .comments-header-title {
@@ -1004,8 +1002,6 @@
       letter-spacing: 1.5px;
       color: var(--accent-primary);
       margin-bottom: 0.5rem;
-      line-height: 1.05;
-      overflow-wrap: break-word;
     }
 
     .comment-form {
@@ -1030,11 +1026,6 @@
       outline: none;
     }
 
-    .comment-input:focus,
-    .comment-textarea:focus {
-      border-color: var(--accent-primary);
-    }
-
     .comment-textarea {
       min-height: 95px;
       resize: vertical;
@@ -1052,7 +1043,6 @@
       border: 3px solid var(--dark-ink);
       box-shadow: var(--comic-shadow-sm);
       padding: 1.2rem;
-      position: relative;
     }
 
     .comment-card-head {
@@ -1062,7 +1052,6 @@
       margin-bottom: 0.4rem;
       border-bottom: 2px solid var(--dark-ink);
       padding-bottom: 0.25rem;
-      gap: 0.5rem;
     }
 
     .comment-author {
@@ -1071,25 +1060,22 @@
       letter-spacing: 1px;
       color: var(--dark-ink);
       text-transform: uppercase;
-      overflow-wrap: break-word;
     }
 
     .comment-date {
       font-family: var(--font-tech);
       font-size: 0.85rem;
       color: #665b50;
-      white-space: nowrap;
     }
 
     .comment-msg {
       font-size: 1.15rem;
       font-weight: bold;
       line-height: 1.4;
-      overflow-wrap: break-word;
     }
 
     /* ==========================================================================
-       FOOTER Y REDES SOCIALES (SOLO ICONOS COMPACTOS)
+       FOOTER Y REDES SOCIALES
        ========================================================================== */
     .main-footer {
       background: #0b0c10;
@@ -1171,11 +1157,6 @@
       box-shadow: 5px 5px 0px #000000;
     }
 
-    .social-icon-btn:active {
-      transform: translate(2px, 2px);
-      box-shadow: 1px 1px 0px #000000;
-    }
-
     .social-icon-btn svg {
       width: 22px;
       height: 22px;
@@ -1190,12 +1171,11 @@
     }
 
     /* ==========================================================================
-       MEDIA QUERIES (TABLETS & CELULARES)
+       RESPONSIVE DESIGN (TABLETS & CELULARES)
        ========================================================================== */
     @media (max-width: 992px) {
       .studio-grid,
-      .team-grid,
-      .assets-grid-2cols {
+      .team-grid {
         grid-template-columns: 1fr;
         gap: 2.2rem;
       }
@@ -1237,7 +1217,8 @@
         text-align: center;
       }
 
-      .tab-label[for="tab-devlog"] {
+      /* La pestaña 4 (Equipo) ocupa ancho completo abajo en móviles */
+      .tab-label[for="tab-team"] {
         grid-column: span 2;
       }
 
@@ -1248,8 +1229,7 @@
       #tab-studio:checked ~ .tabs-nav-bar label[for="tab-studio"],
       #tab-games:checked ~ .tabs-nav-bar label[for="tab-games"],
       #tab-assets:checked ~ .tabs-nav-bar label[for="tab-assets"],
-      #tab-team:checked ~ .tabs-nav-bar label[for="tab-team"],
-      #tab-devlog:checked ~ .tabs-nav-bar label[for="tab-devlog"] {
+      #tab-team:checked ~ .tabs-nav-bar label[for="tab-team"] {
         transform: none;
         box-shadow: 3px 3px 0px var(--dark-ink);
       }
@@ -1269,16 +1249,6 @@
       .gallery-img-box {
         height: 150px;
       }
-
-      .interaction-bar {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      .like-btn, .reaction-pill {
-        width: 100%;
-        justify-content: center;
-      }
     }
   </style>
 </head>
@@ -1289,10 +1259,9 @@
   <input type="radio" name="site_tabs" id="tab-games" class="logic-input">
   <input type="radio" name="site_tabs" id="tab-assets" class="logic-input">
   <input type="radio" name="site_tabs" id="tab-team" class="logic-input">
-  <input type="radio" name="site_tabs" id="tab-devlog" class="logic-input">
 
   <!-- ==========================================================================
-       HEADER CON LOGO OFICIAL (image.png) - SIN SWITCH DE COLOR
+       HEADER CON LOGO OFICIAL (image.png)
        ========================================================================== -->
   <header class="main-header">
     <div class="container navbar">
@@ -1306,7 +1275,7 @@
   </header>
 
   <!-- ==========================================================================
-       BARRA DE NAVEGACIÓN ESTILO MENÚ DE JUEGO (MAIN MENU)
+       BARRA DE NAVEGACIÓN (4 PESTAÑAS SIMÉTRICAS)
        ========================================================================== -->
   <nav class="tabs-nav-bar">
     <div class="container">
@@ -1324,9 +1293,6 @@
         <label for="tab-team" class="tab-label" onclick="playUIBeep(640)">
           <span class="menu-cursor">►</span> 04 // EQUIPO
         </label>
-        <label for="tab-devlog" class="tab-label" onclick="playUIBeep(640)">
-          <span class="menu-cursor">►</span> 05 // DEVLOG
-        </label>
       </div>
     </div>
   </nav>
@@ -1338,7 +1304,7 @@
     <div class="container">
 
       <!-- ====================================================================
-           PESTAÑA 1: EL ESTUDIO (STATUS: HQ PROFILE)
+           PESTAÑA 1: EL ESTUDIO
            ==================================================================== -->
       <section id="panel-studio" class="tab-panel">
         <div class="studio-grid">
@@ -1393,7 +1359,7 @@
       </section>
 
       <!-- ====================================================================
-           PESTAÑA 2: JUEGOS (MISIÓN: DRUNK CITY BASTARDS)
+           PESTAÑA 2: JUEGOS (DCB + ACORDEÓN DESPLEGABLE DE DEVLOG Y COMMS)
            ==================================================================== -->
       <section id="panel-games" class="tab-panel">
         <div class="unified-card-wrapper">
@@ -1420,75 +1386,164 @@
                 <a href="https://tombot-studios.itch.io/drunk-city-bastards" target="_blank" rel="noopener noreferrer" class="comic-btn" onclick="playUIBeep(800)">
                   OBTENER EN ITCH.IO ➔
                 </a>
-                
-                <label for="tab-devlog" class="comic-btn btn-sec" style="cursor: pointer;" onclick="playUIBeep(700)">
-                  VER AVANCES Y DEVLOG ➔
-                </label>
               </div>
             </div>
           </article>
+
+          <!-- ACORDEÓN DESPLEGABLE DE AVANCES Y DEVLOG (INTEGRADO EN LA MISMA PESTAÑA) -->
+          <div class="devlog-accordion">
+            <button class="devlog-accordion-toggle" onclick="toggleDevlogAccordion()">
+              <span>▼ ABRIR AVANCES, DEVLOG Y COMMS FEED</span>
+              <span id="accordion-icon">[ + ]</span>
+            </button>
+
+            <div class="devlog-accordion-content" id="devlog-content-box">
+              <div class="devlog-header">
+                <h2 class="devlog-main-title">DRUNK CITY BASTARDS // DEVLOG</h2>
+                <p class="devlog-subtitle">Transmisión de datos, avances visuales y red de comunicaciones</p>
+              </div>
+
+              <h3 class="devlog-gallery-title">LOG VISUAL DE DESARROLLO EN UNITY</h3>
+              <div class="devlog-gallery-grid">
+                <article class="gallery-panel">
+                  <div class="gallery-img-box">
+                    <svg width="65" height="65" viewBox="0 0 24 24" fill="none" stroke="#c99846" stroke-width="1.8">
+                      <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                    </svg>
+                    <span class="gallery-label">BUILD 0.4.2</span>
+                  </div>
+                  <p class="gallery-caption">Sistema de iluminación nocturna y volumetría en calles secundarias.</p>
+                </article>
+
+                <article class="gallery-panel">
+                  <div class="gallery-img-box">
+                    <svg width="65" height="65" viewBox="0 0 24 24" fill="none" stroke="#4b787c" stroke-width="1.8">
+                      <rect x="3" y="3" width="18" height="18" rx="2"/>
+                      <path d="M3 9h18M9 21V9"/>
+                    </svg>
+                    <span class="gallery-label">GRID-COMBAT</span>
+                  </div>
+                  <p class="gallery-caption">Integración de la cuadrícula táctica y cálculo de coberturas reactivas.</p>
+                </article>
+
+                <article class="gallery-panel">
+                  <div class="gallery-img-box">
+                    <svg width="65" height="65" viewBox="0 0 24 24" fill="none" stroke="#a65646" stroke-width="1.8">
+                      <circle cx="12" cy="12" r="10"/>
+                      <path d="M8 12h8M12 8v8"/>
+                    </svg>
+                    <span class="gallery-label">ENEMIES AI</span>
+                  </div>
+                  <p class="gallery-caption">Modelado de autómatas defectuosos y patrullas de guardia con IA sensorial.</p>
+                </article>
+              </div>
+
+              <article class="devlog-post">
+                <span class="post-badge">LOG #03 // TRANSMISIÓN</span>
+                <h3 class="post-title">CÓMO EQUILIBRAMOS EL SIGILO Y LA ACCIÓN BRUTAL</h3>
+                <div class="post-meta">Transmisión de Tombot Studios // Octubre 2026 // Categoría: Sistemas</div>
+                
+                <p class="post-body">
+                  En las últimas semanas hemos rediseñado por completo el sistema de conos de visión y rango de escucha de las hordas enemigas. Nuestro objetivo en <em>Drunk City Bastards</em> no es forzarte a un sigilo pasivo donde esperas 10 minutos en una esquina, sino darte herramientas para que el sigilo sea rápido, tenso y se sienta como una cacería callejera. Si cometes un error y alertan al campamento, el combate en tercera persona te obligará a usar el entorno, romper coberturas y abrirte paso con lo que tengas en el inventario.
+                </p>
+
+                <div class="interaction-bar">
+                  <button class="like-btn" id="dcb-like-btn" onclick="toggleLike()">
+                    <span>❤</span> <span id="like-text">ME GUSTA</span> (<span id="like-count">34</span>)
+                  </button>
+
+                  <button class="reaction-pill" onclick="addReaction('fire')">🔥 CAOS <span id="react-fire">12</span></button>
+                  <button class="reaction-pill" onclick="addReaction('drink')">🍺 RESACA <span id="react-drink">19</span></button>
+                  <button class="reaction-pill" onclick="addReaction('skull')">💀 TÁCTICA <span id="react-skull">8</span></button>
+                </div>
+              </article>
+
+              <div class="comments-wrapper">
+                <h3 class="comments-header-title">COMMS FEED // OPINIONES Y FEEDBACK</h3>
+                <p style="font-family: var(--font-tech); font-size: 1.05rem; color: var(--newsprint-bg);">
+                  Transmite tus ideas, sugerencias y opiniones sobre los avances del juego.
+                </p>
+
+                <form class="comment-form" id="comment-form" onsubmit="postComment(event)">
+                  <input type="text" id="comment-author" class="comment-input" placeholder="Tu Alias de Jugador / Nombre..." required maxlength="40">
+                  <textarea id="comment-msg" class="comment-textarea" placeholder="Escribe tu feedback o pregunta sobre Drunk City Bastards..." required maxlength="300"></textarea>
+                  <button type="submit" class="comic-btn" onclick="playUIBeep(740)">
+                    ENVIAR TRANSMISIÓN ➔
+                  </button>
+                </form>
+
+                <div class="comments-feed" id="comments-feed">
+                  <div class="comment-card">
+                    <div class="comment-card-head">
+                      <span class="comment-author">NEXUS_TACTICAL</span>
+                      <span class="comment-date">Ayer, 18:40</span>
+                    </div>
+                    <p class="comment-msg">El arte con colores opacos y la estética de novela gráfica le da una personalidad tremenda. Ojalá metan más opciones de armas improvisadas en los callejones.</p>
+                  </div>
+
+                  <div class="comment-card">
+                    <div class="comment-card-head">
+                      <span class="comment-author">DEV_PUNK</span>
+                      <span class="comment-date">Hace 2 días</span>
+                    </div>
+                    <p class="comment-msg">Me encanta que la transición de sigilo a combate sea rápida y sin pantallas de carga. Ya quiero ver la build jugable en Steam.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </section>
 
       <!-- ====================================================================
-           PESTAÑA 3: ASSETS & TOOLS UNITY (QeController & EC Tombot Hub system)
+           PESTAÑA 3: ASSETS & TOOLS UNITY (QeController)
            ==================================================================== -->
       <section id="panel-assets" class="tab-panel">
         <div class="unified-card-wrapper">
           <div class="assets-intro-bar">
             <span class="assets-intro-badge">EQUIPAMIENTO PARA DESARROLLADORES EN UNITY</span>
             <p class="assets-intro-title">
-              Frameworks de movimiento, UI modular y sistemas avanzados optimizados en C#
+              Controlador de personaje modular y arquitectura desacoplada lista para producción en C#
             </p>
           </div>
 
-          <div class="assets-grid-2cols">
+          <article class="asset-featured-showcase">
+            <div class="asset-header-showcase">
+              <span>UNITY PACKAGE // C# FRAMEWORK</span>
+              <span class="asset-star-tag">★ TOOL PRINCIPAL</span>
+            </div>
             
-            <!-- ASSET 1: QeController -->
-            <article class="asset-card">
-              <div class="asset-header">
-                <span>UNITY PACKAGE // C#</span>
-                <span class="asset-star-tag">★ TOOL</span>
-              </div>
-              <div class="asset-body">
-                <div>
-                  <h3 class="asset-title">QeController</h3>
-                  <p class="asset-tagline">CharacterController Isométrico y 3ª Persona</p>
-                  <p class="asset-desc">
-                    Framework modular basado en FSM para resolver locomoción fluida, transiciones de combate y giros de cámara con soporte para el nuevo Input System.
-                  </p>
-                </div>
-                <div class="asset-footer">
-                  <a href="https://tombot-studios.itch.io/httpsalive-noise-e5dnotionsiteqecontroller-manual-de-desarrollador-2db4af2" target="_blank" rel="noopener noreferrer" class="comic-btn" onclick="playUIBeep(800)">
-                    DESCARGAR ➔
-                  </a>
-                </div>
-              </div>
-            </article>
+            <div class="asset-body-showcase">
+              <h3 class="asset-title-showcase">QeController</h3>
+              <p class="asset-tagline-showcase">CharacterController integral para perspectiva isométrica y tercera persona</p>
 
-            <!-- ASSET 2: EC Tombot Hub system (NUEVO) -->
-            <article class="asset-card">
-              <div class="asset-header">
-                <span>UI FRAMEWORK // AAA</span>
-                <span class="asset-star-tag">★ NUEVO</span>
-              </div>
-              <div class="asset-body">
-                <div>
-                  <h3 class="asset-title">EC Tombot Hub system</h3>
-                  <p class="asset-tagline">Survival & Action Master Tab Menu System (RE4 Style)</p>
-                  <p class="asset-desc">
-                    Sistema modular de menús por pestañas estilo Resident Evil 4. Incluye inventario en cuadrícula con rotación de ítems, mapa táctico con Live Feed, árbol de estadísticas y configuración One-Click Setup.
-                  </p>
+              <div class="asset-features-grid">
+                <div class="feature-point">
+                  <span>▶</span> Máquina de Estados (FSM) Desacoplada
                 </div>
-                <div class="asset-footer">
-                  <a href="https://tombot-studios.itch.io" target="_blank" rel="noopener noreferrer" class="comic-btn btn-sec" onclick="playUIBeep(800)">
-                    MÁS INFORMACIÓN ➔
-                  </a>
+                <div class="feature-point">
+                  <span>▶</span> Soporte nativo para New Input System
+                </div>
+                <div class="feature-point">
+                  <span>▶</span> Locomoción fluida y giros de cámara suaves
+                </div>
+                <div class="feature-point">
+                  <span>▶</span> Inspector modular fácil de configurar y extender
                 </div>
               </div>
-            </article>
 
-          </div>
+              <p class="asset-desc-showcase">
+                QeController es un framework diseñado para resolver el movimiento, control y transiciones de estados de personajes en juegos de acción, aventura y sigilo. Construido con buenas prácticas en C#, evita dependencias monolíticas y permite vincular armas, saltos, coberturas y eventos sin tocar la lógica central del controlador.
+              </p>
+
+              <div class="asset-footer-showcase">
+                <a href="https://tombot-studios.itch.io/httpsalive-noise-e5dnotionsiteqecontroller-manual-de-desarrollador-2db4af2" target="_blank" rel="noopener noreferrer" class="comic-btn" onclick="playUIBeep(800)">
+                  DESCARGAR UNITYPACKAGE ➔
+                </a>
+              </div>
+            </div>
+          </article>
         </div>
       </section>
 
@@ -1504,7 +1559,6 @@
 
           <div class="team-grid">
             
-            <!-- MIEMBRO 1 -->
             <article class="team-card">
               <div class="team-header">
                 <div class="team-avatar">
@@ -1520,7 +1574,6 @@
               </p>
             </article>
 
-            <!-- MIEMBRO 2 -->
             <article class="team-card">
               <div class="team-header">
                 <div class="team-avatar">
@@ -1536,7 +1589,6 @@
               </p>
             </article>
 
-            <!-- MIEMBRO 3 -->
             <article class="team-card">
               <div class="team-header">
                 <div class="team-avatar">
@@ -1552,7 +1604,6 @@
               </p>
             </article>
 
-            <!-- MIEMBRO 4 -->
             <article class="team-card">
               <div class="team-header">
                 <div class="team-avatar">
@@ -1568,109 +1619,6 @@
               </p>
             </article>
 
-          </div>
-        </div>
-      </section>
-
-      <!-- ====================================================================
-           PESTAÑA 5: COMMS / DEVLOG Y COMUNIDAD
-           ==================================================================== -->
-      <section id="panel-devlog" class="tab-panel">
-        <div class="unified-card-wrapper">
-          <div class="devlog-header">
-            <h2 class="devlog-main-title">DRUNK CITY BASTARDS // DEVLOG</h2>
-            <p class="devlog-subtitle">Transmisión de datos, avances visuales y red de comunicaciones</p>
-            <label for="tab-games" class="comic-btn btn-news" style="padding: 0.5rem 1.2rem; font-size: 1rem; cursor: pointer;" onclick="playUIBeep(500)">
-              ← VOLVER A JUEGOS
-            </label>
-          </div>
-
-          <h3 class="devlog-gallery-title">LOG VISUAL DE DESARROLLO EN UNITY</h3>
-          <div class="devlog-gallery-grid">
-            <article class="gallery-panel">
-              <div class="gallery-img-box">
-                <svg width="65" height="65" viewBox="0 0 24 24" fill="none" stroke="#c99846" stroke-width="1.8">
-                  <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                </svg>
-                <span class="gallery-label">BUILD 0.4.2</span>
-              </div>
-              <p class="gallery-caption">Sistema de iluminación nocturna y volumetría en calles secundarias.</p>
-            </article>
-
-            <article class="gallery-panel">
-              <div class="gallery-img-box">
-                <svg width="65" height="65" viewBox="0 0 24 24" fill="none" stroke="#4b787c" stroke-width="1.8">
-                  <rect x="3" y="3" width="18" height="18" rx="2"/>
-                  <path d="M3 9h18M9 21V9"/>
-                </svg>
-                <span class="gallery-label">GRID-COMBAT</span>
-              </div>
-              <p class="gallery-caption">Integración de la cuadrícula táctica y cálculo de coberturas reactivas.</p>
-            </article>
-
-            <article class="gallery-panel">
-              <div class="gallery-img-box">
-                <svg width="65" height="65" viewBox="0 0 24 24" fill="none" stroke="#a65646" stroke-width="1.8">
-                  <circle cx="12" cy="12" r="10"/>
-                  <path d="M8 12h8M12 8v8"/>
-                </svg>
-                <span class="gallery-label">ENEMIES AI</span>
-              </div>
-              <p class="gallery-caption">Modelado de autómatas defectuosos y patrullas de guardia con IA sensorial.</p>
-            </article>
-          </div>
-
-          <article class="devlog-post">
-            <span class="post-badge">LOG #03 // TRANSMISIÓN</span>
-            <h3 class="post-title">CÓMO EQUILIBRAMOS EL SIGILO Y LA ACCIÓN BRUTAL</h3>
-            <div class="post-meta">Transmisión de Tombot Studios // Octubre 2026 // Categoría: Sistemas</div>
-            
-            <p class="post-body">
-              En las últimas semanas hemos rediseñado por completo el sistema de conos de visión y rango de escucha de las hordas enemigas. Nuestro objetivo en <em>Drunk City Bastards</em> no es forzarte a un sigilo pasivo donde esperas 10 minutos en una esquina, sino darte herramientas para que el sigilo sea rápido, tenso y se sienta como una cacería callejera. Si cometes un error y alertan al campamento, el combate en tercera persona te obligará a usar el entorno, romper coberturas y abrirte paso con lo que tengas en el inventario.
-            </p>
-
-            <div class="interaction-bar">
-              <button class="like-btn" id="dcb-like-btn" onclick="toggleLike()">
-                <span>❤</span> <span id="like-text">ME GUSTA</span> (<span id="like-count">34</span>)
-              </button>
-
-              <button class="reaction-pill" onclick="addReaction('fire')">🔥 CAOS <span id="react-fire">12</span></button>
-              <button class="reaction-pill" onclick="addReaction('drink')">🍺 RESACA <span id="react-drink">19</span></button>
-              <button class="reaction-pill" onclick="addReaction('skull')">💀 TÁCTICA <span id="react-skull">8</span></button>
-            </div>
-          </article>
-
-          <div class="comments-wrapper">
-            <h3 class="comments-header-title">COMMS FEED // OPINIONES Y FEEDBACK</h3>
-            <p style="font-family: var(--font-tech); font-size: 1.05rem; color: var(--newsprint-bg);">
-              Transmite tus ideas, sugerencias y opiniones sobre los avances del juego.
-            </p>
-
-            <form class="comment-form" id="comment-form" onsubmit="postComment(event)">
-              <input type="text" id="comment-author" class="comment-input" placeholder="Tu Alias de Jugador / Nombre..." required maxlength="40">
-              <textarea id="comment-msg" class="comment-textarea" placeholder="Escribe tu feedback o pregunta sobre Drunk City Bastards..." required maxlength="300"></textarea>
-              <button type="submit" class="comic-btn" onclick="playUIBeep(740)">
-                ENVIAR TRANSMISIÓN ➔
-              </button>
-            </form>
-
-            <div class="comments-feed" id="comments-feed">
-              <div class="comment-card">
-                <div class="comment-card-head">
-                  <span class="comment-author">NEXUS_TACTICAL</span>
-                  <span class="comment-date">Ayer, 18:40</span>
-                </div>
-                <p class="comment-msg">El arte con colores opacos y la estética de novela gráfica le da una personalidad tremenda. Ojalá metan más opciones de armas improvisadas en los callejones.</p>
-              </div>
-
-              <div class="comment-card">
-                <div class="comment-card-head">
-                  <span class="comment-author">DEV_PUNK</span>
-                  <span class="comment-date">Hace 2 días</span>
-                </div>
-                <p class="comment-msg">Me encanta que la transición de sigilo a combate sea rápida y sin pantallas de carga. Ya quiero ver la build jugable en Steam.</p>
-              </div>
-            </div>
           </div>
         </div>
       </section>
@@ -1732,7 +1680,7 @@
   </footer>
 
   <!-- ==========================================================================
-       SCRIPTS
+       SCRIPTS: AUDIO SYNTH 8-BIT + LIKES + COMENTARIOS + ACORDEÓN DEVLOG
        ========================================================================== -->
   <script>
     let sfxEnabled = true;
@@ -1761,6 +1709,19 @@
         osc.start();
         osc.stop(audioCtx.currentTime + 0.05);
       } catch (e) {}
+    }
+
+    // Acordeón Desplegable del Devlog en Juegos
+    function toggleDevlogAccordion() {
+      playUIBeep(650);
+      const content = document.getElementById('devlog-content-box');
+      const icon = document.getElementById('accordion-icon');
+      content.classList.toggle('active');
+      if (content.classList.contains('active')) {
+        icon.textContent = '[ - ]';
+      } else {
+        icon.textContent = '[ + ]';
+      }
     }
 
     let likeCount = parseInt(localStorage.getItem('dcb_likes') || '34');
