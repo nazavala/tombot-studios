@@ -12,10 +12,9 @@
 
   <style>
     /* ==========================================================================
-       VARIABLES DE COLOR Y TEMA RETRO GAME UI
+       VARIABLES DE COLOR Y TEMA RETRO GAME UI (PALETA ÚNICA DEFINITIVA)
        ========================================================================== */
     :root {
-      /* PALETA 1: "PULP ARCADE 80s" (Default) */
       --bg-main: #18191f;            /* Fondo oscuro consola retro */
       --bg-card: #232630;            /* Placa de interfaz metálica */
       --dark-ink: #0d0e12;           /* Negro de pantalla de tubo */
@@ -39,21 +38,6 @@
       --comic-shadow: 6px 6px 0px var(--dark-ink);
       --comic-shadow-lg: 8px 8px 0px var(--dark-ink);
       --comic-shadow-sm: 4px 4px 0px var(--dark-ink);
-    }
-
-    /* PALETA 2: "ACID PUNK 90s" (Activada con el switch) */
-    body:has(#theme-toggle:checked) {
-      --bg-main: #141117;
-      --bg-card: #1f1b25;
-      --dark-ink: #0a080d;
-      
-      --accent-primary: #9ebd42;     /* Verde radar radiactivo */
-      --accent-primary-hover: #b4d84b;
-      --accent-secondary: #ba4e6b;   /* Láser frambuesa */
-      --accent-secondary-hover: #d25979;
-      --accent-alert: #478b94;
-      --newsprint-bg: #d4d7c8;
-      --newsprint-ink: #141116;
     }
 
     /* Reset Global y Bloqueo de Desbordamiento */
@@ -85,14 +69,13 @@
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      transition: background-color 0.25s ease, color 0.25s ease;
     }
 
     .logic-input {
       display: none;
     }
 
-    /* Contenedor Universal Centrado (Equilibrio perfecto en PC y Móvil) */
+    /* Contenedor Universal Centrado */
     .container {
       width: 100%;
       max-width: 1150px;
@@ -101,65 +84,7 @@
     }
 
     /* ==========================================================================
-       TOP HUD BAR: TELEMETRÍA DE VIDEOJUEGO
-       ========================================================================== */
-    .game-top-bar {
-      background: #000000;
-      border-bottom: 2px solid var(--accent-primary);
-      padding: 0.35rem 0;
-      font-size: 0.85rem;
-      color: var(--accent-primary);
-      letter-spacing: 1.5px;
-    }
-
-    .game-top-content {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 0.8rem;
-    }
-
-    .hud-indicator {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-    }
-
-    .hud-blink-dot {
-      width: 8px;
-      height: 8px;
-      background: #39ff14;
-      border-radius: 50%;
-      animation: blink 1.2s infinite ease-in-out;
-    }
-
-    @keyframes blink {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.3; transform: scale(0.8); }
-    }
-
-    .sfx-toggle-btn {
-      background: transparent;
-      border: 1px solid var(--accent-primary);
-      color: var(--accent-primary);
-      font-family: var(--font-tech);
-      font-size: 0.75rem;
-      padding: 0.2rem 0.6rem;
-      cursor: pointer;
-      text-transform: uppercase;
-      min-height: 28px;
-      touch-action: manipulation;
-      transition: background 0.15s ease, color 0.15s ease;
-    }
-
-    .sfx-toggle-btn:hover {
-      background: var(--accent-primary);
-      color: var(--dark-ink);
-    }
-
-    /* ==========================================================================
-       HEADER PRINCIPAL: LOGO + SWITCH
+       HEADER PRINCIPAL (LIMPIO SIN SWITCH)
        ========================================================================== */
     .main-header {
       background: var(--dark-ink);
@@ -175,7 +100,6 @@
       justify-content: space-between;
       align-items: center;
       height: 75px;
-      gap: 1rem;
     }
 
     .logo-container {
@@ -215,55 +139,6 @@
       line-height: 1.1;
       text-shadow: 2px 2px 0px var(--dark-ink);
       white-space: nowrap;
-    }
-
-    .theme-switch-wrapper {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      background: var(--bg-card);
-      border: 2px solid var(--accent-secondary);
-      padding: 0.35rem 0.75rem;
-      box-shadow: 3px 3px 0px var(--dark-ink);
-      user-select: none;
-      flex-shrink: 0;
-      touch-action: manipulation;
-    }
-
-    .theme-label-txt {
-      font-family: var(--font-caacupe);
-      font-size: 0.95rem;
-      letter-spacing: 1px;
-      color: var(--accent-primary);
-      text-transform: uppercase;
-      line-height: 1;
-    }
-
-    .theme-pill-btn {
-      width: 44px;
-      height: 24px;
-      background: var(--dark-ink);
-      border: 2px solid var(--accent-primary);
-      border-radius: 12px;
-      cursor: pointer;
-      position: relative;
-      display: inline-block;
-    }
-
-    .theme-pill-btn::after {
-      content: '';
-      position: absolute;
-      top: 2px;
-      left: 2px;
-      width: 16px;
-      height: 16px;
-      background: var(--accent-primary);
-      border-radius: 50%;
-      transition: transform 0.2s ease, background 0.2s ease;
-    }
-
-    body:has(#theme-toggle:checked) .theme-pill-btn::after {
-      transform: translateX(20px);
     }
 
     /* ==========================================================================
@@ -310,7 +185,7 @@
       user-select: none;
       transition: all 0.15s ease;
       position: relative;
-      bottom: -4px; /* Empalma con el borde inferior en PC */
+      bottom: -4px;
       border-radius: 4px 4px 0 0;
       white-space: nowrap;
       text-transform: uppercase;
@@ -477,10 +352,9 @@
       overflow-wrap: break-word;
     }
 
-    /* TÍTULO 1 REDUCIDO PARA EVITAR SALTO DE LÍNEA EXCESIVO */
     .studio-tagline {
       font-family: var(--font-caacupe);
-      font-size: clamp(0.95rem, 1.8vw, 1.2rem);
+      font-size: clamp(1rem, 2vw, 1.3rem);
       letter-spacing: 1px;
       color: var(--newsprint-bg);
       margin-bottom: 1.5rem;
@@ -568,10 +442,9 @@
       display: block;
     }
 
-    /* TÍTULO 2 REDUCIDO ("TINTA, CÓDIGO Y CAOS") */
     .studio-motto {
       font-family: var(--font-display);
-      font-size: clamp(1.05rem, 2.1vw, 1.25rem);
+      font-size: clamp(1.05rem, 2.1vw, 1.35rem);
       color: var(--accent-primary);
       line-height: 1.2;
       margin-bottom: 0.5rem;
@@ -615,10 +488,9 @@
       border: 2px solid var(--newsprint-bg);
     }
 
-    /* TÍTULO 3 REDUCIDO ("FILOSOFÍA: NUNCA DILUIDA...") */
     .manifesto-title {
       font-family: var(--font-display);
-      font-size: clamp(1.1rem, 2.2vw, 1.65rem);
+      font-size: clamp(1.2rem, 2.5vw, 1.9rem);
       color: var(--newsprint-ink);
       margin-bottom: 0.8rem;
       line-height: 1.2;
@@ -1248,7 +1120,7 @@
     }
 
     /* ==========================================================================
-       FOOTER Y REDES SOCIALES
+       FOOTER Y REDES SOCIALES (SOLO ICONOS COMPACTOS)
        ========================================================================== */
     .main-footer {
       background: #0b0c10;
@@ -1302,46 +1174,43 @@
     .social-links-bar {
       display: flex;
       justify-content: center;
-      gap: 1rem;
+      gap: 0.9rem;
       margin: 1.5rem 0;
       flex-wrap: wrap;
     }
 
-    .social-btn {
+    /* Botones de redes sociales solo con icono (compactos y simétricos) */
+    .social-icon-btn {
+      width: 48px;
+      height: 48px;
       display: inline-flex;
       align-items: center;
-      gap: 0.55rem;
+      justify-content: center;
       background: var(--bg-card);
       color: var(--newsprint-bg);
       border: 3px solid var(--accent-primary);
       box-shadow: 3px 3px 0px #000000;
-      padding: 0.5rem 1.1rem;
-      font-family: var(--font-caacupe);
-      font-size: 1rem;
-      letter-spacing: 1.2px;
       text-decoration: none;
-      text-transform: uppercase;
       transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.15s ease, color 0.15s ease;
       cursor: pointer;
-      min-height: 48px;
       touch-action: manipulation;
     }
 
-    .social-btn:hover {
+    .social-icon-btn:hover {
       background: var(--accent-primary);
       color: var(--dark-ink);
       transform: translate(-2px, -2px);
       box-shadow: 5px 5px 0px #000000;
     }
 
-    .social-btn:active {
+    .social-icon-btn:active {
       transform: translate(2px, 2px);
       box-shadow: 1px 1px 0px #000000;
     }
 
-    .social-btn svg {
-      width: 20px;
-      height: 20px;
+    .social-icon-btn svg {
+      width: 22px;
+      height: 22px;
       fill: currentColor;
     }
 
@@ -1401,7 +1270,6 @@
         text-align: center;
       }
 
-      /* La última pestaña (Devlog) ocupa el ancho completo abajo en móviles */
       .tab-label[for="tab-devlog"] {
         grid-column: span 2;
       }
@@ -1445,43 +1313,10 @@
         width: 100%;
         justify-content: center;
       }
-
-      .social-links-bar {
-        flex-direction: column;
-        align-items: stretch;
-        max-width: 320px;
-        margin: 1.5rem auto;
-      }
-
-      .social-btn {
-        width: 100%;
-        justify-content: center;
-      }
-    }
-
-    @media (max-width: 380px) {
-      .logo-title {
-        font-size: 1rem;
-      }
-
-      .theme-label-txt {
-        display: none;
-      }
-
-      .flagship-panel::before {
-        position: static;
-        display: block;
-        margin-bottom: 0.8rem;
-        width: 100%;
-        text-align: center;
-      }
     }
   </style>
 </head>
 <body>
-
-  <!-- CONTROL DE PALETA DE COLORES -->
-  <input type="checkbox" id="theme-toggle" class="logic-input">
 
   <!-- CONTROL DE PESTAÑAS (CSS PURO) -->
   <input type="radio" name="site_tabs" id="tab-studio" class="logic-input" checked>
@@ -1491,7 +1326,7 @@
   <input type="radio" name="site_tabs" id="tab-devlog" class="logic-input">
 
   <!-- ==========================================================================
-       HEADER CON LOGO OFICIAL (image.png)
+       HEADER CON LOGO OFICIAL (image.png) - SIN SWITCH DE COLOR
        ========================================================================== -->
   <header class="main-header">
     <div class="container navbar">
@@ -1501,12 +1336,6 @@
         </div>
         <span class="logo-title">TOMBOT STUDIOS</span>
       </label>
-
-      <!-- Interruptor con "PALETA RETRO" en Caacupé One -->
-      <div class="theme-switch-wrapper" title="Alternar entre Paleta Pulp 80s y Acid Punk 90s">
-        <span class="theme-label-txt">PALETA RETRO</span>
-        <label for="theme-toggle" class="theme-pill-btn" onclick="playUIBeep(420)"></label>
-      </div>
     </div>
   </header>
 
@@ -1543,13 +1372,13 @@
     <div class="container">
 
       <!-- ====================================================================
-           PESTAÑA 1: EL ESTUDIO (STATUS: HQ PROFILE)
+           PESTAÑA 1: EL ESTUDIO
            ==================================================================== -->
       <section id="panel-studio" class="tab-panel">
         <div class="studio-grid">
           <div class="studio-intro">
             <span class="studio-badge">ESTUDIO INDIE & SERVICIOS DEV // EST. 2025</span>
-            <h3 class="studio-title">TOMBOT STUDIOS</h3>
+            <h1 class="studio-title">TOMBOT STUDIOS</h1>
             
             <p class="studio-tagline">"Videojuegos viscerales, herramientas para creadores y servicios de desarrollo independiente"</p>
 
@@ -1598,7 +1427,7 @@
       </section>
 
       <!-- ====================================================================
-           PESTAÑA 2: JUEGOS (MISIÓN: DRUNK CITY BASTARDS)
+           PESTAÑA 2: JUEGOS
            ==================================================================== -->
       <section id="panel-games" class="tab-panel">
         <div class="unified-card-wrapper">
@@ -1873,7 +1702,7 @@
   </main>
 
   <!-- ==========================================================================
-       FOOTER CON REDES SOCIALES
+       FOOTER CON REDES SOCIALES (SOLO ICONOS COMPACTOS: INSTAGRAM, FB, TIKTOK, YOUTUBE, WHATSAPP, EMAIL)
        ========================================================================== -->
   <footer class="main-footer">
     <div class="container">
@@ -1888,32 +1717,34 @@
       </p>
 
       <div class="social-links-bar">
-        <a href="https://www.instagram.com/tombotstudios/" target="_blank" rel="noopener noreferrer" class="social-btn" title="Instagram" onclick="playUIBeep(550)">
-          <svg viewBox="0 0 24 24">
-            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-          </svg>
-          INSTAGRAM
+        <!-- INSTAGRAM -->
+        <a href="https://www.instagram.com/tombotstudios/" target="_blank" rel="noopener noreferrer" class="social-icon-btn" title="Instagram" onclick="playUIBeep(550)">
+          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
         </a>
 
-        <a href="https://www.facebook.com/profile.php?id=61569450278114" target="_blank" rel="noopener noreferrer" class="social-btn" title="Facebook" onclick="playUIBeep(550)">
-          <svg viewBox="0 0 24 24">
-            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-          </svg>
-          FACEBOOK
+        <!-- FACEBOOK -->
+        <a href="https://www.facebook.com/profile.php?id=61569450278114" target="_blank" rel="noopener noreferrer" class="social-icon-btn" title="Facebook" onclick="playUIBeep(550)">
+          <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
         </a>
 
-        <a href="https://www.tiktok.com/@tombotstudios" target="_blank" rel="noopener noreferrer" class="social-btn" title="TikTok" onclick="playUIBeep(550)">
-          <svg viewBox="0 0 24 24">
-            <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.24 1.07-.14 1.61.24 1.16 1.18 2.09 2.35 2.3 1.05.21 2.22-.07 2.99-.81.65-.62.99-1.49 1.01-2.37.03-4.14.01-8.28.02-12.42V.02z"/>
-          </svg>
-          TIKTOK
+        <!-- TIKTOK -->
+        <a href="https://www.tiktok.com/@tombotstudios" target="_blank" rel="noopener noreferrer" class="social-icon-btn" title="TikTok" onclick="playUIBeep(550)">
+          <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.24 1.07-.14 1.61.24 1.16 1.18 2.09 2.35 2.3 1.05.21 2.22-.07 2.99-.81.65-.62.99-1.49 1.01-2.37.03-4.14.01-8.28.02-12.42V.02z"/></svg>
         </a>
 
-        <a href="https://www.youtube.com/@TombotStudios" target="_blank" rel="noopener noreferrer" class="social-btn" title="YouTube" onclick="playUIBeep(550)">
-          <svg viewBox="0 0 24 24">
-            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-          </svg>
-          YOUTUBE
+        <!-- YOUTUBE -->
+        <a href="https://www.youtube.com/@TombotStudios" target="_blank" rel="noopener noreferrer" class="social-icon-btn" title="YouTube" onclick="playUIBeep(550)">
+          <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        </a>
+
+        <!-- CORREO ELECTRÓNICO (EMAIL) -->
+        <a href="mailto:tombotstudios@gmail.com" class="social-icon-btn" title="Correo: tombotstudios@gmail.com" onclick="playUIBeep(550)">
+          <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-8V6l8 5 8-x2v2z"/></svg>
+        </a>
+
+        <!-- WHATSAPP -->
+        <a href="https://wa.me/523336827305" target="_blank" rel="noopener noreferrer" class="social-icon-btn" title="WhatsApp: 3336827305" onclick="playUIBeep(550)">
+          <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
         </a>
       </div>
 
@@ -1924,7 +1755,7 @@
   </footer>
 
   <!-- ==========================================================================
-       SCRIPTS: AUDIO SYNTH 8-BIT + LIKES + COMENTARIOS
+       SCRIPTS
        ========================================================================== -->
   <script>
     let sfxEnabled = true;
@@ -1953,13 +1784,6 @@
         osc.start();
         osc.stop(audioCtx.currentTime + 0.05);
       } catch (e) {}
-    }
-
-    function toggleSFX() {
-      sfxEnabled = !sfxEnabled;
-      const btn = document.getElementById('sfx-btn');
-      if (btn) btn.textContent = sfxEnabled ? 'SFX: ON' : 'SFX: OFF';
-      if (sfxEnabled) playUIBeep(600);
     }
 
     let likeCount = parseInt(localStorage.getItem('dcb_likes') || '34');
@@ -2053,7 +1877,7 @@
       msgInput.value = '';
     }
 
-    @keyframes escapeHTML(str) {
+    function escapeHTML(str) {
       return str.replace(/[&<>'"]/g, 
         tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
       );
