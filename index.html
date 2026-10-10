@@ -12,7 +12,7 @@
 
   <style>
     /* ==========================================================================
-       VARIABLES DE COLOR Y TEMA RETRO GAME UI (PALETA ÚNICA DEFINITIVA)
+       VARIABLES DE COLOR Y TEMA RETRO GAME UI
        ========================================================================== */
     :root {
       --bg-main: #18191f;            /* Fondo oscuro consola retro */
@@ -84,7 +84,7 @@
     }
 
     /* ==========================================================================
-       HEADER PRINCIPAL (LIMPIO SIN SWITCH)
+       HEADER PRINCIPAL
        ========================================================================== */
     .main-header {
       background: var(--dark-ink);
@@ -374,7 +374,7 @@
 
     .newsprint-box::before,
     .flagship-panel::after,
-    .asset-featured-showcase::after,
+    .asset-card::after,
     .team-card::after {
       content: "[ + ]";
       position: absolute;
@@ -589,7 +589,7 @@
     }
 
     /* ==========================================================================
-       PESTAÑA 3: ARSENAL / TOOLS UNITY (QeController)
+       PESTAÑA 3: ASSETS & TOOLS UNITY (GRILLA DE 2 COLUMNAS)
        ========================================================================== */
     .assets-intro-bar {
       margin-bottom: 1.8rem;
@@ -619,7 +619,13 @@
       line-height: 1.35;
     }
 
-    .asset-featured-showcase {
+    .assets-grid-2cols {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+
+    .asset-card {
       background: var(--newsprint-bg);
       border: var(--comic-border);
       box-shadow: var(--comic-shadow-lg);
@@ -628,96 +634,59 @@
       position: relative;
     }
 
-    .asset-header-showcase {
+    .asset-header {
       background: var(--dark-ink);
       color: var(--accent-primary);
-      padding: 1rem 1.5rem;
+      padding: 0.9rem 1.3rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
       border-bottom: 4px solid var(--dark-ink);
       font-family: var(--font-caacupe);
-      font-size: 1rem;
+      font-size: 0.95rem;
       letter-spacing: 1px;
       flex-wrap: wrap;
       gap: 0.5rem;
     }
 
-    .asset-star-tag {
-      background: var(--accent-primary);
-      color: var(--dark-ink);
-      padding: 0.2rem 0.6rem;
-      font-family: var(--font-caacupe);
-      font-size: 0.9rem;
-      letter-spacing: 1px;
-      border: 1px solid var(--dark-ink);
-      font-weight: bold;
-    }
-
-    .asset-body-showcase {
-      padding: clamp(1.5rem, 3.5vw, 2.5rem);
+    .asset-body {
+      padding: clamp(1.4rem, 3vw, 2rem);
       display: flex;
       flex-direction: column;
+      flex-grow: 1;
+      justify-content: space-between;
     }
 
-    .asset-title-showcase {
+    .asset-title {
       font-family: var(--font-display);
-      font-size: clamp(1.8rem, 4.5vw, 3.2rem);
+      font-size: clamp(1.6rem, 3.5vw, 2.2rem);
       color: var(--newsprint-ink);
-      margin-bottom: 0.6rem;
+      margin-bottom: 0.5rem;
       line-height: 1.1;
       overflow-wrap: break-word;
     }
 
-    .asset-tagline-showcase {
+    .asset-tagline {
       font-family: var(--font-caacupe);
-      font-size: clamp(1.1rem, 2vw, 1.3rem);
+      font-size: 1.1rem;
       color: var(--accent-secondary);
       letter-spacing: 1px;
       text-transform: uppercase;
-      margin-bottom: 1.2rem;
+      margin-bottom: 1rem;
       line-height: 1.3;
     }
 
-    .asset-features-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1rem;
+    .asset-desc {
+      font-size: 1.1rem;
+      color: var(--newsprint-ink);
+      font-weight: bold;
       margin-bottom: 1.5rem;
+      line-height: 1.45;
     }
 
-    .feature-point {
-      background: rgba(18, 17, 23, 0.08);
-      border: 2px solid var(--dark-ink);
-      padding: 0.75rem 1rem;
-      font-family: var(--font-tech);
-      font-size: 1.05rem;
-      font-weight: bold;
-      color: var(--newsprint-ink);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      line-height: 1.25;
-    }
-
-    .feature-point span {
-      color: var(--accent-alert);
-      font-size: 1.2rem;
-      line-height: 1;
-      flex-shrink: 0;
-    }
-
-    .asset-desc-showcase {
-      font-size: 1.2rem;
-      color: var(--newsprint-ink);
-      font-weight: bold;
-      margin-bottom: 1.8rem;
-      line-height: 1.5;
-    }
-
-    .asset-footer-showcase {
+    .asset-footer {
       border-top: 3px dashed var(--dark-ink);
-      padding-top: 1.5rem;
+      padding-top: 1.2rem;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1179,7 +1148,6 @@
       flex-wrap: wrap;
     }
 
-    /* Botones de redes sociales solo con icono (compactos y simétricos) */
     .social-icon-btn {
       width: 48px;
       height: 48px;
@@ -1226,12 +1194,12 @@
        ========================================================================== */
     @media (max-width: 992px) {
       .studio-grid,
-      .team-grid {
+      .team-grid,
+      .assets-grid-2cols {
         grid-template-columns: 1fr;
         gap: 2.2rem;
       }
 
-      .asset-features-grid,
       .devlog-gallery-grid {
         grid-template-columns: repeat(2, 1fr);
       }
@@ -1249,7 +1217,6 @@
         padding: 0.6rem 0;
       }
 
-      /* MENÚ TÁCTIL MÓVIL 5 PESTAÑAS (2X2 + 1) */
       .tabs-nav-bar {
         padding-top: 0.5rem;
       }
@@ -1295,7 +1262,6 @@
         width: 100%;
       }
 
-      .asset-features-grid,
       .devlog-gallery-grid {
         grid-template-columns: 1fr;
       }
@@ -1353,7 +1319,7 @@
           <span class="menu-cursor">►</span> 02 // JUEGOS
         </label>
         <label for="tab-assets" class="tab-label" onclick="playUIBeep(640)">
-          <span class="menu-cursor">►</span> 03 // ARSENAL
+          <span class="menu-cursor">►</span> 03 // ASSETS
         </label>
         <label for="tab-team" class="tab-label" onclick="playUIBeep(640)">
           <span class="menu-cursor">►</span> 04 // EQUIPO
@@ -1372,7 +1338,7 @@
     <div class="container">
 
       <!-- ====================================================================
-           PESTAÑA 1: EL ESTUDIO
+           PESTAÑA 1: EL ESTUDIO (STATUS: HQ PROFILE)
            ==================================================================== -->
       <section id="panel-studio" class="tab-panel">
         <div class="studio-grid">
@@ -1390,7 +1356,7 @@
 
             <div class="action-row">
               <label for="tab-games" class="comic-btn" onclick="playUIBeep(700)">VER JUEGOS DESARROLLADOS ➔</label>
-              <label for="tab-assets" class="comic-btn btn-sec" onclick="playUIBeep(700)">EXPLORAR ARSENAL</label>
+              <label for="tab-assets" class="comic-btn btn-sec" onclick="playUIBeep(700)">EXPLORAR ASSETS</label>
             </div>
           </div>
 
@@ -1427,7 +1393,7 @@
       </section>
 
       <!-- ====================================================================
-           PESTAÑA 2: JUEGOS
+           PESTAÑA 2: JUEGOS (MISIÓN: DRUNK CITY BASTARDS)
            ==================================================================== -->
       <section id="panel-games" class="tab-panel">
         <div class="unified-card-wrapper">
@@ -1465,53 +1431,64 @@
       </section>
 
       <!-- ====================================================================
-           PESTAÑA 3: ARSENAL / TOOLS UNITY (QeController)
+           PESTAÑA 3: ASSETS & TOOLS UNITY (QeController & EC Tombot Hub system)
            ==================================================================== -->
       <section id="panel-assets" class="tab-panel">
         <div class="unified-card-wrapper">
           <div class="assets-intro-bar">
             <span class="assets-intro-badge">EQUIPAMIENTO PARA DESARROLLADORES EN UNITY</span>
             <p class="assets-intro-title">
-              Controlador de personaje modular y arquitectura desacoplada lista para producción en C#
+              Frameworks de movimiento, UI modular y sistemas avanzados optimizados en C#
             </p>
           </div>
 
-          <article class="asset-featured-showcase">
-            <div class="asset-header-showcase">
-              <span>UNITY PACKAGE // C# FRAMEWORK</span>
-              <span class="asset-star-tag">★ TOOL PRINCIPAL</span>
-            </div>
+          <div class="assets-grid-2cols">
             
-            <div class="asset-body-showcase">
-              <h3 class="asset-title-showcase">QeController</h3>
-              <p class="asset-tagline-showcase">CharacterController integral para perspectiva isométrica y tercera persona</p>
-
-              <div class="asset-features-grid">
-                <div class="feature-point">
-                  <span>▶</span> Máquina de Estados (FSM) Desacoplada
+            <!-- ASSET 1: QeController -->
+            <article class="asset-card">
+              <div class="asset-header">
+                <span>UNITY PACKAGE // C#</span>
+                <span class="asset-star-tag">★ TOOL</span>
+              </div>
+              <div class="asset-body">
+                <div>
+                  <h3 class="asset-title">QeController</h3>
+                  <p class="asset-tagline">CharacterController Isométrico y 3ª Persona</p>
+                  <p class="asset-desc">
+                    Framework modular basado en FSM para resolver locomoción fluida, transiciones de combate y giros de cámara con soporte para el nuevo Input System.
+                  </p>
                 </div>
-                <div class="feature-point">
-                  <span>▶</span> Soporte nativo para New Input System
-                </div>
-                <div class="feature-point">
-                  <span>▶</span> Locomoción fluida y giros de cámara suaves
-                </div>
-                <div class="feature-point">
-                  <span>▶</span> Inspector modular fácil de configurar y extender
+                <div class="asset-footer">
+                  <a href="https://tombot-studios.itch.io/httpsalive-noise-e5dnotionsiteqecontroller-manual-de-desarrollador-2db4af2" target="_blank" rel="noopener noreferrer" class="comic-btn" onclick="playUIBeep(800)">
+                    DESCARGAR ➔
+                  </a>
                 </div>
               </div>
+            </article>
 
-              <p class="asset-desc-showcase">
-                QeController es un framework diseñado para resolver el movimiento, control y transiciones de estados de personajes en juegos de acción, aventura y sigilo. Construido con buenas prácticas en C#, evita dependencias monolíticas y permite vincular armas, saltos, coberturas y eventos sin tocar la lógica central del controlador.
-              </p>
-
-              <div class="asset-footer-showcase">
-                <a href="https://tombot-studios.itch.io/httpsalive-noise-e5dnotionsiteqecontroller-manual-de-desarrollador-2db4af2" target="_blank" rel="noopener noreferrer" class="comic-btn" onclick="playUIBeep(800)">
-                  DESCARGAR UNITYPACKAGE ➔
-                </a>
+            <!-- ASSET 2: EC Tombot Hub system (NUEVO) -->
+            <article class="asset-card">
+              <div class="asset-header">
+                <span>UI FRAMEWORK // AAA</span>
+                <span class="asset-star-tag">★ NUEVO</span>
               </div>
-            </div>
-          </article>
+              <div class="asset-body">
+                <div>
+                  <h3 class="asset-title">EC Tombot Hub system</h3>
+                  <p class="asset-tagline">Survival & Action Master Tab Menu System (RE4 Style)</p>
+                  <p class="asset-desc">
+                    Sistema modular de menús por pestañas estilo Resident Evil 4. Incluye inventario en cuadrícula con rotación de ítems, mapa táctico con Live Feed, árbol de estadísticas y configuración One-Click Setup.
+                  </p>
+                </div>
+                <div class="asset-footer">
+                  <a href="https://tombot-studios.itch.io" target="_blank" rel="noopener noreferrer" class="comic-btn btn-sec" onclick="playUIBeep(800)">
+                    MÁS INFORMACIÓN ➔
+                  </a>
+                </div>
+              </div>
+            </article>
+
+          </div>
         </div>
       </section>
 
@@ -1702,7 +1679,7 @@
   </main>
 
   <!-- ==========================================================================
-       FOOTER CON REDES SOCIALES (SOLO ICONOS COMPACTOS: INSTAGRAM, FB, TIKTOK, YOUTUBE, WHATSAPP, EMAIL)
+       FOOTER CON REDES SOCIALES (ICONS ONLY)
        ========================================================================== -->
   <footer class="main-footer">
     <div class="container">
@@ -1737,9 +1714,9 @@
           <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
         </a>
 
-        <!-- CORREO ELECTRÓNICO (EMAIL) -->
-        <a href="mailto:tombotstudios@gmail.com" class="social-icon-btn" title="Correo: tombotstudios@gmail.com" onclick="playUIBeep(550)">
-          <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-8V6l8 5 8-x2v2z"/></svg>
+        <!-- EMAIL -->
+        <a href="mailto:tombotstudios@gmail.com" class="social-icon-btn" title="Email: tombotstudios@gmail.com" onclick="playUIBeep(550)">
+          <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-8V6l8 5 8-5v2z"/></svg>
         </a>
 
         <!-- WHATSAPP -->
