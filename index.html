@@ -619,7 +619,7 @@
     }
 
     /* ==========================================================================
-       PESTAÑA 3: ASSETS & TOOLS UNITY
+       PESTAÑA 3: ASSETS & TOOLS UNITY (GRILLA DE 2 COLUMNAS CON ACORDEÓN)
        ========================================================================== */
     .assets-intro-bar {
       margin-bottom: 1.8rem;
@@ -718,6 +718,45 @@
       display: flex;
       align-items: center;
       justify-content: center;
+    }
+
+    /* Acordeón específico para cada Asset */
+    .asset-devlog-section {
+      margin-top: 1.2rem;
+      border-top: 3px solid var(--dark-ink);
+    }
+
+    .asset-devlog-toggle {
+      width: 100%;
+      background: var(--dark-ink);
+      color: var(--accent-primary);
+      border: none;
+      padding: 0.8rem 1rem;
+      font-family: var(--font-caacupe);
+      font-size: 0.95rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      touch-action: manipulation;
+    }
+
+    .asset-devlog-toggle:hover {
+      background: #232630;
+    }
+
+    .asset-devlog-content {
+      display: none;
+      padding: 1.2rem;
+      background: #1e2028;
+      color: var(--newsprint-bg);
+      border-top: 2px solid var(--dark-ink);
+    }
+
+    .asset-devlog-content.active {
+      display: block;
     }
 
     /* ==========================================================================
@@ -1144,9 +1183,6 @@
       gap: 0.9rem;
       margin: 1.5rem 0;
       flex-wrap: wrap;
-      max-width: 380px; /* Distribuye ordenadamente en filas de 3 */
-      margin-left: auto;
-      margin-right: auto;
     }
 
     .social-icon-btn {
@@ -1218,7 +1254,6 @@
         padding: 0.6rem 0;
       }
 
-      /* MENÚ TÁCTIL MÓVIL 4 PESTAÑAS (2X2) */
       .tabs-nav-bar {
         padding-top: 0.5rem;
       }
@@ -1386,7 +1421,7 @@
       </section>
 
       <!-- ====================================================================
-           PESTAÑA 2: JUEGOS + DEVLOG DESPLEGABLE
+           PESTAÑA 2: JUEGOS (DCB + ACORDEÓN DE DEVLOG INTEGRADO)
            ==================================================================== -->
       <section id="panel-games" class="tab-panel">
         <div class="unified-card-wrapper">
@@ -1507,7 +1542,7 @@
       </section>
 
       <!-- ====================================================================
-           PESTAÑA 3: ASSETS (QeController + EC Tombot Hub system)
+           PESTAÑA 3: ASSETS (QeController + EC Tombot Hub system con Devlog)
            ==================================================================== -->
       <section id="panel-assets" class="tab-panel">
         <div class="unified-card-wrapper">
@@ -1540,6 +1575,25 @@
                   </a>
                 </div>
               </div>
+
+              <!-- Devlog Acordeón Asset 1 -->
+              <div class="asset-devlog-section">
+                <button class="asset-devlog-toggle" onclick="toggleAssetDevlog('qecontroller')">
+                  <span>▼ DEVLOG & FEEDBACK</span>
+                  <span id="asset-icon-qecontroller">[ + ]</span>
+                </button>
+                <div class="asset-devlog-content" id="asset-box-qecontroller">
+                  <h4 style="font-family: var(--font-dcb); font-size: 1.2rem; color: var(--accent-primary); margin-bottom: 0.4rem;">QeController - Bitácora</h4>
+                  <p style="font-size: 0.9rem; margin-bottom: 0.8rem;">Actualización técnica y soporte para desarrolladores.</p>
+                  
+                  <form class="comment-form" onsubmit="postAssetComment(event, 'qecontroller')">
+                    <input type="text" id="author-qecontroller" class="comment-input" placeholder="Tu Alias..." required style="font-size:14px; padding:6px;" maxlength="30">
+                    <textarea id="msg-qecontroller" class="comment-textarea" placeholder="Reporte de bug o duda..." required style="font-size:14px; padding:6px; min-height:60px;" maxlength="200"></textarea>
+                    <button type="submit" class="comic-btn" style="font-size:12px; padding:6px 12px;" onclick="playUIBeep(700)">ENVIAR</button>
+                  </form>
+                  <div class="comments-feed" id="feed-qecontroller"></div>
+                </div>
+              </div>
             </article>
 
             <!-- ASSET 2: EC Tombot Hub system -->
@@ -1553,13 +1607,32 @@
                   <h3 class="asset-title">EC Tombot Hub system</h3>
                   <p class="asset-tagline">Survival & Action Master Tab Menu System (RE4 Style)</p>
                   <p class="asset-desc">
-                    Sistema modular de menús por pestañas estilo Resident Evil 4. Incluye inventario en cuadrícula con rotación de ítems, mapa táctico con Live Feed, árbol de estadísticas y configuración One-Click Setup.
+                    Sistema modular de menús por pestañas estilo Resident Evil 4. Incluye inventario en cuadrícula con rotación de ítems, mapa táctico con Live Feed y configuración One-Click Setup.
                   </p>
                 </div>
                 <div class="asset-footer">
                   <a href="https://tombot-studios.itch.io" target="_blank" rel="noopener noreferrer" class="comic-btn btn-sec" onclick="playUIBeep(800)">
                     MÁS INFORMACIÓN ➔
                   </a>
+                </div>
+              </div>
+
+              <!-- Devlog Acordeón Asset 2 -->
+              <div class="asset-devlog-section">
+                <button class="asset-devlog-toggle" onclick="toggleAssetDevlog('tombothub')">
+                  <span>▼ DEVLOG & FEEDBACK</span>
+                  <span id="asset-icon-tombothub">[ + ]</span>
+                </button>
+                <div class="asset-devlog-content" id="asset-box-tombothub">
+                  <h4 style="font-family: var(--font-dcb); font-size: 1.2rem; color: var(--accent-primary); margin-bottom: 0.4rem;">Tombot Hub - Bitácora</h4>
+                  <p style="font-size: 0.9rem; margin-bottom: 0.8rem;">Notas de parche e instalación One-Click.</p>
+                  
+                  <form class="comment-form" onsubmit="postAssetComment(event, 'tombothub')">
+                    <input type="text" id="author-tombothub" class="comment-input" placeholder="Tu Alias..." required style="font-size:14px; padding:6px;" maxlength="30">
+                    <textarea id="msg-tombothub" class="comment-textarea" placeholder="Reporte de bug o duda..." required style="font-size:14px; padding:6px; min-height:60px;" maxlength="200"></textarea>
+                    <button type="submit" class="comic-btn" style="font-size:12px; padding:6px 12px;" onclick="playUIBeep(700)">ENVIAR</button>
+                  </form>
+                  <div class="comments-feed" id="feed-tombothub"></div>
                 </div>
               </div>
             </article>
@@ -1580,7 +1653,6 @@
 
           <div class="team-grid">
             
-            <!-- MIEMBRO 1 -->
             <article class="team-card">
               <div class="team-header">
                 <div class="team-avatar">
@@ -1596,7 +1668,6 @@
               </p>
             </article>
 
-            <!-- MIEMBRO 2 -->
             <article class="team-card">
               <div class="team-header">
                 <div class="team-avatar">
@@ -1612,7 +1683,6 @@
               </p>
             </article>
 
-            <!-- MIEMBRO 3 -->
             <article class="team-card">
               <div class="team-header">
                 <div class="team-avatar">
@@ -1628,7 +1698,6 @@
               </p>
             </article>
 
-            <!-- MIEMBRO 4 -->
             <article class="team-card">
               <div class="team-header">
                 <div class="team-avatar">
@@ -1705,7 +1774,7 @@
   </footer>
 
   <!-- ==========================================================================
-       SCRIPTS
+       SCRIPTS (AUDIO + LIKES + COMENTARIOS + ACORDEÓN INDEPENDIENTE PARA ASSETS)
        ========================================================================== -->
   <script>
     let sfxEnabled = true;
@@ -1736,6 +1805,7 @@
       } catch (e) {}
     }
 
+    // Acordeón Devlog en Juegos
     function toggleDevlogAccordion() {
       playUIBeep(650);
       const content = document.getElementById('devlog-content-box');
@@ -1743,6 +1813,20 @@
       content.classList.toggle('active');
       if (content.classList.contains('active')) {
         icon.textContent = '[ - ]';
+      } else {
+        icon.textContent = '[ + ]';
+      }
+    }
+
+    // Acordeón independiente para cada Asset
+    function toggleAssetDevlog(assetId) {
+      playUIBeep(600);
+      const content = document.getElementById('asset-box-' + assetId);
+      const icon = document.getElementById('asset-icon-' + assetId);
+      content.classList.toggle('active');
+      if (content.classList.contains('active')) {
+        icon.textContent = '[ - ]';
+        loadAssetComments(assetId);
       } else {
         icon.textContent = '[ + ]';
       }
@@ -1791,6 +1875,42 @@
       }
     }
 
+    function loadAssetComments(assetId) {
+      const feed = document.getElementById('feed-' + assetId);
+      if (!feed || feed.dataset.loaded) return;
+      feed.dataset.loaded = "true";
+
+      const saved = JSON.parse(localStorage.getItem('asset_comments_' + assetId) || '[]');
+      saved.forEach(c => {
+        feed.insertBefore(createCommentElement(c.author, c.date, c.msg), feed.firstChild);
+      });
+    }
+
+    function postAssetComment(event, assetId) {
+      event.preventDefault();
+      const authorInput = document.getElementById('author-' + assetId);
+      const msgInput = document.getElementById('msg-' + assetId);
+      if (!authorInput || !msgInput) return;
+
+      const author = authorInput.value.trim();
+      const msg = msgInput.value.trim();
+      if (!author || !msg) return;
+
+      const date = "Hoy, " + new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      const feed = document.getElementById('feed-' + assetId);
+      
+      if (feed) {
+        feed.insertBefore(createCommentElement(author, date, msg), feed.firstChild);
+      }
+
+      const saved = JSON.parse(localStorage.getItem('asset_comments_' + assetId) || '[]');
+      saved.unshift({ author, date, msg });
+      localStorage.setItem('asset_comments_' + assetId, JSON.stringify(saved));
+
+      authorInput.value = '';
+      msgInput.value = '';
+    }
+
     function loadSavedComments() {
       const saved = JSON.parse(localStorage.getItem('dcb_user_comments') || '[]');
       const feed = document.getElementById('comments-feed');
@@ -1821,7 +1941,6 @@
 
       const author = authorInput.value.trim();
       const msg = msgInput.value.trim();
-
       if (!author || !msg) return;
 
       const date = "Hoy, " + new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
