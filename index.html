@@ -40,7 +40,6 @@
       --comic-shadow-sm: 4px 4px 0px var(--dark-ink);
     }
 
-    /* Reset Global y Bloqueo de Desbordamiento */
     *, *::before, *::after {
       margin: 0;
       padding: 0;
@@ -75,7 +74,6 @@
       display: none;
     }
 
-    /* Contenedor Universal Centrado */
     .container {
       width: 100%;
       max-width: 1150px;
@@ -526,6 +524,10 @@
       text-overflow: ellipsis;
     }
 
+    .flagship-content {
+      width: 100%;
+    }
+
     .flagship-title {
       font-family: var(--font-dcb);
       font-size: clamp(2.8rem, 7vw, 5.8rem);
@@ -577,7 +579,6 @@
       line-height: 1.5;
     }
 
-    /* Acordeón Desplegable del Devlog */
     .devlog-accordion {
       background: var(--bg-card);
       border: var(--comic-border);
@@ -619,7 +620,7 @@
     }
 
     /* ==========================================================================
-       PESTAÑA 3: ASSETS & TOOLS UNITY (GRILLA DE 2 COLUMNAS CON ACORDEÓN)
+       PESTAÑA 3: ASSETS & TOOLS UNITY
        ========================================================================== */
     .assets-intro-bar {
       margin-bottom: 1.8rem;
@@ -720,7 +721,6 @@
       justify-content: center;
     }
 
-    /* Acordeón específico para cada Asset */
     .asset-devlog-section {
       margin-top: 1.2rem;
       border-top: 3px solid var(--dark-ink);
@@ -760,7 +760,7 @@
     }
 
     /* ==========================================================================
-       PESTAÑA 4: EQUIPO (CREW / MEMBERS)
+       PESTAÑA 4: EQUIPO (FOTOS GRANDES, COMPLETAS Y CON LIGHTBOX)
        ========================================================================== */
     .team-grid {
       display: grid;
@@ -780,36 +780,62 @@
 
     .team-header {
       display: flex;
-      gap: 1.2rem;
+      gap: 1.4rem;
       align-items: center;
       margin-bottom: 1.2rem;
       border-bottom: 3px solid var(--dark-ink);
-      padding-bottom: 1rem;
+      padding-bottom: 1.2rem;
     }
 
+    /* CONTENEDOR DE FOTO MÁS GRANDE Y CLICKEABLE */
     .team-avatar {
-      width: 85px;
-      height: 85px;
+      width: 120px;
+      height: 120px;
       flex-shrink: 0;
-      border: 3px solid var(--dark-ink);
-      background: var(--dark-ink);
-      box-shadow: 3px 3px 0px var(--dark-ink);
+      border: 3.5px solid var(--dark-ink);
+      background: #0d0e12;
+      box-shadow: 4px 4px 0px var(--dark-ink);
       overflow: hidden;
+      cursor: pointer;
+      position: relative;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      touch-action: manipulation;
     }
 
+    .team-avatar:hover {
+      transform: scale(1.05);
+      box-shadow: 6px 6px 0px var(--dark-ink);
+    }
+
+    .team-avatar::after {
+      content: '🔍';
+      position: absolute;
+      bottom: 4px;
+      right: 4px;
+      font-size: 0.75rem;
+      background: rgba(13, 14, 18, 0.8);
+      padding: 2px 4px;
+      border: 1px solid var(--accent-primary);
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    /* FOTO SIN CORTES (object-fit: contain) Y PIXEL ART NÍTIDO */
     .team-avatar img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
       display: block;
     }
 
     .team-info h3 {
       font-family: var(--font-display);
-      font-size: 1.25rem;
+      font-size: 1.35rem;
       color: var(--newsprint-ink);
       line-height: 1.15;
-      margin-bottom: 0.3rem;
+      margin-bottom: 0.4rem;
     }
 
     .team-role {
@@ -817,22 +843,105 @@
       background: var(--dark-ink);
       color: var(--accent-primary);
       font-family: var(--font-caacupe);
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       letter-spacing: 1px;
-      padding: 0.2rem 0.6rem;
+      padding: 0.25rem 0.65rem;
       text-transform: uppercase;
       border: 1px solid var(--dark-ink);
     }
 
     .team-bio {
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       color: var(--newsprint-ink);
       font-weight: bold;
       line-height: 1.45;
     }
 
     /* ==========================================================================
-       DEVLOG STYLES (GALERÍA, POSTS, COMENTARIOS)
+       MODAL LIGHTBOX ARCADE (VISOR DE FOTOS EXPANDIDAS EN LA MISMA PÁGINA)
+       ========================================================================== */
+    .lightbox-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 12, 16, 0.9);
+      z-index: 99999;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      backdrop-filter: blur(4px);
+    }
+
+    .lightbox-modal.active {
+      display: flex;
+      animation: gameMenuLoad 0.18s ease-out forwards;
+    }
+
+    .lightbox-content {
+      background: var(--newsprint-bg);
+      border: 4px solid var(--dark-ink);
+      box-shadow: 10px 10px 0px #000000;
+      max-width: 92vw;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .lightbox-header {
+      background: var(--dark-ink);
+      color: var(--accent-primary);
+      padding: 0.7rem 1.2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-caacupe);
+      font-size: 1.1rem;
+      letter-spacing: 1px;
+      border-bottom: 3px solid var(--dark-ink);
+      gap: 1rem;
+    }
+
+    .lightbox-close-btn {
+      background: var(--accent-alert);
+      color: #ffffff;
+      border: 2px solid var(--dark-ink);
+      font-family: var(--font-caacupe);
+      font-size: 0.95rem;
+      padding: 0.25rem 0.8rem;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: transform 0.1s ease;
+      touch-action: manipulation;
+    }
+
+    .lightbox-close-btn:hover {
+      transform: scale(1.05);
+    }
+
+    .lightbox-img-wrapper {
+      padding: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #0d0e12;
+      max-height: calc(85vh - 65px);
+      overflow: auto;
+    }
+
+    .lightbox-img-wrapper img {
+      max-width: 100%;
+      max-height: 68vh;
+      object-fit: contain;
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+      display: block;
+      box-shadow: 0 0 20px rgba(0,0,0,0.8);
+      border: 2px solid #232630;
+    }
+
+    /* ==========================================================================
+       DEVLOG STYLES
        ========================================================================== */
     .devlog-header {
       background: var(--bg-card);
@@ -904,6 +1013,10 @@
       flex-direction: column;
       overflow: hidden;
       position: relative;
+    }
+
+    .gallery-panel:hover {
+      transform: translateY(-4px);
     }
 
     .gallery-img-box {
@@ -1111,6 +1224,7 @@
       letter-spacing: 1px;
       color: var(--dark-ink);
       text-transform: uppercase;
+      overflow-wrap: break-word;
     }
 
     .comment-date {
@@ -1126,7 +1240,7 @@
     }
 
     /* ==========================================================================
-       FOOTER Y REDES SOCIALES (SOLO ICONOS COMPACTOS)
+       FOOTER Y REDES SOCIALES
        ========================================================================== */
     .main-footer {
       background: #0b0c10;
@@ -1181,8 +1295,9 @@
       display: flex;
       justify-content: center;
       gap: 0.9rem;
-      margin: 1.5rem 0;
+      margin: 1.5rem auto;
       flex-wrap: wrap;
+      max-width: 380px;
     }
 
     .social-icon-btn {
@@ -1302,14 +1417,21 @@
         height: 150px;
       }
 
-      .interaction-bar {
+      .team-avatar {
+        width: 105px;
+        height: 105px;
+      }
+    }
+
+    @media (max-width: 440px) {
+      .team-header {
         flex-direction: column;
-        align-items: stretch;
+        text-align: center;
+        gap: 0.8rem;
       }
 
-      .like-btn, .reaction-pill {
-        width: 100%;
-        justify-content: center;
+      .team-avatar {
+        margin: 0 auto;
       }
     }
   </style>
@@ -1323,7 +1445,7 @@
   <input type="radio" name="site_tabs" id="tab-team" class="logic-input">
 
   <!-- ==========================================================================
-       HEADER CON LOGO OFICIAL (image.png)
+       HEADER CON LOGO OFICIAL
        ========================================================================== -->
   <header class="main-header">
     <div class="container navbar">
@@ -1337,7 +1459,7 @@
   </header>
 
   <!-- ==========================================================================
-       BARRA DE NAVEGACIÓN (4 PESTAÑAS SIMÉTRICAS)
+       BARRA DE NAVEGACIÓN (4 PESTAÑAS)
        ========================================================================== -->
   <nav class="tabs-nav-bar">
     <div class="container">
@@ -1360,7 +1482,7 @@
   </nav>
 
   <!-- ==========================================================================
-       VISTAS DINÁMICAS POR PESTAÑAS (MAIN)
+       VISTAS DINÁMICAS POR PESTAÑAS
        ========================================================================== -->
   <main>
     <div class="container">
@@ -1421,7 +1543,7 @@
       </section>
 
       <!-- ====================================================================
-           PESTAÑA 2: JUEGOS (DCB + ACORDEÓN DE DEVLOG INTEGRADO)
+           PESTAÑA 2: JUEGOS + DEVLOG DESPLEGABLE
            ==================================================================== -->
       <section id="panel-games" class="tab-panel">
         <div class="unified-card-wrapper">
@@ -1542,7 +1664,7 @@
       </section>
 
       <!-- ====================================================================
-           PESTAÑA 3: ASSETS (QeController + EC Tombot Hub system con Devlog)
+           PESTAÑA 3: ASSETS (QeController + EC Tombot Hub system)
            ==================================================================== -->
       <section id="panel-assets" class="tab-panel">
         <div class="unified-card-wrapper">
@@ -1576,7 +1698,6 @@
                 </div>
               </div>
 
-              <!-- Devlog Acordeón Asset 1 -->
               <div class="asset-devlog-section">
                 <button class="asset-devlog-toggle" onclick="toggleAssetDevlog('qecontroller')">
                   <span>▼ DEVLOG & FEEDBACK</span>
@@ -1617,7 +1738,6 @@
                 </div>
               </div>
 
-              <!-- Devlog Acordeón Asset 2 -->
               <div class="asset-devlog-section">
                 <button class="asset-devlog-toggle" onclick="toggleAssetDevlog('tombothub')">
                   <span>▼ DEVLOG & FEEDBACK</span>
@@ -1642,7 +1762,7 @@
       </section>
 
       <!-- ====================================================================
-           PESTAÑA 4: EQUIPO (CREW / MEMBERS)
+           PESTAÑA 4: EQUIPO (FOTOS GRANDES, COMPLETAS Y CON LIGHTBOX)
            ==================================================================== -->
       <section id="panel-team" class="tab-panel">
         <div class="unified-card-wrapper">
@@ -1653,9 +1773,10 @@
 
           <div class="team-grid">
             
+            <!-- MIEMBRO 1 -->
             <article class="team-card">
               <div class="team-header">
-                <div class="team-avatar">
+                <div class="team-avatar" onclick="openImageModal('nazj.png', 'Andres Zavala')" title="Clic para ampliar retrato">
                   <img src="nazj.png" alt="Andres Zavala" onerror="this.src='image.png'">
                 </div>
                 <div class="team-info">
@@ -1668,9 +1789,10 @@
               </p>
             </article>
 
+            <!-- MIEMBRO 2 -->
             <article class="team-card">
               <div class="team-header">
-                <div class="team-avatar">
+                <div class="team-avatar" onclick="openImageModal('efb.png', 'Erendira Flores')" title="Clic para ampliar retrato">
                   <img src="efb.png" alt="Erendira Flores" onerror="this.src='image.png'">
                 </div>
                 <div class="team-info">
@@ -1683,9 +1805,10 @@
               </p>
             </article>
 
+            <!-- MIEMBRO 3 -->
             <article class="team-card">
               <div class="team-header">
-                <div class="team-avatar">
+                <div class="team-avatar" onclick="openImageModal('duzf.png', 'Dante Zavala')" title="Clic para ampliar retrato">
                   <img src="duzf.png" alt="Dante Zavala" onerror="this.src='image.png'">
                 </div>
                 <div class="team-info">
@@ -1698,9 +1821,10 @@
               </p>
             </article>
 
+            <!-- MIEMBRO 4 -->
             <article class="team-card">
               <div class="team-header">
-                <div class="team-avatar">
+                <div class="team-avatar" onclick="openImageModal('semf.png', 'Saul Flores')" title="Clic para ampliar retrato">
                   <img src="semf.png" alt="Saul Flores" onerror="this.src='image.png'">
                 </div>
                 <div class="team-info">
@@ -1719,6 +1843,21 @@
 
     </div>
   </main>
+
+  <!-- ==========================================================================
+       MODAL LIGHTBOX ARCADE (AMPLIAR FOTO SIN ABRIR OTRA PESTAÑA)
+       ========================================================================== -->
+  <div id="image-lightbox-modal" class="lightbox-modal" onclick="closeImageModal(event)">
+    <div class="lightbox-content" onclick="event.stopPropagation()">
+      <div class="lightbox-header">
+        <span id="lightbox-title">RETRATO // EXPANDIDO</span>
+        <button class="lightbox-close-btn" onclick="closeImageModal()">[ X ] CERRAR</button>
+      </div>
+      <div class="lightbox-img-wrapper">
+        <img id="lightbox-img" src="" alt="Retrato Ampliado">
+      </div>
+    </div>
+  </div>
 
   <!-- ==========================================================================
        FOOTER CON REDES SOCIALES (ICONS ONLY)
@@ -1774,7 +1913,7 @@
   </footer>
 
   <!-- ==========================================================================
-       SCRIPTS (AUDIO + LIKES + COMENTARIOS + ACORDEÓN INDEPENDIENTE PARA ASSETS)
+       SCRIPTS
        ========================================================================== -->
   <script>
     let sfxEnabled = true;
@@ -1804,6 +1943,29 @@
         osc.stop(audioCtx.currentTime + 0.05);
       } catch (e) {}
     }
+
+    // Modal Lightbox para fotos del equipo
+    function openImageModal(src, title) {
+      playUIBeep(650);
+      const modal = document.getElementById('image-lightbox-modal');
+      const img = document.getElementById('lightbox-img');
+      const titleElem = document.getElementById('lightbox-title');
+      img.src = src;
+      titleElem.textContent = title ? 'RETRATO // ' + title.toUpperCase() : 'RETRATO // EXPANDIDO';
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeImageModal(e) {
+      playUIBeep(450);
+      const modal = document.getElementById('image-lightbox-modal');
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeImageModal();
+    });
 
     // Acordeón Devlog en Juegos
     function toggleDevlogAccordion() {
