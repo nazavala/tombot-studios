@@ -40,6 +40,7 @@
       --comic-shadow-sm: 4px 4px 0px var(--dark-ink);
     }
 
+    /* Reset Global y Bloqueo de Desbordamiento */
     *, *::before, *::after {
       margin: 0;
       padding: 0;
@@ -74,6 +75,7 @@
       display: none;
     }
 
+    /* Contenedor Universal Centrado */
     .container {
       width: 100%;
       max-width: 1150px;
@@ -145,16 +147,7 @@
     .tabs-nav-bar {
       background: #101116;
       border-bottom: var(--comic-border);
-      padding-top: 0.8rem;
-    }
-
-    .tabs-nav-header-label {
-      font-size: 0.85rem;
-      color: var(--accent-secondary);
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-bottom: 0.4rem;
-      display: block;
+      padding-top: 0.5rem;
     }
 
     .tabs-list {
@@ -524,10 +517,6 @@
       text-overflow: ellipsis;
     }
 
-    .flagship-content {
-      width: 100%;
-    }
-
     .flagship-title {
       font-family: var(--font-dcb);
       font-size: clamp(2.8rem, 7vw, 5.8rem);
@@ -579,6 +568,7 @@
       line-height: 1.5;
     }
 
+    /* Acordeón Desplegable del Devlog */
     .devlog-accordion {
       background: var(--bg-card);
       border: var(--comic-border);
@@ -721,6 +711,7 @@
       justify-content: center;
     }
 
+    /* Acordeón específico para cada Asset */
     .asset-devlog-section {
       margin-top: 1.2rem;
       border-top: 3px solid var(--dark-ink);
@@ -760,7 +751,7 @@
     }
 
     /* ==========================================================================
-       PESTAÑA 4: EQUIPO (FOTOS GRANDES, COMPLETAS Y CON LIGHTBOX)
+       PESTAÑA 4: EQUIPO (CREW / MEMBERS)
        ========================================================================== */
     .team-grid {
       display: grid;
@@ -787,7 +778,6 @@
       padding-bottom: 1.2rem;
     }
 
-    /* CONTENEDOR DE FOTO MÁS GRANDE Y CLICKEABLE */
     .team-avatar {
       width: 120px;
       height: 120px;
@@ -820,7 +810,6 @@
       pointer-events: none;
     }
 
-    /* FOTO SIN CORTES (object-fit: contain) Y PIXEL ART NÍTIDO */
     .team-avatar img {
       width: 100%;
       height: 100%;
@@ -858,7 +847,7 @@
     }
 
     /* ==========================================================================
-       MODAL LIGHTBOX ARCADE (VISOR DE FOTOS EXPANDIDAS EN LA MISMA PÁGINA)
+       MODAL LIGHTBOX ARCADE
        ========================================================================== */
     .lightbox-modal {
       display: none;
@@ -1224,7 +1213,6 @@
       letter-spacing: 1px;
       color: var(--dark-ink);
       text-transform: uppercase;
-      overflow-wrap: break-word;
     }
 
     .comment-date {
@@ -1240,7 +1228,7 @@
     }
 
     /* ==========================================================================
-       FOOTER Y REDES SOCIALES
+       FOOTER Y REDES SOCIALES (SOLO ICONOS COMPACTOS)
        ========================================================================== */
     .main-footer {
       background: #0b0c10;
@@ -1295,9 +1283,11 @@
       display: flex;
       justify-content: center;
       gap: 0.9rem;
-      margin: 1.5rem auto;
+      margin: 1.5rem 0;
       flex-wrap: wrap;
       max-width: 380px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .social-icon-btn {
@@ -1369,6 +1359,7 @@
         padding: 0.6rem 0;
       }
 
+      /* MENÚ TÁCTIL MÓVIL 4 PESTAÑAS (2X2) */
       .tabs-nav-bar {
         padding-top: 0.5rem;
       }
@@ -1459,11 +1450,10 @@
   </header>
 
   <!-- ==========================================================================
-       BARRA DE NAVEGACIÓN (4 PESTAÑAS)
+       BARRA DE NAVEGACIÓN (4 PESTAÑAS SIN TEXTO INICIAL)
        ========================================================================== -->
   <nav class="tabs-nav-bar">
     <div class="container">
-      <span class="tabs-nav-header-label">MAIN MENU // SELECT DIRECTORY:</span>
       <div class="tabs-list">
         <label for="tab-studio" class="tab-label" onclick="playUIBeep(640)">
           <span class="menu-cursor">►</span> 01 // ESTUDIO
@@ -1762,7 +1752,7 @@
       </section>
 
       <!-- ====================================================================
-           PESTAÑA 4: EQUIPO (FOTOS GRANDES, COMPLETAS Y CON LIGHTBOX)
+           PESTAÑA 4: EQUIPO (CREW / MEMBERS)
            ==================================================================== -->
       <section id="panel-team" class="tab-panel">
         <div class="unified-card-wrapper">
@@ -1773,7 +1763,6 @@
 
           <div class="team-grid">
             
-            <!-- MIEMBRO 1 -->
             <article class="team-card">
               <div class="team-header">
                 <div class="team-avatar" onclick="openImageModal('nazj.png', 'Andres Zavala')" title="Clic para ampliar retrato">
@@ -1789,7 +1778,6 @@
               </p>
             </article>
 
-            <!-- MIEMBRO 2 -->
             <article class="team-card">
               <div class="team-header">
                 <div class="team-avatar" onclick="openImageModal('efb.png', 'Erendira Flores')" title="Clic para ampliar retrato">
@@ -1805,7 +1793,6 @@
               </p>
             </article>
 
-            <!-- MIEMBRO 3 -->
             <article class="team-card">
               <div class="team-header">
                 <div class="team-avatar" onclick="openImageModal('duzf.png', 'Dante Zavala')" title="Clic para ampliar retrato">
@@ -1821,7 +1808,6 @@
               </p>
             </article>
 
-            <!-- MIEMBRO 4 -->
             <article class="team-card">
               <div class="team-header">
                 <div class="team-avatar" onclick="openImageModal('semf.png', 'Saul Flores')" title="Clic para ampliar retrato">
@@ -1845,7 +1831,7 @@
   </main>
 
   <!-- ==========================================================================
-       MODAL LIGHTBOX ARCADE (AMPLIAR FOTO SIN ABRIR OTRA PESTAÑA)
+       MODAL LIGHTBOX ARCADE
        ========================================================================== -->
   <div id="image-lightbox-modal" class="lightbox-modal" onclick="closeImageModal(event)">
     <div class="lightbox-content" onclick="event.stopPropagation()">
