@@ -115,13 +115,18 @@
       width: 52px;
       height: 52px;
       flex-shrink: 0;
-      border: 3px solid var(--accent-primary);
-      background: var(--bg-card);
+      border: none;
+      background: transparent;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 3px 3px 0px var(--dark-ink);
       overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.15s ease;
+    }
+
+    .logo-frame:hover {
+      transform: scale(1.08);
     }
 
     .logo-frame img {
@@ -409,13 +414,18 @@
       width: clamp(120px, 15vw, 155px);
       height: clamp(120px, 15vw, 155px);
       margin: 0 auto 1.5rem auto;
-      border: 4px solid var(--accent-primary);
-      background: var(--dark-ink);
-      box-shadow: var(--comic-shadow-sm);
+      border: none;
+      background: transparent;
       display: flex;
       align-items: center;
       justify-content: center;
       overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.15s ease;
+    }
+
+    .studio-big-logo:hover {
+      transform: scale(1.05);
     }
 
     .studio-big-logo img {
@@ -749,7 +759,7 @@
     }
 
     /* ==========================================================================
-       PESTAÑA 4: EQUIPO (FOTOS CON MARCO REDONDO CIRCULAR)
+       PESTAÑA 4: EQUIPO (CREW / MEMBERS)
        ========================================================================== */
     .team-grid {
       display: grid;
@@ -776,16 +786,15 @@
       padding-bottom: 1.2rem;
     }
 
-    /* MARCO REDONDO (CIRCULAR) PARA FOTOS DE PERFIL */
     .team-avatar {
-      width: 110px;
-      height: 110px;
+      width: 120px;
+      height: 120px;
       flex-shrink: 0;
       border: 3.5px solid var(--dark-ink);
       background: #0d0e12;
       box-shadow: 4px 4px 0px var(--dark-ink);
       overflow: hidden;
-      border-radius: 50%; /* Marco redondo perfecto */
+      border-radius: 50%;
       cursor: pointer;
       position: relative;
       transition: transform 0.15s ease, box-shadow 0.15s ease;
@@ -802,7 +811,7 @@
       position: absolute;
       bottom: 6px;
       right: 6px;
-      font-size: 0.7rem;
+      font-size: 0.75rem;
       background: rgba(13, 14, 18, 0.85);
       padding: 2px 5px;
       border: 1px solid var(--accent-primary);
@@ -814,7 +823,7 @@
     .team-avatar img {
       width: 100%;
       height: 100%;
-      object-fit: cover; /* Llena el círculo de forma limpia */
+      object-fit: cover;
       display: block;
     }
 
@@ -846,7 +855,7 @@
     }
 
     /* ==========================================================================
-       MODAL LIGHTBOX ARCADE (AMPLIAR FOTO REDONDA EN CUADRADO CÓMIC)
+       MODAL LIGHTBOX ARCADE
        ========================================================================== */
     .lightbox-modal {
       display: none;
@@ -903,7 +912,7 @@
       touch-action: manipulation;
     }
 
-    .lightbox- close-btn:hover {
+    .lightbox-close-btn:hover {
       transform: scale(1.05);
     }
 
@@ -1245,6 +1254,7 @@
       align-items: center;
       justify-content: center;
       overflow: hidden;
+      cursor: pointer;
     }
 
     .footer-logo-center img {
@@ -1423,18 +1433,6 @@
         height: 105px;
       }
     }
-
-    @media (max-width: 440px) {
-      .team-header {
-        flex-direction: column;
-        text-align: center;
-        gap: 0.8rem;
-      }
-
-      .team-avatar {
-        margin: 0 auto;
-      }
-    }
   </style>
 </head>
 <body>
@@ -1446,12 +1444,12 @@
   <input type="radio" name="site_tabs" id="tab-team" class="logic-input">
 
   <!-- ==========================================================================
-       HEADER CON LOGO OFICIAL
+       HEADER CON LOGO OFICIAL (SIN MARCO AMARILLO Y AMPLIABLE)
        ========================================================================== -->
   <header class="main-header">
     <div class="container navbar">
       <label for="tab-studio" class="logo-container" title="Inicio / Estudio" onclick="playUIBeep(520)">
-        <div class="logo-frame">
+        <div class="logo-frame" onclick="openImageModal('image.png', 'Tombot Studios Logo'); event.stopPropagation();" title="Ampliar logo">
           <img src="image.png" alt="Tombot Studios Logo">
         </div>
         <span class="logo-title">TOMBOT STUDIOS</span>
@@ -1511,7 +1509,7 @@
           </div>
 
           <div class="studio-card-hq">
-            <div class="studio-big-logo">
+            <div class="studio-big-logo" onclick="openImageModal('image.png', 'Tombot Studios Logo')" title="Ampliar logo">
               <img src="image.png" alt="Tombot Studios Logo">
             </div>
             <h2 class="studio-motto">TINTA, CÓDIGO Y CAOS</h2>
@@ -1697,6 +1695,24 @@
                   </a>
                 </div>
               </div>
+
+              <div class="asset-devlog-section">
+                <button class="asset-devlog-toggle" onclick="toggleAssetDevlog('qecontroller')">
+                  <span>▼ DEVLOG & FEEDBACK</span>
+                  <span id="asset-icon-qecontroller">[ + ]</span>
+                </button>
+                <div class="asset-devlog-content" id="asset-box-qecontroller">
+                  <h4 style="font-family: var(--font-dcb); font-size: 1.2rem; color: var(--accent-primary); margin-bottom: 0.4rem;">QeController - Bitácora</h4>
+                  <p style="font-size: 0.9rem; margin-bottom: 0.8rem;">Actualización técnica y soporte para desarrolladores.</p>
+                  
+                  <form class="comment-form" onsubmit="postAssetComment(event, 'qecontroller')">
+                    <input type="text" id="author-qecontroller" class="comment-input" placeholder="Tu Alias..." required style="font-size:14px; padding:6px;" maxlength="30">
+                    <textarea id="msg-qecontroller" class="comment-textarea" placeholder="Reporte de bug o duda..." required style="font-size:14px; padding:6px; min-height:60px;" maxlength="200"></textarea>
+                    <button type="submit" class="comic-btn" style="font-size:12px; padding:6px 12px;" onclick="playUIBeep(700)">ENVIAR</button>
+                  </form>
+                  <div class="comments-feed" id="feed-qecontroller"></div>
+                </div>
+              </div>
             </article>
 
             <!-- ASSET 2: EC Tombot Hub system -->
@@ -1719,6 +1735,24 @@
                   </a>
                 </div>
               </div>
+
+              <div class="asset-devlog-section">
+                <button class="asset-devlog-toggle" onclick="toggleAssetDevlog('tombothub')">
+                  <span>▼ DEVLOG & FEEDBACK</span>
+                  <span id="asset-icon-tombothub">[ + ]</span>
+                </button>
+                <div class="asset-devlog-content" id="asset-box-tombothub">
+                  <h4 style="font-family: var(--font-dcb); font-size: 1.2rem; color: var(--accent-primary); margin-bottom: 0.4rem;">Tombot Hub - Bitácora</h4>
+                  <p style="font-size: 0.9rem; margin-bottom: 0.8rem;">Notas de parche e instalación One-Click.</p>
+                  
+                  <form class="comment-form" onsubmit="postAssetComment(event, 'tombothub')">
+                    <input type="text" id="author-tombothub" class="comment-input" placeholder="Tu Alias..." required style="font-size:14px; padding:6px;" maxlength="30">
+                    <textarea id="msg-tombothub" class="comment-textarea" placeholder="Reporte de bug o duda..." required style="font-size:14px; padding:6px; min-height:60px;" maxlength="200"></textarea>
+                    <button type="submit" class="comic-btn" style="font-size:12px; padding:6px 12px;" onclick="playUIBeep(700)">ENVIAR</button>
+                  </form>
+                  <div class="comments-feed" id="feed-tombothub"></div>
+                </div>
+              </div>
             </article>
 
           </div>
@@ -1726,7 +1760,7 @@
       </section>
 
       <!-- ====================================================================
-           PESTAÑA 4: EQUIPO (CREW / MEMBERS CON MARCO REDONDO)
+           PESTAÑA 4: EQUIPO (CREW / MEMBERS)
            ==================================================================== -->
       <section id="panel-team" class="tab-panel">
         <div class="unified-card-wrapper">
@@ -1809,7 +1843,7 @@
   </main>
 
   <!-- ==========================================================================
-       MODAL LIGHTBOX ARCADE
+       MODAL LIGHTBOX ARCADE (PARA LOGO Y FOTOS DE EQUIPO)
        ========================================================================== -->
   <div id="image-lightbox-modal" class="lightbox-modal" onclick="closeImageModal(event)">
     <div class="lightbox-content" onclick="event.stopPropagation()">
@@ -1818,7 +1852,7 @@
         <button class="lightbox-close-btn" onclick="closeImageModal()">[ X ] CERRAR</button>
       </div>
       <div class="lightbox-img-wrapper">
-        <img id="lightbox-img" src="" alt="Retrato Ampliado">
+        <img id="lightbox-img" src="" alt="Imagen Ampliada">
       </div>
     </div>
   </div>
@@ -1828,7 +1862,7 @@
        ========================================================================== -->
   <footer class="main-footer">
     <div class="container">
-      <div class="footer-logo-center">
+      <div class="footer-logo-center" onclick="openImageModal('image.png', 'Tombot Studios Logo')" title="Ampliar logo">
         <img src="image.png" alt="Tombot Studios Logo">
       </div>
       
@@ -1908,7 +1942,7 @@
       } catch (e) {}
     }
 
-    // Modal Lightbox para fotos del equipo
+    // Modal Lightbox para logos y fotos del equipo
     function openImageModal(src, title) {
       playUIBeep(650);
       const modal = document.getElementById('image-lightbox-modal');
