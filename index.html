@@ -84,7 +84,7 @@
     }
 
     /* ==========================================================================
-       HEADER PRINCIPAL (SIN MARCO AMARILLO EN EL LOGO)
+       HEADER PRINCIPAL
        ========================================================================== */
     .main-header {
       background: var(--dark-ink);
@@ -115,11 +115,12 @@
       width: 52px;
       height: 52px;
       flex-shrink: 0;
-      border: none; /* MARCO AMARILLO ELIMINADO */
-      background: transparent;
+      border: 3px solid var(--accent-primary);
+      background: var(--bg-card);
       display: flex;
       align-items: center;
       justify-content: center;
+      box-shadow: 3px 3px 0px var(--dark-ink);
       overflow: hidden;
     }
 
@@ -300,7 +301,7 @@
     }
 
     /* ==========================================================================
-       PESTAÑA 1: EL ESTUDIO (SIN MARCO AMARILLO EN LOGO CENTRAL)
+       PESTAÑA 1: EL ESTUDIO
        ========================================================================== */
     .studio-grid {
       display: grid;
@@ -408,8 +409,9 @@
       width: clamp(120px, 15vw, 155px);
       height: clamp(120px, 15vw, 155px);
       margin: 0 auto 1.5rem auto;
-      border: none; /* MARCO AMARILLO ELIMINADO */
-      background: transparent;
+      border: 4px solid var(--accent-primary);
+      background: var(--dark-ink);
+      box-shadow: var(--comic-shadow-sm);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -747,7 +749,7 @@
     }
 
     /* ==========================================================================
-       PESTAÑA 4: EQUIPO (CREW / MEMBERS)
+       PESTAÑA 4: EQUIPO (FOTOS CON MARCO REDONDO CIRCULAR)
        ========================================================================== */
     .team-grid {
       display: grid;
@@ -774,14 +776,16 @@
       padding-bottom: 1.2rem;
     }
 
+    /* MARCO REDONDO (CIRCULAR) PARA FOTOS DE PERFIL */
     .team-avatar {
-      width: 120px;
-      height: 120px;
+      width: 110px;
+      height: 110px;
       flex-shrink: 0;
       border: 3.5px solid var(--dark-ink);
       background: #0d0e12;
       box-shadow: 4px 4px 0px var(--dark-ink);
       overflow: hidden;
+      border-radius: 50%; /* Marco redondo perfecto */
       cursor: pointer;
       position: relative;
       transition: transform 0.15s ease, box-shadow 0.15s ease;
@@ -796,12 +800,13 @@
     .team-avatar::after {
       content: '🔍';
       position: absolute;
-      bottom: 4px;
-      right: 4px;
-      font-size: 0.75rem;
-      background: rgba(13, 14, 18, 0.8);
-      padding: 2px 4px;
+      bottom: 6px;
+      right: 6px;
+      font-size: 0.7rem;
+      background: rgba(13, 14, 18, 0.85);
+      padding: 2px 5px;
       border: 1px solid var(--accent-primary);
+      border-radius: 50%;
       line-height: 1;
       pointer-events: none;
     }
@@ -809,9 +814,7 @@
     .team-avatar img {
       width: 100%;
       height: 100%;
-      object-fit: contain;
-      image-rendering: pixelated;
-      image-rendering: crisp-edges;
+      object-fit: cover; /* Llena el círculo de forma limpia */
       display: block;
     }
 
@@ -843,7 +846,7 @@
     }
 
     /* ==========================================================================
-       MODAL LIGHTBOX ARCADE
+       MODAL LIGHTBOX ARCADE (AMPLIAR FOTO REDONDA EN CUADRADO CÓMIC)
        ========================================================================== */
     .lightbox-modal {
       display: none;
@@ -900,7 +903,7 @@
       touch-action: manipulation;
     }
 
-    .lightbox-close-btn:hover {
+    .lightbox- close-btn:hover {
       transform: scale(1.05);
     }
 
@@ -926,7 +929,7 @@
     }
 
     /* ==========================================================================
-       DEVLOG STYLES
+       DEVLOG STYLES GENERALES
        ========================================================================== */
     .devlog-header {
       background: var(--bg-card);
@@ -1220,7 +1223,7 @@
     }
 
     /* ==========================================================================
-       FOOTER Y REDES SOCIALES (TABLA 3 X 2 EN MÓVILES, LÍNEA ÚNICA EN PC)
+       FOOTER Y REDES SOCIALES
        ========================================================================== */
     .main-footer {
       background: #0b0c10;
@@ -1413,6 +1416,23 @@
         gap: 0.8rem;
         max-width: 180px;
         margin: 1.5rem auto;
+      }
+
+      .team-avatar {
+        width: 105px;
+        height: 105px;
+      }
+    }
+
+    @media (max-width: 440px) {
+      .team-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.8rem;
+      }
+
+      .team-avatar {
+        margin: 0 auto;
       }
     }
   </style>
@@ -1644,7 +1664,7 @@
       </section>
 
       <!-- ====================================================================
-           PESTAÑA 3: ASSETS (QeController + EC Tombot Hub system, AMBOS CON DEVLOG)
+           PESTAÑA 3: ASSETS (QeController + EC Tombot Hub system)
            ==================================================================== -->
       <section id="panel-assets" class="tab-panel">
         <div class="unified-card-wrapper">
@@ -1677,25 +1697,6 @@
                   </a>
                 </div>
               </div>
-
-              <!-- Devlog Acordeón Asset 1 -->
-              <div class="asset-devlog-section">
-                <button class="asset-devlog-toggle" onclick="toggleAssetDevlog('qecontroller')">
-                  <span>▼ DEVLOG & FEEDBACK</span>
-                  <span id="asset-icon-qecontroller">[ + ]</span>
-                </button>
-                <div class="asset-devlog-content" id="asset-box-qecontroller">
-                  <h4 style="font-family: var(--font-dcb); font-size: 1.2rem; color: var(--accent-primary); margin-bottom: 0.4rem;">QeController - Bitácora</h4>
-                  <p style="font-size: 0.9rem; margin-bottom: 0.8rem;">Actualización técnica y soporte para desarrolladores.</p>
-                  
-                  <form class="comment-form" onsubmit="postAssetComment(event, 'qecontroller')">
-                    <input type="text" id="author-qecontroller" class="comment-input" placeholder="Tu Alias..." required style="font-size:14px; padding:6px;" maxlength="30">
-                    <textarea id="msg-qecontroller" class="comment-textarea" placeholder="Reporte de bug o duda..." required style="font-size:14px; padding:6px; min-height:60px;" maxlength="200"></textarea>
-                    <button type="submit" class="comic-btn" style="font-size:12px; padding:6px 12px;" onclick="playUIBeep(700)">ENVIAR</button>
-                  </form>
-                  <div class="comments-feed" id="feed-qecontroller"></div>
-                </div>
-              </div>
             </article>
 
             <!-- ASSET 2: EC Tombot Hub system -->
@@ -1718,25 +1719,6 @@
                   </a>
                 </div>
               </div>
-
-              <!-- Devlog Acordeón Asset 2 -->
-              <div class="asset-devlog-section">
-                <button class="asset-devlog-toggle" onclick="toggleAssetDevlog('tombothub')">
-                  <span>▼ DEVLOG & FEEDBACK</span>
-                  <span id="asset-icon-tombothub">[ + ]</span>
-                </button>
-                <div class="asset-devlog-content" id="asset-box-tombothub">
-                  <h4 style="font-family: var(--font-dcb); font-size: 1.2rem; color: var(--accent-primary); margin-bottom: 0.4rem;">Tombot Hub - Bitácora</h4>
-                  <p style="font-size: 0.9rem; margin-bottom: 0.8rem;">Notas de parche e instalación One-Click.</p>
-                  
-                  <form class="comment-form" onsubmit="postAssetComment(event, 'tombothub')">
-                    <input type="text" id="author-tombothub" class="comment-input" placeholder="Tu Alias..." required style="font-size:14px; padding:6px;" maxlength="30">
-                    <textarea id="msg-tombothub" class="comment-textarea" placeholder="Reporte de bug o duda..." required style="font-size:14px; padding:6px; min-height:60px;" maxlength="200"></textarea>
-                    <button type="submit" class="comic-btn" style="font-size:12px; padding:6px 12px;" onclick="playUIBeep(700)">ENVIAR</button>
-                  </form>
-                  <div class="comments-feed" id="feed-tombothub"></div>
-                </div>
-              </div>
             </article>
 
           </div>
@@ -1744,7 +1726,7 @@
       </section>
 
       <!-- ====================================================================
-           PESTAÑA 4: EQUIPO (CREW / MEMBERS)
+           PESTAÑA 4: EQUIPO (CREW / MEMBERS CON MARCO REDONDO)
            ==================================================================== -->
       <section id="panel-team" class="tab-panel">
         <div class="unified-card-wrapper">
