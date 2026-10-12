@@ -609,7 +609,7 @@
     }
 
     /* ==========================================================================
-       PESTAÑA 3: ASSETS & TOOLS UNITY
+       PESTAÑA 3: ASSETS & TOOLS UNITY (CON ACORDEÓN EN CADA ASSET)
        ========================================================================== */
     .assets-intro-bar {
       margin-bottom: 1.8rem;
@@ -710,6 +710,7 @@
       justify-content: center;
     }
 
+    /* Estilos del acordeón desplegable en cada Asset */
     .asset-devlog-section {
       margin-top: 1.2rem;
       border-top: 3px solid var(--dark-ink);
@@ -928,7 +929,7 @@
     }
 
     /* ==========================================================================
-       DEVLOG STYLES
+       DEVLOG STYLES GENERALES
        ========================================================================== */
     .devlog-header {
       background: var(--bg-card);
@@ -1273,7 +1274,6 @@
       padding: 0 0.5rem;
     }
 
-    /* BARRA DE REDES: Flex en PC (una sola línea), Grid 3x2 en Móviles */
     .social-links-bar {
       display: flex;
       justify-content: center;
@@ -1409,7 +1409,6 @@
         justify-content: center;
       }
 
-      /* TRANSFORMACIÓN DE REDES SOCIALES A TABLA 3X2 EN MÓVILES */
       .social-links-bar {
         display: grid;
         grid-template-columns: repeat(3, 48px);
@@ -1648,7 +1647,7 @@
       </section>
 
       <!-- ====================================================================
-           PESTAÑA 3: ASSETS (QeController + EC Tombot Hub system)
+           PESTAÑA 3: ASSETS (QeController + EC Tombot Hub system con Devlog)
            ==================================================================== -->
       <section id="panel-assets" class="tab-panel">
         <div class="unified-card-wrapper">
@@ -1681,6 +1680,24 @@
                   </a>
                 </div>
               </div>
+
+              <div class="asset-devlog-section">
+                <button class="asset-devlog-toggle" onclick="toggleAssetDevlog('qecontroller')">
+                  <span>▼ DEVLOG & FEEDBACK</span>
+                  <span id="asset-icon-qecontroller">[ + ]</span>
+                </button>
+                <div class="asset-devlog-content" id="asset-box-qecontroller">
+                  <h4 style="font-family: var(--font-dcb); font-size: 1.2rem; color: var(--accent-primary); margin-bottom: 0.4rem;">QeController - Bitácora</h4>
+                  <p style="font-size: 0.9rem; margin-bottom: 0.8rem;">Actualización técnica y soporte para desarrolladores.</p>
+                  
+                  <form class="comment-form" onsubmit="postAssetComment(event, 'qecontroller')">
+                    <input type="text" id="author-qecontroller" class="comment-input" placeholder="Tu Alias..." required style="font-size:14px; padding:6px;" maxlength="30">
+                    <textarea id="msg-qecontroller" class="comment-textarea" placeholder="Reporte de bug o duda..." required style="font-size:14px; padding:6px; min-height:60px;" maxlength="200"></textarea>
+                    <button type="submit" class="comic-btn" style="font-size:12px; padding:6px 12px;" onclick="playUIBeep(700)">ENVIAR</button>
+                  </form>
+                  <div class="comments-feed" id="feed-qecontroller"></div>
+                </div>
+              </div>
             </article>
 
             <!-- ASSET 2: EC Tombot Hub system -->
@@ -1701,6 +1718,24 @@
                   <a href="https://tombot-studios.itch.io" target="_blank" rel="noopener noreferrer" class="comic-btn btn-sec" onclick="playUIBeep(800)">
                     MÁS INFORMACIÓN ➔
                   </a>
+                </div>
+              </div>
+
+              <div class="asset-devlog-section">
+                <button class="asset-devlog-toggle" onclick="toggleAssetDevlog('tombothub')">
+                  <span>▼ DEVLOG & FEEDBACK</span>
+                  <span id="asset-icon-tombothub">[ + ]</span>
+                </button>
+                <div class="asset-devlog-content" id="asset-box-tombothub">
+                  <h4 style="font-family: var(--font-dcb); font-size: 1.2rem; color: var(--accent-primary); margin-bottom: 0.4rem;">Tombot Hub - Bitácora</h4>
+                  <p style="font-size: 0.9rem; margin-bottom: 0.8rem;">Notas de parche e instalación One-Click.</p>
+                  
+                  <form class="comment-form" onsubmit="postAssetComment(event, 'tombothub')">
+                    <input type="text" id="author-tombothub" class="comment-input" placeholder="Tu Alias..." required style="font-size:14px; padding:6px;" maxlength="30">
+                    <textarea id="msg-tombothub" class="comment-textarea" placeholder="Reporte de bug o duda..." required style="font-size:14px; padding:6px; min-height:60px;" maxlength="200"></textarea>
+                    <button type="submit" class="comic-btn" style="font-size:12px; padding:6px 12px;" onclick="playUIBeep(700)">ENVIAR</button>
+                  </form>
+                  <div class="comments-feed" id="feed-tombothub"></div>
                 </div>
               </div>
             </article>
