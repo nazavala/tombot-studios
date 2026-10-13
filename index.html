@@ -84,7 +84,7 @@
     }
 
     /* ==========================================================================
-       HEADER PRINCIPAL
+       HEADER PRINCIPAL (CON LOGO REDONDO)
        ========================================================================== */
     .main-header {
       background: var(--dark-ink);
@@ -112,16 +112,23 @@
     }
 
     .logo-frame {
-      width: 52px;
-      height: 52px;
+      width: 48px;
+      height: 48px;
       flex-shrink: 0;
       border: 3px solid var(--accent-primary);
       background: var(--bg-card);
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 3px 3px 0px var(--dark-ink);
+      box-shadow: 2px 2px 0px var(--dark-ink);
       overflow: hidden;
+      border-radius: 50%; /* Marco redondo */
+      cursor: pointer;
+      transition: transform 0.15s ease;
+    }
+
+    .logo-frame:hover {
+      transform: scale(1.08);
     }
 
     .logo-frame img {
@@ -301,7 +308,7 @@
     }
 
     /* ==========================================================================
-       PESTAÑA 1: EL ESTUDIO
+       PESTAÑA 1: EL ESTUDIO (CON LOGO CENTRAL REDONDO)
        ========================================================================== */
     .studio-grid {
       display: grid;
@@ -416,6 +423,14 @@
       align-items: center;
       justify-content: center;
       overflow: hidden;
+      border-radius: 50%; /* Marco redondo */
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .studio-big-logo:hover {
+      transform: scale(1.05);
+      box-shadow: 6px 6px 0px var(--dark-ink);
     }
 
     .studio-big-logo img {
@@ -609,7 +624,7 @@
     }
 
     /* ==========================================================================
-       PESTAÑA 3: ASSETS & TOOLS UNITY (CON ACORDEÓN EN CADA ASSET)
+       PESTAÑA 3: ASSETS & TOOLS UNITY
        ========================================================================== */
     .assets-intro-bar {
       margin-bottom: 1.8rem;
@@ -710,7 +725,6 @@
       justify-content: center;
     }
 
-    /* Estilos del acordeón desplegable en cada Asset */
     .asset-devlog-section {
       margin-top: 1.2rem;
       border-top: 3px solid var(--dark-ink);
@@ -785,6 +799,7 @@
       background: #0d0e12;
       box-shadow: 4px 4px 0px var(--dark-ink);
       overflow: hidden;
+      border-radius: 50%;
       cursor: pointer;
       position: relative;
       transition: transform 0.15s ease, box-shadow 0.15s ease;
@@ -799,12 +814,13 @@
     .team-avatar::after {
       content: '🔍';
       position: absolute;
-      bottom: 4px;
-      right: 4px;
+      bottom: 6px;
+      right: 6px;
       font-size: 0.75rem;
-      background: rgba(13, 14, 18, 0.8);
-      padding: 2px 4px;
+      background: rgba(13, 14, 18, 0.85);
+      padding: 2px 5px;
       border: 1px solid var(--accent-primary);
+      border-radius: 50%;
       line-height: 1;
       pointer-events: none;
     }
@@ -812,9 +828,7 @@
     .team-avatar img {
       width: 100%;
       height: 100%;
-      object-fit: contain;
-      image-rendering: pixelated;
-      image-rendering: crisp-edges;
+      object-fit: cover;
       display: block;
     }
 
@@ -1223,7 +1237,7 @@
     }
 
     /* ==========================================================================
-       FOOTER Y REDES SOCIALES (TABLA 3 X 2 EN MÓVILES, LÍNEA ÚNICA EN PC)
+       FOOTER Y REDES SOCIALES
        ========================================================================== */
     .main-footer {
       background: #0b0c10;
@@ -1237,14 +1251,19 @@
     .footer-logo-center {
       width: 65px;
       height: 65px;
-      border: 3px solid var(--accent-primary);
-      background: var(--bg-card);
-      box-shadow: 4px 4px 0px #000000;
+      border: none;
+      background: transparent;
       margin: 0 auto 1rem auto;
       display: flex;
       align-items: center;
       justify-content: center;
       overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.15s ease;
+    }
+
+    .footer-logo-center:hover {
+      transform: scale(1.08);
     }
 
     .footer-logo-center img {
@@ -1417,6 +1436,11 @@
         max-width: 180px;
         margin: 1.5rem auto;
       }
+
+      .team-avatar {
+        width: 105px;
+        height: 105px;
+      }
     }
   </style>
 </head>
@@ -1429,12 +1453,12 @@
   <input type="radio" name="site_tabs" id="tab-team" class="logic-input">
 
   <!-- ==========================================================================
-       HEADER CON LOGO OFICIAL
+       HEADER CON LOGO OFICIAL (SIN MARCO)
        ========================================================================== -->
   <header class="main-header">
     <div class="container navbar">
       <label for="tab-studio" class="logo-container" title="Inicio / Estudio" onclick="playUIBeep(520)">
-        <div class="logo-frame">
+        <div class="logo-frame" onclick="openImageModal('image.png', 'Tombot Studios Logo'); event.stopPropagation();" title="Ampliar logo">
           <img src="image.png" alt="Tombot Studios Logo">
         </div>
         <span class="logo-title">TOMBOT STUDIOS</span>
@@ -1494,7 +1518,7 @@
           </div>
 
           <div class="studio-card-hq">
-            <div class="studio-big-logo">
+            <div class="studio-big-logo" onclick="openImageModal('image.png', 'Tombot Studios Logo')" title="Ampliar logo">
               <img src="image.png" alt="Tombot Studios Logo">
             </div>
             <h2 class="studio-motto">TINTA, CÓDIGO Y CAOS</h2>
@@ -1647,7 +1671,7 @@
       </section>
 
       <!-- ====================================================================
-           PESTAÑA 3: ASSETS (QeController + EC Tombot Hub system con Devlog)
+           PESTAÑA 3: ASSETS (QeController + EC Tombot Hub system)
            ==================================================================== -->
       <section id="panel-assets" class="tab-panel">
         <div class="unified-card-wrapper">
@@ -1837,7 +1861,7 @@
         <button class="lightbox-close-btn" onclick="closeImageModal()">[ X ] CERRAR</button>
       </div>
       <div class="lightbox-img-wrapper">
-        <img id="lightbox-img" src="" alt="Retrato Ampliado">
+        <img id="lightbox-img" src="" alt="Imagen Ampliada">
       </div>
     </div>
   </div>
@@ -1847,7 +1871,7 @@
        ========================================================================== -->
   <footer class="main-footer">
     <div class="container">
-      <div class="footer-logo-center">
+      <div class="footer-logo-center" onclick="openImageModal('image.png', 'Tombot Studios Logo')" title="Ampliar logo">
         <img src="image.png" alt="Tombot Studios Logo">
       </div>
       
@@ -1927,7 +1951,7 @@
       } catch (e) {}
     }
 
-    // Modal Lightbox para fotos del equipo
+    // Modal Lightbox para logos y fotos del equipo
     function openImageModal(src, title) {
       playUIBeep(650);
       const modal = document.getElementById('image-lightbox-modal');
