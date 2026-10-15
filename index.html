@@ -84,7 +84,7 @@
     }
 
     /* ==========================================================================
-       HEADER PRINCIPAL
+       HEADER PRINCIPAL (CON LOGO REDONDO)
        ========================================================================== */
     .main-header {
       background: var(--dark-ink);
@@ -112,15 +112,17 @@
     }
 
     .logo-frame {
-      width: 52px;
-      height: 52px;
+      width: 48px;
+      height: 48px;
       flex-shrink: 0;
-      border: none;
-      background: transparent;
+      border: 3px solid var(--dark-ink);
+      background: var(--bg-card);
       display: flex;
       align-items: center;
       justify-content: center;
+      box-shadow: 2px 2px 0px var(--dark-ink);
       overflow: hidden;
+      border-radius: 50%; /* Logotipo redondo en Header */
       cursor: pointer;
       transition: transform 0.15s ease;
     }
@@ -306,7 +308,7 @@
     }
 
     /* ==========================================================================
-       PESTAÑA 1: EL ESTUDIO
+       PESTAÑA 1: EL ESTUDIO (CON LOGO CENTRAL REDONDO)
        ========================================================================== */
     .studio-grid {
       display: grid;
@@ -411,21 +413,24 @@
     }
 
     .studio-big-logo {
-      width: clamp(120px, 15vw, 155px);
-      height: clamp(120px, 15vw, 155px);
+      width: clamp(130px, 16vw, 160px);
+      height: clamp(130px, 16vw, 160px);
       margin: 0 auto 1.5rem auto;
-      border: none;
-      background: transparent;
+      border: 3.5px solid var(--dark-ink);
+      background: var(--dark-ink);
+      box-shadow: 4px 4px 0px var(--dark-ink);
       display: flex;
       align-items: center;
       justify-content: center;
       overflow: hidden;
+      border-radius: 50%; /* Logo central redondo */
       cursor: pointer;
-      transition: transform 0.15s ease;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
 
     .studio-big-logo:hover {
       transform: scale(1.05);
+      box-shadow: 6px 6px 0px var(--dark-ink);
     }
 
     .studio-big-logo img {
@@ -759,7 +764,7 @@
     }
 
     /* ==========================================================================
-       PESTAÑA 4: EQUIPO (FOTOS CUADRADAS CON MARCO CÓMIC)
+       PESTAÑA 4: EQUIPO (CREW / MEMBERS)
        ========================================================================== */
     .team-grid {
       display: grid;
@@ -786,16 +791,15 @@
       padding-bottom: 1.2rem;
     }
 
-    /* MARCO CUADRADO CON ESTILO CÓMIC PARA FOTOS DE PERFIL */
     .team-avatar {
-      width: 110px;
-      height: 110px;
+      width: 120px;
+      height: 120px;
       flex-shrink: 0;
       border: 3.5px solid var(--dark-ink);
       background: #0d0e12;
       box-shadow: 4px 4px 0px var(--dark-ink);
       overflow: hidden;
-      border-radius: 4px; /* Marco cuadrado */
+      border-radius: 50%;
       cursor: pointer;
       position: relative;
       transition: transform 0.15s ease, box-shadow 0.15s ease;
@@ -810,12 +814,13 @@
     .team-avatar::after {
       content: '🔍';
       position: absolute;
-      bottom: 4px;
-      right: 4px;
+      bottom: 6px;
+      right: 6px;
       font-size: 0.75rem;
       background: rgba(13, 14, 18, 0.85);
-      padding: 2px 4px;
+      padding: 2px 5px;
       border: 1px solid var(--accent-primary);
+      border-radius: 50%;
       line-height: 1;
       pointer-events: none;
     }
@@ -1246,8 +1251,10 @@
     .footer-logo-center {
       width: 65px;
       height: 65px;
-      border: none;
-      background: transparent;
+      border-radius: 50%; /* Logo redondo en Footer */
+      border: 3px solid var(--accent-primary);
+      background: var(--bg-card);
+      box-shadow: 4px 4px 0px #000000;
       margin: 0 auto 1rem auto;
       display: flex;
       align-items: center;
@@ -1433,8 +1440,8 @@
       }
 
       .team-avatar {
-        width: 100px;
-        height: 100px;
+        width: 105px;
+        height: 105px;
       }
     }
   </style>
@@ -1448,7 +1455,7 @@
   <input type="radio" name="site_tabs" id="tab-team" class="logic-input">
 
   <!-- ==========================================================================
-       HEADER CON LOGO OFICIAL (SIN MARCO)
+       HEADER CON LOGO OFICIAL REDONDO
        ========================================================================== -->
   <header class="main-header">
     <div class="container navbar">
@@ -1764,7 +1771,7 @@
       </section>
 
       <!-- ====================================================================
-           PESTAÑA 4: EQUIPO (CREW / MEMBERS CON FOTOS REDONDAS)
+           PESTAÑA 4: EQUIPO (CREW / MEMBERS)
            ==================================================================== -->
       <section id="panel-team" class="tab-panel">
         <div class="unified-card-wrapper">
@@ -1862,7 +1869,7 @@
   </div>
 
   <!-- ==========================================================================
-       FOOTER CON REDES SOCIALES (ICONS ONLY)
+       FOOTER CON REDES SOCIALES (LOGOTIPO REDONDO)
        ========================================================================== -->
   <footer class="main-footer">
     <div class="container">
