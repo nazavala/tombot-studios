@@ -2,8 +2,8 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tombot Studios | Indie Dossier & Game Dev</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <title>Tombot Studios | Indie Dossier & Game Dev Hub</title>
   
   <!-- FUENTES INDUSTRIALES, DOSSIER GRUNGE Y MONOSPACE -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,23 +16,23 @@
        ========================================================================== */
     :root {
       /* PALETA 1: "RUST & INDUSTRIAL ASPHALT" (Por defecto) */
-      --bg-base: #0b0c0e;
-      --bg-surface: #14171d;
-      --bg-surface-elevated: #1a1e26;
-      --dark-ink: #060709;
+      --bg-base: #0a0b0e;
+      --bg-surface: #13161c;
+      --bg-surface-elevated: #1a1e27;
+      --dark-ink: #050608;
       
       --accent-primary: #d99637;      /* Mostaza industrial desgastado */
       --accent-primary-hover: #f0aa46;
       --accent-secondary: #3d7982;    /* Pátina / cerceta corroído */
-      --accent-secondary-hover: #4b929d;
+      --accent-secondary-hover: #4e95a0;
       --accent-rust: #ab3326;         /* Óxido y sangre coagulada */
       --accent-rust-hover: #c44032;
 
       --newsprint-bg: #c8beab;        /* Papel manchado / cartón de dossier */
-      --newsprint-ink: #100f0e;       /* Tinta negra de imprenta clandestina */
+      --newsprint-ink: #100f0e;       /* Tinta de imprenta clandestina */
       --newsprint-sub: #544e45;
 
-      /* Tipografías */
+      /* Jerarquía Tipográfica */
       --font-display: 'Teko', sans-serif;
       --font-title: 'Bebas Neue', sans-serif;
       --font-typewriter: 'Special Elite', monospace;
@@ -45,21 +45,21 @@
       --grunge-shadow-heavy: 8px 8px 0px #000000;
     }
 
-    /* PALETA 2: "ACID TOXIC / SLUDGE PUNK" (Activada vía interruptor) */
+    /* PALETA 2: "ACID TOXIC / SLUDGE PUNK" */
     body:has(#theme-toggle:checked) {
-      --bg-base: #0a080d;
-      --bg-surface: #131018;
-      --bg-surface-elevated: #1b1724;
-      --dark-ink: #050407;
+      --bg-base: #09070c;
+      --bg-surface: #120f18;
+      --bg-surface-elevated: #1a1624;
+      --dark-ink: #050307;
       
       --accent-primary: #a3e620;      /* Verde ácido radiactivo */
       --accent-primary-hover: #b5f731;
-      --accent-secondary: #c93b68;    /* Magenta tóxico / aerosol punk */
+      --accent-secondary: #c93b68;    /* Magenta aerosol punk */
       --accent-secondary-hover: #de4777;
       --accent-rust: #298d9e;         /* Cian de desecho químico */
       --accent-rust-hover: #33a7bb;
 
-      --newsprint-bg: #d3d8c8;        /* Papel expuesto a humo tóxico */
+      --newsprint-bg: #d3d8c8;        /* Papel tóxico */
       --newsprint-ink: #0f0f12;
       --newsprint-sub: #4b5043;
 
@@ -68,28 +68,35 @@
     }
 
     /* Reset & Base */
-    * {
+    *, *::before, *::after {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
       -webkit-tap-highlight-color: transparent;
     }
 
+    html {
+      width: 100%;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
     body {
+      width: 100%;
+      overflow-x: hidden;
       background-color: var(--bg-base);
       color: #dfdfdf;
       font-family: var(--font-tech);
       font-size: 1.15rem;
-      line-height: 1.5;
+      line-height: 1.45;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       position: relative;
-      overflow-x: hidden;
       transition: background-color 0.25s ease, color 0.25s ease;
     }
 
-    /* EFECTO DE TEXTURA GRUNGE & SCANLINES (Puro CSS) */
+    /* TEXTURA PROCEDURAL DE RUIDO Y SCANLINES */
     body::before {
       content: "";
       position: fixed;
@@ -119,13 +126,13 @@
 
     .container {
       width: 100%;
-      max-width: 1220px;
+      max-width: 1180px;
       margin: 0 auto;
       padding: 0 1.5rem;
     }
 
     /* ==========================================================================
-       HEADER INDUSTRIAL / GRUNGE MILITARY
+       HEADER PRINCIPAL CON LOGOTIPO REDONDO
        ========================================================================== */
     .main-header {
       background: var(--dark-ink);
@@ -152,34 +159,39 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      height: 75px;
+      min-height: 72px;
+      padding: 0.4rem 0;
       gap: 1rem;
     }
 
     .logo-container {
       display: flex;
       align-items: center;
-      gap: 1rem;
+      gap: 0.9rem;
       cursor: pointer;
       text-decoration: none;
+      min-width: 0;
     }
 
     .logo-frame {
-      width: 52px;
-      height: 52px;
-      background: #000;
+      width: 50px;
+      height: 50px;
+      flex-shrink: 0;
       border: 2px solid var(--accent-primary);
-      box-shadow: 3px 3px 0px rgba(0,0,0,0.8);
+      background: #000;
       display: flex;
       align-items: center;
       justify-content: center;
+      box-shadow: 3px 3px 0px rgba(0,0,0,0.8);
       overflow: hidden;
-      clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+      border-radius: 50%;
+      cursor: pointer;
+      position: relative;
       transition: transform 0.15s ease, border-color 0.15s ease;
     }
 
-    .logo-container:hover .logo-frame {
-      transform: scale(1.05);
+    .logo-frame:hover {
+      transform: scale(1.08);
       border-color: var(--accent-primary-hover);
     }
 
@@ -203,13 +215,14 @@
       letter-spacing: 2px;
       line-height: 0.9;
       text-shadow: 2px 2px 0px #000;
+      white-space: nowrap;
     }
 
     .logo-sub {
       font-family: var(--font-tech);
-      font-size: 0.78rem;
+      font-size: 0.75rem;
       letter-spacing: 2px;
-      color: #838b99;
+      color: #7d8594;
       text-transform: uppercase;
     }
 
@@ -223,6 +236,7 @@
       padding: 0.4rem 0.9rem;
       user-select: none;
       box-shadow: inset 0 0 8px rgba(0,0,0,0.7);
+      flex-shrink: 0;
     }
 
     .theme-label-txt {
@@ -260,18 +274,21 @@
     }
 
     /* ==========================================================================
-       BARRA DE PESTAÑAS (EXPEDIENTES / DOSSIER MILITAR)
+       BARRA DE NAVEGACIÓN (DOSSIER TABS // 4 PESTAÑAS)
        ========================================================================== */
     .tabs-nav-bar {
       background: #0a0b0e;
       border-bottom: 2px solid #242933;
       padding-top: 0.6rem;
+      position: relative;
+      z-index: 100;
     }
 
     .tabs-list {
       display: flex;
       gap: 0.4rem;
       overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
       scrollbar-width: none;
     }
     .tabs-list::-webkit-scrollbar { display: none; }
@@ -279,6 +296,7 @@
     .tab-label {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 0.6rem;
       font-family: var(--font-title);
       font-size: 1.25rem;
@@ -296,14 +314,15 @@
       position: relative;
       bottom: -2px;
       white-space: nowrap;
+      flex-shrink: 0;
       clip-path: polygon(10px 0, 100% 0, 100% 100%, 0 100%, 0 10px);
+      touch-action: manipulation;
     }
 
-    .tab-label span {
-      font-family: var(--font-tech);
-      font-size: 0.85rem;
+    .tab-label .menu-cursor {
       color: var(--accent-primary);
-      opacity: 0.7;
+      opacity: 0.3;
+      transition: opacity 0.15s ease, transform 0.15s ease;
     }
 
     .tab-label:hover {
@@ -312,10 +331,16 @@
       border-top-color: var(--accent-primary);
     }
 
+    .tab-label:hover .menu-cursor {
+      opacity: 1;
+      transform: translateX(2px);
+    }
+
+    /* PESTAÑA ACTIVA */
     #tab-studio:checked ~ .tabs-nav-bar label[for="tab-studio"],
     #tab-games:checked ~ .tabs-nav-bar label[for="tab-games"],
     #tab-assets:checked ~ .tabs-nav-bar label[for="tab-assets"],
-    #tab-devlog:checked ~ .tabs-nav-bar label[for="tab-devlog"] {
+    #tab-team:checked ~ .tabs-nav-bar label[for="tab-team"] {
       background: var(--bg-surface-elevated);
       color: var(--accent-primary);
       border-top: 2px solid var(--accent-primary);
@@ -324,11 +349,12 @@
       z-index: 5;
     }
 
-    #tab-studio:checked ~ .tabs-nav-bar label[for="tab-studio"] span,
-    #tab-games:checked ~ .tabs-nav-bar label[for="tab-games"] span,
-    #tab-assets:checked ~ .tabs-nav-bar label[for="tab-assets"] span,
-    #tab-devlog:checked ~ .tabs-nav-bar label[for="tab-devlog"] span {
+    #tab-studio:checked ~ .tabs-nav-bar label[for="tab-studio"] .menu-cursor,
+    #tab-games:checked ~ .tabs-nav-bar label[for="tab-games"] .menu-cursor,
+    #tab-assets:checked ~ .tabs-nav-bar label[for="tab-assets"] .menu-cursor,
+    #tab-team:checked ~ .tabs-nav-bar label[for="tab-team"] .menu-cursor {
       opacity: 1;
+      transform: scale(1.15);
     }
 
     /* ==========================================================================
@@ -358,10 +384,16 @@
     #tab-studio:checked ~ main #panel-studio { display: block; }
     #tab-games:checked ~ main #panel-games { display: block; }
     #tab-assets:checked ~ main #panel-assets { display: block; }
-    #tab-devlog:checked ~ main #panel-devlog { display: block; }
+    #tab-team:checked ~ main #panel-team { display: block; }
+
+    .unified-card-wrapper {
+      width: 100%;
+      max-width: 1080px;
+      margin: 0 auto;
+    }
 
     /* ==========================================================================
-       BOTONES INDUSTRIALES / BISELADOS
+       BOTONES INDUSTRIALES BISELADOS
        ========================================================================== */
     .comic-btn {
       display: inline-flex;
@@ -377,7 +409,7 @@
       color: var(--dark-ink);
       border: none;
       cursor: pointer;
-      min-height: 48px;
+      min-height: 50px;
       position: relative;
       clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
       box-shadow: 4px 4px 0px #000;
@@ -385,6 +417,7 @@
       line-height: 1;
       text-align: center;
       font-weight: 700;
+      touch-action: manipulation;
     }
 
     .comic-btn:hover {
@@ -411,17 +444,11 @@
       color: #fff;
     }
 
-    .comic-btn.btn-news {
-      background: var(--newsprint-bg);
-      color: var(--newsprint-ink);
-    }
-
-    /* Cinta de embalaje Grunge (Tape) */
     .grunge-tape {
       position: absolute;
       top: -10px;
       right: 25px;
-      background: rgba(217, 150, 55, 0.4);
+      background: rgba(217, 150, 55, 0.45);
       color: #000;
       font-family: var(--font-tech);
       font-size: 0.75rem;
@@ -461,18 +488,13 @@
 
     .studio-title {
       font-family: var(--font-title);
-      font-size: clamp(3rem, 6.5vw, 5.2rem);
+      font-size: clamp(2.8rem, 6.5vw, 5.2rem);
       line-height: 0.88;
       color: #f5f5f5;
       text-transform: uppercase;
       letter-spacing: 3px;
       margin-bottom: 1rem;
       text-shadow: 4px 4px 0px rgba(0,0,0,0.9);
-    }
-
-    .studio-title span {
-      color: var(--accent-primary);
-      display: block;
     }
 
     .studio-tagline {
@@ -485,7 +507,6 @@
       padding-left: 1rem;
     }
 
-    /* Caja tipo Papel Periódico Sucio / Manifiesto */
     .newsprint-box {
       background: var(--newsprint-bg);
       color: var(--newsprint-ink);
@@ -520,7 +541,6 @@
       flex-wrap: wrap;
     }
 
-    /* HQ Card / Bunker de Desarrollo */
     .studio-card-hq {
       background: var(--bg-surface);
       border: 1px solid #2a313d;
@@ -532,7 +552,7 @@
     }
 
     .studio-card-hq::before {
-      content: "TOMBOT // BASE OPERATIVA";
+      content: "STATUS // BASE OPERATIVA";
       position: absolute;
       top: 0;
       left: 0;
@@ -547,17 +567,24 @@
     }
 
     .studio-big-logo {
-      width: 130px;
-      height: 130px;
+      width: 140px;
+      height: 140px;
       margin: 1.5rem auto 1.5rem auto;
-      border: 2px solid var(--accent-primary);
+      border: 3px solid var(--accent-primary);
       background: #000;
       box-shadow: 4px 4px 0px rgba(0,0,0,0.8);
       display: flex;
       align-items: center;
       justify-content: center;
       overflow: hidden;
-      clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+      border-radius: 50%;
+      cursor: pointer;
+      transition: transform 0.15s ease, border-color 0.15s ease;
+    }
+
+    .studio-big-logo:hover {
+      transform: scale(1.06);
+      border-color: var(--accent-primary-hover);
     }
 
     .studio-big-logo img {
@@ -600,7 +627,6 @@
       letter-spacing: 1px;
     }
 
-    /* Manifiesto */
     .manifesto-box {
       background: #11141a;
       border: 1px solid #2a3140;
@@ -638,13 +664,8 @@
     }
 
     /* ==========================================================================
-       PESTAÑA 2: JUEGOS (DRUNK CITY BASTARDS)
+       PESTAÑA 2: JUEGOS + DEVLOG DESPLEGABLE
        ========================================================================== */
-    .games-single-wrapper {
-      max-width: 980px;
-      margin: 0 auto;
-    }
-
     .flagship-panel {
       background: var(--bg-surface);
       border: 1px solid #2c3342;
@@ -652,9 +673,9 @@
       padding: clamp(2.2rem, 5vw, 3.5rem);
       position: relative;
       clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 0 100%);
+      margin-bottom: 2rem;
     }
 
-    /* Sello tipo stencil / rubber stamp */
     .flagship-stamp {
       position: absolute;
       top: 25px;
@@ -674,7 +695,7 @@
 
     .flagship-title {
       font-family: var(--font-title);
-      font-size: clamp(3.8rem, 8.5vw, 6.8rem);
+      font-size: clamp(3.2rem, 8.5vw, 6.8rem);
       letter-spacing: 4px;
       color: #ffffff;
       line-height: 0.85;
@@ -721,31 +742,60 @@
       line-height: 1.65;
     }
 
-    /* ==========================================================================
-       PESTAÑA 4: DEVLOG & AVANCES
-       ========================================================================== */
-    .devlog-wrapper {
-      max-width: 1040px;
-      margin: 0 auto;
-    }
-
-    .devlog-header {
+    /* Acordeón Grunge */
+    .devlog-accordion {
       background: var(--bg-surface);
       border: 1px solid #2a3140;
-      border-left: 4px solid var(--accent-primary);
       box-shadow: var(--grunge-shadow);
-      padding: 2rem;
-      margin-bottom: 2.5rem;
+      margin-top: 2rem;
+    }
+
+    .devlog-accordion-toggle {
+      width: 100%;
+      background: #090a0d;
+      color: var(--accent-primary);
+      border: none;
+      padding: 1.2rem 1.6rem;
+      font-family: var(--font-title);
+      font-size: 1.45rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      flex-wrap: wrap;
-      gap: 1.2rem;
+      transition: background 0.15s ease;
+      touch-action: manipulation;
+    }
+
+    .devlog-accordion-toggle:hover {
+      background: #12151b;
+      color: #fff;
+    }
+
+    .devlog-accordion-content {
+      display: none;
+      padding: 2rem 1.6rem;
+      background: var(--bg-base);
+      border-top: 1px dashed #2c3342;
+    }
+
+    .devlog-accordion-content.active {
+      display: block;
+    }
+
+    /* Galería HUD Devlog */
+    .devlog-header {
+      background: var(--bg-surface);
+      border-left: 4px solid var(--accent-primary);
+      box-shadow: var(--grunge-shadow);
+      padding: 1.8rem;
+      margin-bottom: 2.2rem;
     }
 
     .devlog-main-title {
       font-family: var(--font-title);
-      font-size: clamp(2.6rem, 5vw, 4rem);
+      font-size: clamp(2.4rem, 5vw, 4rem);
       letter-spacing: 2px;
       color: #ffffff;
       line-height: 0.9;
@@ -759,13 +809,12 @@
       margin-top: 0.3rem;
     }
 
-    /* Galería de Capturas / HUD Táctico */
     .devlog-gallery-title {
       font-family: var(--font-title);
       font-size: 2rem;
       letter-spacing: 2px;
       color: var(--accent-primary);
-      margin: 2.5rem 0 1.2rem 0;
+      margin: 2rem 0 1.2rem 0;
       text-transform: uppercase;
       border-bottom: 1px dashed #2c3342;
       padding-bottom: 0.5rem;
@@ -775,7 +824,7 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 1.5rem;
-      margin-bottom: 3rem;
+      margin-bottom: 2.5rem;
     }
 
     .gallery-panel {
@@ -795,7 +844,7 @@
 
     .gallery-img-box {
       width: 100%;
-      height: 190px;
+      height: 180px;
       background: #08090c;
       display: flex;
       align-items: center;
@@ -805,7 +854,6 @@
       overflow: hidden;
     }
 
-    /* HUD de cámara de seguridad */
     .gallery-img-box::before {
       content: "REC ●";
       position: absolute;
@@ -818,12 +866,12 @@
     }
 
     .gallery-img-box svg {
-      opacity: 0.4;
+      opacity: 0.45;
       transition: opacity 0.2s ease, transform 0.2s ease;
     }
 
     .gallery-panel:hover .gallery-img-box svg {
-      opacity: 0.8;
+      opacity: 0.85;
       transform: scale(1.05);
     }
 
@@ -841,20 +889,19 @@
     }
 
     .gallery-caption {
-      padding: 1.2rem;
+      padding: 1.1rem;
       font-size: 1.05rem;
       color: #9da7b8;
       line-height: 1.45;
     }
 
-    /* Entrada de Bitácora / Manifiesto */
     .devlog-post {
       background: var(--newsprint-bg);
       color: var(--newsprint-ink);
       border: 2px solid #000;
       box-shadow: var(--grunge-shadow-heavy);
       padding: clamp(1.8rem, 4vw, 3rem);
-      margin-bottom: 3rem;
+      margin-bottom: 2.5rem;
       position: relative;
     }
 
@@ -871,7 +918,7 @@
 
     .post-title {
       font-family: var(--font-title);
-      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
       letter-spacing: 2px;
       color: var(--newsprint-ink);
       line-height: 0.95;
@@ -895,12 +942,11 @@
       margin-bottom: 2rem;
     }
 
-    /* Sistema de Likes & Reacciones */
     .interaction-bar {
       border-top: 2px dashed #000;
       padding-top: 1.5rem;
       display: flex;
-      gap: 1rem;
+      gap: 0.8rem;
       align-items: center;
       flex-wrap: wrap;
     }
@@ -920,11 +966,7 @@
       box-shadow: 4px 4px 0px #000;
       transition: all 0.12s ease;
       user-select: none;
-    }
-
-    .like-btn:hover {
-      transform: translate(-2px, -2px);
-      box-shadow: 6px 6px 0px #000;
+      min-height: 46px;
     }
 
     .like-btn.liked {
@@ -945,6 +987,7 @@
       align-items: center;
       gap: 0.4rem;
       transition: all 0.12s ease;
+      min-height: 44px;
     }
 
     .reaction-pill:hover {
@@ -953,19 +996,16 @@
       border-color: var(--accent-primary);
     }
 
-    /* Muro de Comentarios */
     .comments-wrapper {
       background: var(--bg-surface);
       border: 1px solid #2a3140;
       box-shadow: var(--grunge-shadow-heavy);
       padding: clamp(1.8rem, 4vw, 2.8rem);
-      margin-bottom: 2rem;
-      clip-path: polygon(0 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);
     }
 
     .comments-header-title {
       font-family: var(--font-title);
-      font-size: 2.6rem;
+      font-size: 2.4rem;
       letter-spacing: 2px;
       color: var(--accent-primary);
       margin-bottom: 0.4rem;
@@ -976,9 +1016,9 @@
       display: flex;
       flex-direction: column;
       gap: 1rem;
-      margin: 1.8rem 0 2.2rem 0;
+      margin: 1.6rem 0 2rem 0;
       border-bottom: 1px dashed #2f3849;
-      padding-bottom: 2rem;
+      padding-bottom: 1.8rem;
     }
 
     .comment-input,
@@ -988,7 +1028,7 @@
       color: #fff;
       border: 1px solid #323b4c;
       font-family: var(--font-tech);
-      font-size: 1.1rem;
+      font-size: 1rem;
       padding: 0.85rem 1.2rem;
       outline: none;
       transition: border-color 0.15s ease;
@@ -1001,7 +1041,7 @@
     }
 
     .comment-textarea {
-      min-height: 110px;
+      min-height: 100px;
       resize: vertical;
     }
 
@@ -1015,7 +1055,7 @@
       background: #0e1014;
       border: 1px solid #262c38;
       border-left: 3px solid var(--accent-primary);
-      padding: 1.3rem;
+      padding: 1.2rem;
       box-shadow: 3px 3px 0px rgba(0,0,0,0.8);
     }
 
@@ -1023,14 +1063,14 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 0.6rem;
+      margin-bottom: 0.5rem;
       border-bottom: 1px dashed #202530;
-      padding-bottom: 0.4rem;
+      padding-bottom: 0.35rem;
     }
 
     .comment-author {
       font-family: var(--font-title);
-      font-size: 1.5rem;
+      font-size: 1.45rem;
       letter-spacing: 1.5px;
       color: var(--accent-primary);
     }
@@ -1042,21 +1082,16 @@
     }
 
     .comment-msg {
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       color: #c4ccdb;
       line-height: 1.5;
     }
 
     /* ==========================================================================
-       PESTAÑA 3: ASSETS & TOOLS (QeController)
+       PESTAÑA 3: ASSETS & TOOLS (QeController + EC Tombot Hub)
        ========================================================================== */
-    .assets-single-wrapper {
-      max-width: 950px;
-      margin: 0 auto;
-    }
-
     .assets-intro-bar {
-      margin-bottom: 2.5rem;
+      margin-bottom: 2.2rem;
       text-align: center;
     }
 
@@ -1075,116 +1110,318 @@
 
     .assets-intro-title {
       font-family: var(--font-typewriter);
-      font-size: clamp(1.2rem, 2.2vw, 1.55rem);
+      font-size: clamp(1.15rem, 2.2vw, 1.55rem);
       color: #aeb8c9;
       line-height: 1.4;
-      max-width: 800px;
+      max-width: 820px;
       margin: 0 auto;
     }
 
-    .asset-featured-showcase {
+    .assets-grid-2cols {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+
+    .asset-card {
       background: var(--bg-surface);
       border: 1px solid #2d3444;
       box-shadow: var(--grunge-shadow-heavy);
       display: flex;
       flex-direction: column;
       position: relative;
-      clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 0 100%);
+      clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 15px, 100% 100%, 0 100%);
     }
 
-    .asset-header-showcase {
+    .asset-header {
       background: #090a0d;
       color: var(--accent-primary);
-      padding: 1.1rem 1.8rem;
+      padding: 1rem 1.4rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
       border-bottom: 1px solid #2d3444;
       font-family: var(--font-tech);
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       letter-spacing: 2px;
     }
 
     .asset-star-tag {
       background: var(--accent-primary);
       color: #000;
-      padding: 0.2rem 0.7rem;
+      padding: 0.15rem 0.6rem;
       font-family: var(--font-title);
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       letter-spacing: 1px;
       font-weight: bold;
     }
 
-    .asset-body-showcase {
-      padding: clamp(2rem, 4vw, 3rem);
+    .asset-body {
+      padding: clamp(1.5rem, 3vw, 2.2rem);
       display: flex;
       flex-direction: column;
+      flex-grow: 1;
+      justify-content: space-between;
     }
 
-    .asset-title-showcase {
+    .asset-title {
       font-family: var(--font-title);
-      font-size: clamp(3.2rem, 6.5vw, 5rem);
+      font-size: clamp(2.4rem, 4.5vw, 3.4rem);
       color: #ffffff;
       line-height: 0.9;
-      margin-bottom: 0.6rem;
-      letter-spacing: 3px;
+      margin-bottom: 0.5rem;
+      letter-spacing: 2px;
     }
 
-    .asset-tagline-showcase {
+    .asset-tagline {
       font-family: var(--font-typewriter);
-      font-size: 1.3rem;
+      font-size: 1.15rem;
       color: var(--accent-primary);
-      margin-bottom: 1.8rem;
+      margin-bottom: 1.2rem;
       line-height: 1.35;
     }
 
-    .asset-features-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1rem;
-      margin-bottom: 2rem;
-    }
-
-    .feature-point {
-      background: #0a0b0f;
-      border: 1px solid #262c3a;
-      border-left: 3px solid var(--accent-secondary);
-      padding: 0.9rem 1.2rem;
-      font-family: var(--font-tech);
-      font-size: 1.05rem;
-      color: #c9d2e0;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-
-    .feature-point span {
-      color: var(--accent-primary);
+    .asset-desc {
       font-size: 1.1rem;
-    }
-
-    .asset-desc-showcase {
-      font-size: 1.18rem;
       color: #a3acbd;
-      line-height: 1.65;
-      margin-bottom: 2.5rem;
+      line-height: 1.6;
+      margin-bottom: 1.8rem;
     }
 
-    .asset-footer-showcase {
+    .asset-footer {
       border-top: 1px dashed #2d3444;
-      padding-top: 2rem;
+      padding-top: 1.4rem;
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
+    .asset-devlog-section {
+      border-top: 1px solid #2d3444;
+      background: #0b0d12;
+    }
+
+    .asset-devlog-toggle {
+      width: 100%;
+      background: #0e1117;
+      color: var(--accent-primary);
+      border: none;
+      padding: 0.9rem 1.4rem;
+      font-family: var(--font-title);
+      font-size: 1.2rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.15s ease;
+      touch-action: manipulation;
+    }
+
+    .asset-devlog-toggle:hover {
+      background: #171b24;
+      color: #fff;
+    }
+
+    .asset-devlog-content {
+      display: none;
+      padding: 1.4rem;
+      border-top: 1px dashed #282f3d;
+    }
+
+    .asset-devlog-content.active {
+      display: block;
+    }
+
     /* ==========================================================================
-       FOOTER (BÚNKER INDUSTRIAL)
+       PESTAÑA 4: EQUIPO (CREW / OPERATIVOS)
+       ========================================================================== */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+
+    .team-card {
+      background: var(--bg-surface);
+      border: 1px solid #2a3140;
+      box-shadow: var(--grunge-shadow-heavy);
+      padding: 1.8rem;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 15px, 100% 100%, 0 100%);
+    }
+
+    .team-header {
+      display: flex;
+      gap: 1.4rem;
+      align-items: center;
+      margin-bottom: 1.2rem;
+      border-bottom: 1px dashed #2d3545;
+      padding-bottom: 1.2rem;
+    }
+
+    .team-avatar {
+      width: 110px;
+      height: 110px;
+      flex-shrink: 0;
+      border: 3px solid var(--accent-primary);
+      background: #000;
+      box-shadow: 4px 4px 0px rgba(0,0,0,0.8);
+      overflow: hidden;
+      border-radius: 50%;
+      cursor: pointer;
+      position: relative;
+      transition: transform 0.15s ease, border-color 0.15s ease;
+      touch-action: manipulation;
+    }
+
+    .team-avatar:hover {
+      transform: scale(1.06);
+      border-color: var(--accent-primary-hover);
+    }
+
+    .team-avatar::after {
+      content: '🔍';
+      position: absolute;
+      bottom: 4px;
+      right: 4px;
+      font-size: 0.75rem;
+      background: rgba(0, 0, 0, 0.85);
+      padding: 2px 5px;
+      border: 1px solid var(--accent-primary);
+      border-radius: 50%;
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .team-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .team-info h3 {
+      font-family: var(--font-title);
+      font-size: 2rem;
+      color: #fff;
+      line-height: 0.95;
+      margin-bottom: 0.4rem;
+      letter-spacing: 1.5px;
+    }
+
+    .team-role {
+      display: inline-block;
+      background: #000;
+      color: var(--accent-primary);
+      font-family: var(--font-tech);
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      padding: 0.25rem 0.65rem;
+      text-transform: uppercase;
+      border: 1px solid var(--accent-primary);
+    }
+
+    .team-bio {
+      font-size: 1.1rem;
+      color: #a4adbd;
+      line-height: 1.55;
+    }
+
+    /* ==========================================================================
+       MODAL LIGHTBOX (SURVEILLANCE HUD)
+       ========================================================================== */
+    .lightbox-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(5, 6, 8, 0.92);
+      z-index: 99999;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      backdrop-filter: blur(5px);
+    }
+
+    .lightbox-modal.active {
+      display: flex;
+      animation: grungeAppear 0.18s ease-out forwards;
+    }
+
+    .lightbox-content {
+      background: var(--bg-surface);
+      border: 2px solid var(--accent-primary);
+      box-shadow: 0 0 30px rgba(0,0,0,0.9), 10px 10px 0px #000000;
+      max-width: 90vw;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
+    }
+
+    .lightbox-header {
+      background: #08090c;
+      color: var(--accent-primary);
+      padding: 0.8rem 1.4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-title);
+      font-size: 1.4rem;
+      letter-spacing: 2px;
+      border-bottom: 1px solid #282f3d;
+      gap: 1rem;
+    }
+
+    .lightbox-close-btn {
+      background: var(--accent-rust);
+      color: #ffffff;
+      border: none;
+      font-family: var(--font-title);
+      font-size: 1.15rem;
+      letter-spacing: 1px;
+      padding: 0.35rem 0.9rem;
+      cursor: pointer;
+      text-transform: uppercase;
+      clip-path: polygon(5px 0, 100% 0, 100% calc(100% - 5px), calc(100% - 5px) 100%, 0 100%, 0 5px);
+      transition: background 0.12s ease;
+      touch-action: manipulation;
+    }
+
+    .lightbox-close-btn:hover {
+      background: var(--accent-rust-hover);
+    }
+
+    .lightbox-img-wrapper {
+      padding: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #000;
+      max-height: calc(85vh - 65px);
+      overflow: auto;
+    }
+
+    .lightbox-img-wrapper img {
+      max-width: 100%;
+      max-height: 70vh;
+      object-fit: contain;
+      display: block;
+      box-shadow: 0 0 20px rgba(0,0,0,0.8);
+      border: 1px solid #232833;
+    }
+
+    /* ==========================================================================
+       FOOTER & DOCK DE REDES SOCIALES
        ========================================================================== */
     .main-footer {
       background: #060709;
       border-top: 2px solid #1a1e27;
-      padding: 50px 0 35px 0;
+      padding: 45px 0 calc(35px + env(safe-area-inset-bottom)) 0;
       text-align: center;
       margin-top: auto;
       position: relative;
@@ -1209,7 +1446,13 @@
       align-items: center;
       justify-content: center;
       overflow: hidden;
-      clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+      border-radius: 50%;
+      cursor: pointer;
+      transition: transform 0.15s ease;
+    }
+
+    .footer-logo-center:hover {
+      transform: scale(1.08);
     }
 
     .footer-logo-center img {
@@ -1229,128 +1472,189 @@
 
     .footer-quote {
       font-family: var(--font-tech);
-      font-size: 1rem;
+      font-size: 0.95rem;
       letter-spacing: 2px;
       color: #727c8e;
       max-width: 650px;
       margin: 0 auto 1.5rem auto;
       text-transform: uppercase;
       line-height: 1.4;
+      padding: 0 1rem;
     }
 
+    /* DOCK SOCIAL COMPACTO (6 ICONOS) */
     .social-links-bar {
-      display: flex;
+      display: inline-flex;
       justify-content: center;
-      gap: 1.2rem;
-      margin: 2rem 0;
+      align-items: center;
+      gap: 0.75rem;
+      margin: 1.5rem auto 1.2rem auto;
+      padding: 0.5rem 0.8rem;
+      background: #0d0f14;
+      border: 1px solid #232833;
+      box-shadow: inset 0 0 12px rgba(0,0,0,0.8), 3px 3px 0px #000;
       flex-wrap: wrap;
     }
 
-    .social-btn {
+    .social-icon-btn {
       display: inline-flex;
       align-items: center;
-      gap: 0.6rem;
-      background: #11141b;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      background: #141720;
       color: #b5bfd1;
-      border: 1px solid #2a3140;
-      padding: 0.6rem 1.4rem;
-      font-family: var(--font-tech);
-      font-size: 0.95rem;
-      letter-spacing: 1.5px;
+      border: 1px solid #2b3342;
       text-decoration: none;
-      text-transform: uppercase;
-      transition: all 0.12s ease;
+      transition: all 0.15s ease;
       cursor: pointer;
       clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
+      touch-action: manipulation;
     }
 
-    .social-btn:hover {
+    .social-icon-btn:hover {
       background: var(--accent-primary);
       color: #000;
       border-color: var(--accent-primary);
       transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(217, 150, 55, 0.35);
     }
 
-    .social-btn svg {
-      width: 18px;
-      height: 18px;
+    .social-icon-btn:active {
+      transform: translateY(1px);
+    }
+
+    .social-icon-btn svg {
+      width: 22px;
+      height: 22px;
       fill: currentColor;
+      transition: transform 0.15s ease;
     }
 
-    .social-btn.is-disabled {
-      opacity: 0.65;
-      cursor: default;
-    }
-
-    .social-btn.is-disabled:hover {
-      background: #11141b;
-      color: #b5bfd1;
-      border-color: #2a3140;
-      transform: none;
-    }
-
-    .badge-soon {
-      background: var(--accent-rust);
-      color: #ffffff;
-      font-size: 0.7rem;
-      padding: 0.15rem 0.5rem;
-      letter-spacing: 1px;
-      margin-left: 0.3rem;
+    .social-icon-btn:hover svg {
+      transform: scale(1.15);
     }
 
     .footer-legal {
       font-size: 0.95rem;
       color: #555c6b;
-      margin-top: 1.5rem;
+      margin-top: 1.2rem;
+      padding: 0 1rem;
     }
 
     /* ==========================================================================
-       MEDIA QUERIES
+       MEDIA QUERIES (RESPONSIVE MÓVILES Y TABLETS)
        ========================================================================== */
     @media (max-width: 992px) {
-      .studio-grid {
+      .studio-grid,
+      .team-grid,
+      .assets-grid-2cols {
         grid-template-columns: 1fr;
-        gap: 2.5rem;
+        gap: 2.2rem;
       }
 
-      .asset-features-grid,
       .devlog-gallery-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
       }
     }
 
     @media (max-width: 768px) {
+      .container {
+        padding: 0 1rem;
+      }
+
       .navbar {
         height: auto;
-        padding: 0.8rem 0;
+        padding: 0.6rem 0;
         flex-wrap: wrap;
       }
 
+      .logo-title {
+        font-size: 1.6rem;
+      }
+
       .tabs-list {
-        justify-content: stretch;
+        padding-bottom: 0.4rem;
       }
 
       .tab-label {
-        flex: 1;
-        text-align: center;
-        justify-content: center;
-        padding: 0.7rem 0.6rem;
-        font-size: 1.05rem;
+        padding: 0.65rem 1.1rem;
+        font-size: 1.1rem;
+      }
+
+      .tab-label .menu-cursor {
+        display: none;
       }
 
       .comic-btn {
         width: 100%;
       }
 
-      .social-links-bar {
+      .action-row {
         flex-direction: column;
-        align-items: stretch;
-        max-width: 320px;
-        margin: 1.5rem auto;
+        gap: 0.9rem;
       }
 
-      .social-btn {
+      .flagship-panel {
+        padding: 2rem 1.2rem;
+      }
+
+      .flagship-stamp {
+        position: static;
+        display: inline-block;
+        transform: none;
+        margin-bottom: 1rem;
+        box-shadow: none;
+      }
+
+      .grunge-tape {
+        right: 15px;
+        font-size: 0.7rem;
+        padding: 0.15rem 0.8rem;
+      }
+
+      .devlog-gallery-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .interaction-bar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .like-btn, .reaction-pill {
         justify-content: center;
+        width: 100%;
+      }
+
+      .social-links-bar {
+        gap: 0.55rem;
+        padding: 0.45rem 0.6rem;
+      }
+
+      .social-icon-btn {
+        width: 44px;
+        height: 44px;
+      }
+
+      .team-avatar {
+        width: 95px;
+        height: 95px;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .logo-sub {
+        display: none;
+      }
+
+      .theme-switch-wrapper {
+        padding: 0.35rem 0.6rem;
+        gap: 0.5rem;
+      }
+
+      .theme-label-txt {
+        font-size: 0.75rem;
       }
     }
   </style>
@@ -1364,16 +1668,16 @@
   <input type="radio" name="site_tabs" id="tab-studio" class="logic-input" checked>
   <input type="radio" name="site_tabs" id="tab-games" class="logic-input">
   <input type="radio" name="site_tabs" id="tab-assets" class="logic-input">
-  <input type="radio" name="site_tabs" id="tab-devlog" class="logic-input">
+  <input type="radio" name="site_tabs" id="tab-team" class="logic-input">
 
   <!-- ==========================================================================
-       HEADER PRINCIPAL
+       HEADER PRINCIPAL CON LOGO REDONDO & MODO GRUNGE
        ========================================================================== -->
   <header class="main-header">
     <div class="hazard-top-bar"></div>
     <div class="container navbar">
-      <label for="tab-studio" class="logo-container" title="Inicio // Tombot Studios">
-        <div class="logo-frame">
+      <label for="tab-studio" class="logo-container" title="Inicio // Tombot Studios" onclick="playUIBeep(520)">
+        <div class="logo-frame" onclick="openImageModal('image.png', 'Tombot Studios Logo'); event.stopPropagation();" title="Ampliar logo">
           <img src="image.png" alt="Tombot Studios Logo">
         </div>
         <div class="logo-text-block">
@@ -1382,38 +1686,38 @@
         </div>
       </label>
 
-      <!-- Interruptor Industrial -->
+      <!-- Interruptor Grunge -->
       <div class="theme-switch-wrapper" title="Alternar entre paleta Rust 80s y Acid Punk 90s">
         <span class="theme-label-txt">MODO GRUNGE</span>
-        <label for="theme-toggle" class="theme-pill-btn"></label>
+        <label for="theme-toggle" class="theme-pill-btn" onclick="playUIBeep(480)"></label>
       </div>
     </div>
   </header>
 
   <!-- ==========================================================================
-       BARRA DE PESTAÑAS (EXPEDIENTE INDIE)
-       ========================================================================== */ -->
+       BARRA DE NAVEGACIÓN (4 PESTAÑAS // DOSSIER MILITAR)
+       ========================================================================== -->
   <nav class="tabs-nav-bar">
     <div class="container">
       <div class="tabs-list">
-        <label for="tab-studio" class="tab-label">
-          <span>01 //</span> EL ESTUDIO
+        <label for="tab-studio" class="tab-label" onclick="playUIBeep(640)">
+          <span class="menu-cursor">►</span> 01 // EL ESTUDIO
         </label>
-        <label for="tab-games" class="tab-label">
-          <span>02 //</span> JUEGOS
+        <label for="tab-games" class="tab-label" onclick="playUIBeep(640)">
+          <span class="menu-cursor">►</span> 02 // JUEGOS
         </label>
-        <label for="tab-assets" class="tab-label">
-          <span>03 //</span> ASSETS UNITY
+        <label for="tab-assets" class="tab-label" onclick="playUIBeep(640)">
+          <span class="menu-cursor">►</span> 03 // ASSETS UNITY
         </label>
-        <label for="tab-devlog" class="tab-label">
-          <span>04 //</span> DEVLOG DCB
+        <label for="tab-team" class="tab-label" onclick="playUIBeep(640)">
+          <span class="menu-cursor">►</span> 04 // EQUIPO
         </label>
       </div>
     </div>
   </nav>
 
   <!-- ==========================================================================
-       CONTENIDO PRINCIPAL
+       CONTENIDO DINÁMICO POR PESTAÑAS
        ========================================================================== -->
   <main>
     <div class="container">
@@ -1424,33 +1728,30 @@
       <section id="panel-studio" class="tab-panel">
         <div class="studio-grid">
           <div class="studio-intro">
-            <span class="studio-badge">ESTUDIO INDIE INDEPENDIENTE // EST. 2025</span>
-            <h1 class="studio-title">
-              TOMBOT <span>STUDIOS</span>
-            </h1>
+            <span class="studio-badge">ESTUDIO INDIE & SERVICIOS DEV // EST. 2025</span>
+            <h1 class="studio-title">TOMBOT STUDIOS</h1>
             
-            <p class="studio-tagline">"Videojuegos crudos, arte gráfico visceral y código abierto a la comunidad"</p>
+            <p class="studio-tagline">"Videojuegos viscerales, herramientas para creadores y servicios de desarrollo independiente"</p>
 
             <div class="newsprint-box">
               <span class="grunge-tape">ARCHIVO #01</span>
               <p>
-                Somos un taller artesanal forjado en el amor por los 16 bits de arcade, el entintado callejero y el diseño de sistemas implacables. Desarrollamos títulos con identidad implacable y creamos herramientas listas para producción en Unity.
+                Somos un taller clandestino forjado en el amor por los 16 bits de arcade, el entintado callejero y la arquitectura técnica sólida. Desarrollamos títulos propios con identidad implacable y brindamos servicios de desarrollo, programación y herramientas especializadas en Unity para otros estudios y creadores independientes.
               </p>
             </div>
 
             <div class="action-row">
-              <label for="tab-games" class="comic-btn">VER JUEGOS DESARROLLADOS ➔</label>
-              <label for="tab-assets" class="comic-btn btn-sec">EXPLORAR ASSETS</label>
+              <label for="tab-games" class="comic-btn" onclick="playUIBeep(700)">VER JUEGOS DESARROLLADOS ➔</label>
+              <label for="tab-assets" class="comic-btn btn-sec" onclick="playUIBeep(700)">EXPLORAR ASSETS</label>
             </div>
           </div>
 
           <div class="studio-card-hq">
-            <!-- LOGO OFICIAL -->
-            <div class="studio-big-logo">
+            <div class="studio-big-logo" onclick="openImageModal('image.png', 'Tombot Studios Logo')" title="Ampliar logo">
               <img src="image.png" alt="Tombot Studios Logo">
             </div>
             <h2 class="studio-motto">TINTA, CÓDIGO Y CAOS</h2>
-            <p style="font-size: 1.05rem; color: #8a95a8; font-family: var(--font-tech);">Desarrollo sin inversores ni ataduras.</p>
+            <p style="font-size: 1.05rem; color: #8a95a8; font-family: var(--font-tech);">Juegos propios y servicios para desarrolladores.</p>
 
             <div class="studio-stats">
               <div class="stat-item">
@@ -1459,34 +1760,33 @@
               </div>
               <div class="stat-item">
                 <h4>URP</h4>
-                <span>ESPECIALISTAS</span>
+                <span>ENGINE</span>
               </div>
               <div class="stat-item">
-                <h4>100%</h4>
-                <span>INDIE</span>
+                <h4>DEV</h4>
+                <span>SERVICES</span>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Manifiesto de Filosofía -->
         <div class="manifesto-box">
-          <span class="manifesto-badge">MANIFIESTO PUNK</span>
+          <span class="manifesto-badge">MANIFIESTO REBELDE</span>
           <h3 class="manifesto-title">FILOSOFÍA: NUNCA DILUIDA, SIEMPRE DESAFIANTE</h3>
           <p class="manifesto-text">
-            Repudiamos los títulos diseñados para engancharte con recompensas automáticas. Nuestros juegos demandan dominio de controles, comprensión espacial y toma de decisiones táctica bajo presión. Cero microtransacciones abusivas.
+            Repudiamos los títulos diseñados para engancharte con recompensas automáticas. Nuestros juegos demandan dominio de controles, comprensión espacial y toma de decisiones táctica bajo presión. Cero microtransacciones abusivas y soporte técnico directo para la comunidad de desarrolladores.
           </p>
         </div>
       </section>
 
       <!-- ====================================================================
-           PESTAÑA 2: JUEGOS (DRUNK CITY BASTARDS)
+           PESTAÑA 2: JUEGOS + DEVLOG DESPLEGABLE
            ==================================================================== -->
       <section id="panel-games" class="tab-panel">
-        <div class="games-single-wrapper">
+        <div class="unified-card-wrapper">
           <article class="flagship-panel">
-            <div class="flagship-stamp">Próximamente en Steam</div>
             <span class="grunge-tape">EXPEDIENTE // DCB-X</span>
+            <div class="flagship-stamp">Próximamente en Steam</div>
 
             <div class="flagship-content">
               <h2 class="flagship-title">DRUNK CITY BASTARDS</h2>
@@ -1507,183 +1807,286 @@
               </div>
 
               <div class="action-row">
-                <a href="https://tombot-studios.itch.io/drunk-city-bastards" target="_blank" rel="noopener noreferrer" class="comic-btn">
+                <a href="https://tombot-studios.itch.io/drunk-city-bastards" target="_blank" rel="noopener noreferrer" class="comic-btn" onclick="playUIBeep(800)">
                   OBTENER EN ITCH.IO ➔
                 </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- ACORDEÓN DESPLEGABLE DE AVANCES Y DEVLOG -->
+          <div class="devlog-accordion">
+            <button class="devlog-accordion-toggle" onclick="toggleDevlogAccordion()">
+              <span>▼ EXPANDIR AVANCES, DEVLOG Y COMMS FEED</span>
+              <span id="accordion-icon">[ + ]</span>
+            </button>
+
+            <div class="devlog-accordion-content" id="devlog-content-box">
+              <div class="devlog-header">
+                <h2 class="devlog-main-title">DRUNK CITY BASTARDS // DEVLOG</h2>
+                <p class="devlog-subtitle">Transmisión de datos, avances visuales y red de comunicaciones</p>
+              </div>
+
+              <h3 class="devlog-gallery-title">LOG VISUAL DE DESARROLLO EN UNITY</h3>
+              <div class="devlog-gallery-grid">
                 
-                <label for="tab-devlog" class="comic-btn btn-sec" style="cursor: pointer;">
-                  VER AVANCES Y DEVLOG ➔
-                </label>
+                <article class="gallery-panel">
+                  <div class="gallery-img-box">
+                    <svg width="55" height="55" viewBox="0 0 24 24" fill="none" stroke="var(--accent-primary)" stroke-width="1.8">
+                      <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                    </svg>
+                    <span class="gallery-label">BUILD 0.4.2</span>
+                  </div>
+                  <p class="gallery-caption">Sistema de iluminación nocturna y volumetría en calles secundarias.</p>
+                </article>
+
+                <article class="gallery-panel">
+                  <div class="gallery-img-box">
+                    <svg width="55" height="55" viewBox="0 0 24 24" fill="none" stroke="var(--accent-secondary)" stroke-width="1.8">
+                      <rect x="3" y="3" width="18" height="18" rx="2"/>
+                      <path d="M3 9h18M9 21V9"/>
+                    </svg>
+                    <span class="gallery-label">GRID-COMBAT</span>
+                  </div>
+                  <p class="gallery-caption">Integración de la cuadrícula táctica y cálculo de coberturas reactivas.</p>
+                </article>
+
+                <article class="gallery-panel">
+                  <div class="gallery-img-box">
+                    <svg width="55" height="55" viewBox="0 0 24 24" fill="none" stroke="var(--accent-rust)" stroke-width="1.8">
+                      <circle cx="12" cy="12" r="10"/>
+                      <path d="M8 12h8M12 8v8"/>
+                    </svg>
+                    <span class="gallery-label">ENEMIES AI</span>
+                  </div>
+                  <p class="gallery-caption">Modelado de autómatas defectuosos y patrullas con IA sensorial.</p>
+                </article>
+
               </div>
-            </div>
-          </article>
-        </div>
-      </section>
 
-      <!-- ====================================================================
-           PESTAÑA 4: DEVLOG DCB
-           ==================================================================== -->
-      <section id="panel-devlog" class="tab-panel">
-        <div class="devlog-wrapper">
+              <article class="devlog-post">
+                <span class="grunge-tape">LOG #03 // TRANSMISIÓN</span>
+                <span class="post-badge">ACTUALIZACIÓN #03 // DEVLOG</span>
+                <h3 class="post-title">CÓMO EQUILIBRAMOS EL SIGILO Y LA ACCIÓN BRUTAL</h3>
+                <div class="post-meta">Transmisión de Tombot Studios // Octubre 2026</div>
+                
+                <p class="post-body">
+                  En las últimas semanas hemos rediseñado por completo el sistema de conos de visión y rango de escucha de las hordas enemigas. Nuestro objetivo en <em>Drunk City Bastards</em> no es forzarte a un sigilo pasivo donde esperas 10 minutos en una esquina, sino darte herramientas para que el sigilo sea rápido y tenso.
+                </p>
 
-          <div class="devlog-header">
-            <div>
-              <h2 class="devlog-main-title">DRUNK CITY BASTARDS // DEVLOG</h2>
-              <p class="devlog-subtitle">Bitácora de producción, avances visuales y comunidad</p>
-            </div>
-            <label for="tab-games" class="comic-btn btn-sec" style="padding: 0.5rem 1.2rem; font-size: 1.1rem; cursor: pointer;">
-              ← VOLVER A JUEGOS
-            </label>
-          </div>
-
-          <!-- Galería de Avances / Wireframe HUD -->
-          <h3 class="devlog-gallery-title">AVANCES DE DESARROLLO EN UNITY</h3>
-          <div class="devlog-gallery-grid">
-            
-            <article class="gallery-panel">
-              <div class="gallery-img-box">
-                <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="var(--accent-primary)" stroke-width="1.8">
-                  <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                </svg>
-                <span class="gallery-label">BUILD 0.4.2</span>
-              </div>
-              <p class="gallery-caption">Sistema de iluminación nocturna y volumetría en calles secundarias.</p>
-            </article>
-
-            <article class="gallery-panel">
-              <div class="gallery-img-box">
-                <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="var(--accent-secondary)" stroke-width="1.8">
-                  <rect x="3" y="3" width="18" height="18" rx="2"/>
-                  <path d="M3 9h18M9 21V9"/>
-                </svg>
-                <span class="gallery-label">COMBATE</span>
-              </div>
-              <p class="gallery-caption">Integración de la cuadrícula táctica y cálculo de coberturas reactivas.</p>
-            </article>
-
-            <article class="gallery-panel">
-              <div class="gallery-img-box">
-                <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="var(--accent-rust)" stroke-width="1.8">
-                  <circle cx="12" cy="12" r="10"/>
-                  <path d="M8 12h8M12 8v8"/>
-                </svg>
-                <span class="gallery-label">ENEMIGOS</span>
-              </div>
-              <p class="gallery-caption">Modelado de autómatas defectuosos y patrullas de guardia con IA sensorial.</p>
-            </article>
-
-          </div>
-
-          <!-- Entrada de Bitácora -->
-          <article class="devlog-post">
-            <span class="grunge-tape">LOG #03 // TRANSMISIÓN</span>
-            <span class="post-badge">ACTUALIZACIÓN #03 // DEVLOG</span>
-            <h3 class="post-title">CÓMO EQUILIBRAMOS EL SIGILO Y LA ACCIÓN BRUTAL</h3>
-            <div class="post-meta">Publicado por Tombot Studios // Octubre 2026 // Categoría: Gameplay & Sistemas</div>
-            
-            <p class="post-body">
-              En las últimas semanas hemos rediseñado por completo el sistema de conos de visión y rango de escucha de las hordas enemigas. Nuestro objetivo en <em>Drunk City Bastards</em> no es forzarte a un sigilo pasivo donde esperas 10 minutos en una esquina, sino darte herramientas para que el sigilo sea rápido, tenso y se sienta como una cacería callejera. Si cometes un error y alertan al campamento, el combate en tercera persona te obligará a usar el entorno, romper coberturas y abrirte paso con lo que tengas en el inventario.
-            </p>
-
-            <!-- Reacciones -->
-            <div class="interaction-bar">
-              <button class="like-btn" id="dcb-like-btn" onclick="toggleLike()">
-                <span>❤</span> <span id="like-text">ME GUSTA</span> (<span id="like-count">34</span>)
-              </button>
-
-              <button class="reaction-pill" onclick="addReaction('fire')">🔥 CAOS <span id="react-fire">12</span></button>
-              <button class="reaction-pill" onclick="addReaction('drink')">🍺 RESACA <span id="react-drink">19</span></button>
-              <button class="reaction-pill" onclick="addReaction('skull')">💀 TÁCTICA <span id="react-skull">8</span></button>
-            </div>
-          </article>
-
-          <!-- Comentarios -->
-          <div class="comments-wrapper">
-            <h3 class="comments-header-title">COMENTARIOS Y FEEDBACK DE LA COMUNIDAD</h3>
-            <p style="font-family: var(--font-tech); font-size: 1.05rem; color: #8995aa;">
-              Déjanos tus ideas, sugerencias y opiniones sobre los avances del juego. Leemos cada mensaje.
-            </p>
-
-            <form class="comment-form" id="comment-form" onsubmit="postComment(event)">
-              <input type="text" id="comment-author" class="comment-input" placeholder="Tu Nombre / Alias gamer..." required maxlength="40">
-              <textarea id="comment-msg" class="comment-textarea" placeholder="Escribe tu opinión, feedback o pregunta sobre Drunk City Bastards..." required maxlength="300"></textarea>
-              <button type="submit" class="comic-btn" style="align-self: flex-start;">
-                PUBLICAR COMENTARIO ➔
-              </button>
-            </form>
-
-            <div class="comments-feed" id="comments-feed">
-              <div class="comment-card">
-                <div class="comment-card-head">
-                  <span class="comment-author">NEXUS_TACTICAL</span>
-                  <span class="comment-date">Ayer, 18:40</span>
+                <div class="interaction-bar">
+                  <button class="like-btn" id="dcb-like-btn" onclick="toggleLike()">
+                    <span>❤</span> <span id="like-text">ME GUSTA</span> (<span id="like-count">34</span>)
+                  </button>
+                  <button class="reaction-pill" onclick="addReaction('fire')">🔥 CAOS <span id="react-fire">12</span></button>
+                  <button class="reaction-pill" onclick="addReaction('drink')">🍺 RESACA <span id="react-drink">19</span></button>
                 </div>
-                <p class="comment-msg">El arte con colores opacos y la estética de novela gráfica le da una personalidad tremenda. Ojalá metan más opciones de armas improvisadas en los callejones.</p>
-              </div>
+              </article>
 
-              <div class="comment-card">
-                <div class="comment-card-head">
-                  <span class="comment-author">DEV_PUNK</span>
-                  <span class="comment-date">Hace 2 días</span>
+              <div class="comments-wrapper">
+                <h3 class="comments-header-title">COMMS FEED // OPINIONES</h3>
+                <form class="comment-form" onsubmit="postComment(event)">
+                  <input type="text" id="comment-author" class="comment-input" placeholder="Tu Alias..." required maxlength="40">
+                  <textarea id="comment-msg" class="comment-textarea" placeholder="Escribe tu feedback..." required maxlength="300"></textarea>
+                  <button type="submit" class="comic-btn" onclick="playUIBeep(740)">ENVIAR TRANSMISIÓN ➔</button>
+                </form>
+                <div class="comments-feed" id="comments-feed">
+                  <div class="comment-card">
+                    <div class="comment-card-head">
+                      <span class="comment-author">NEXUS_TACTICAL</span>
+                      <span class="comment-date">Ayer, 18:40</span>
+                    </div>
+                    <p class="comment-msg">¡El arte tiene una personalidad tremenda!</p>
+                  </div>
                 </div>
-                <p class="comment-msg">Me encanta que la transición de sigilo a combate sea rápida y sin pantallas de carga. Ya quiero ver la build jugable en Steam.</p>
               </div>
             </div>
-
           </div>
 
         </div>
       </section>
 
       <!-- ====================================================================
-           PESTAÑA 3: ASSETS & TOOLS (QeController)
+           PESTAÑA 3: ASSETS (QeController + EC Tombot Hub system)
            ==================================================================== -->
       <section id="panel-assets" class="tab-panel">
-        <div class="assets-single-wrapper">
+        <div class="unified-card-wrapper">
           <div class="assets-intro-bar">
-            <span class="assets-intro-badge">HERRAMIENTA OFICIAL PARA DESARROLLADORES</span>
+            <span class="assets-intro-badge">EQUIPAMIENTO PARA DESARROLLADORES EN UNITY</span>
             <p class="assets-intro-title">
-              Controlador de personaje modular y arquitectura desacoplada lista para producción en Unity C#
+              Frameworks de movimiento, UI modular y sistemas avanzados optimizados en C#
             </p>
           </div>
 
-          <article class="asset-featured-showcase">
-            <span class="grunge-tape">STABLE BUILD // C#</span>
-            <div class="asset-header-showcase">
-              <span>UNITY PACKAGE // C# FRAMEWORK</span>
-              <span class="asset-star-tag">★ TOOL PRINCIPAL</span>
-            </div>
+          <div class="assets-grid-2cols">
             
-            <div class="asset-body-showcase">
-              <h3 class="asset-title-showcase">QeController</h3>
-              <p class="asset-tagline-showcase">CharacterController integral para perspectiva isométrica y tercera persona</p>
-
-              <div class="asset-features-grid">
-                <div class="feature-point">
-                  <span>▶</span> Máquina de Estados (FSM) Desacoplada
+            <!-- ASSET 1: QeController -->
+            <article class="asset-card">
+              <span class="grunge-tape">STABLE BUILD</span>
+              <div class="asset-header">
+                <span>UNITY PACKAGE // C#</span>
+                <span class="asset-star-tag">★ TOOL</span>
+              </div>
+              <div class="asset-body">
+                <div>
+                  <h3 class="asset-title">QeController</h3>
+                  <p class="asset-tagline">CharacterController Isométrico y 3ª Persona</p>
+                  <p class="asset-desc">
+                    Framework modular basado en FSM para resolver locomoción fluida, transiciones de combate y giros de cámara con soporte para el nuevo Input System.
+                  </p>
                 </div>
-                <div class="feature-point">
-                  <span>▶</span> Soporte nativo para New Input System
-                </div>
-                <div class="feature-point">
-                  <span>▶</span> Locomoción fluida y giros de cámara suaves
-                </div>
-                <div class="feature-point">
-                  <span>▶</span> Inspector modular fácil de configurar y extender
+                <div class="asset-footer">
+                  <a href="https://tombot-studios.itch.io/httpsalive-noise-e5dnotionsiteqecontroller-manual-de-desarrollador-2db4af2" target="_blank" rel="noopener noreferrer" class="comic-btn" onclick="playUIBeep(800)">
+                    DESCARGAR ➔
+                  </a>
                 </div>
               </div>
 
-              <p class="asset-desc-showcase">
-                QeController es un framework diseñado para resolver el movimiento, control y transiciones de estados de personajes en juegos de acción, aventura y sigilo. Construido con buenas prácticas en C#, evita dependencias monolíticas y permite vincular armas, saltos, coberturas y eventos sin tocar la lógica central del controlador.
+              <div class="asset-devlog-section">
+                <button class="asset-devlog-toggle" onclick="toggleAssetDevlog('qecontroller')">
+                  <span>▼ DEVLOG & FEEDBACK</span>
+                  <span id="asset-icon-qecontroller">[ + ]</span>
+                </button>
+                <div class="asset-devlog-content" id="asset-box-qecontroller">
+                  <h4 style="font-family: var(--font-title); font-size: 1.4rem; color: var(--accent-primary); margin-bottom: 0.4rem; letter-spacing: 1px;">QeController // Bitácora</h4>
+                  <p style="font-size: 0.95rem; color: #8e98a8; margin-bottom: 0.9rem;">Actualización técnica y soporte para desarrolladores.</p>
+                  
+                  <form class="comment-form" onsubmit="postAssetComment(event, 'qecontroller')">
+                    <input type="text" id="author-qecontroller" class="comment-input" placeholder="Tu Alias..." required maxlength="30">
+                    <textarea id="msg-qecontroller" class="comment-textarea" placeholder="Reporte de bug o duda..." required maxlength="200"></textarea>
+                    <button type="submit" class="comic-btn" style="min-height: 42px; font-size: 1.1rem; padding: 0.5rem 1.2rem;" onclick="playUIBeep(700)">ENVIAR FEEDBACK</button>
+                  </form>
+                  <div class="comments-feed" id="feed-qecontroller"></div>
+                </div>
+              </div>
+            </article>
+
+            <!-- ASSET 2: EC Tombot Hub system -->
+            <article class="asset-card">
+              <span class="grunge-tape">NUEVO LANZAMIENTO</span>
+              <div class="asset-header">
+                <span>UI FRAMEWORK // AAA</span>
+                <span class="asset-star-tag">★ DESTACADO</span>
+              </div>
+              <div class="asset-body">
+                <div>
+                  <h3 class="asset-title">EC Tombot Hub system</h3>
+                  <p class="asset-tagline">Survival & Action Master Tab Menu System (RE4 Style)</p>
+                  <p class="asset-desc">
+                    Sistema modular de menús por pestañas estilo Resident Evil 4. Incluye inventario en cuadrícula con rotación de ítems, mapa táctico con Live Feed y configuración One-Click Setup.
+                  </p>
+                </div>
+                <div class="asset-footer">
+                  <a href="https://tombot-studios.itch.io" target="_blank" rel="noopener noreferrer" class="comic-btn btn-sec" onclick="playUIBeep(800)">
+                    MÁS INFORMACIÓN ➔
+                  </a>
+                </div>
+              </div>
+
+              <div class="asset-devlog-section">
+                <button class="asset-devlog-toggle" onclick="toggleAssetDevlog('tombothub')">
+                  <span>▼ DEVLOG & FEEDBACK</span>
+                  <span id="asset-icon-tombothub">[ + ]</span>
+                </button>
+                <div class="asset-devlog-content" id="asset-box-tombothub">
+                  <h4 style="font-family: var(--font-title); font-size: 1.4rem; color: var(--accent-primary); margin-bottom: 0.4rem; letter-spacing: 1px;">Tombot Hub // Bitácora</h4>
+                  <p style="font-size: 0.95rem; color: #8e98a8; margin-bottom: 0.9rem;">Notas de parche e instalación One-Click.</p>
+                  
+                  <form class="comment-form" onsubmit="postAssetComment(event, 'tombothub')">
+                    <input type="text" id="author-tombothub" class="comment-input" placeholder="Tu Alias..." required maxlength="30">
+                    <textarea id="msg-tombothub" class="comment-textarea" placeholder="Reporte de bug o duda..." required maxlength="200"></textarea>
+                    <button type="submit" class="comic-btn" style="min-height: 42px; font-size: 1.1rem; padding: 0.5rem 1.2rem;" onclick="playUIBeep(700)">ENVIAR FEEDBACK</button>
+                  </form>
+                  <div class="comments-feed" id="feed-tombothub"></div>
+                </div>
+              </div>
+            </article>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           PESTAÑA 4: EQUIPO (CREW / OPERATIVOS)
+           ==================================================================== -->
+      <section id="panel-team" class="tab-panel">
+        <div class="unified-card-wrapper">
+          <div class="assets-intro-bar">
+            <span class="assets-intro-badge">TALENTO CLAVE // CREW</span>
+            <p class="assets-intro-title">El equipo detrás de la tinta, el código y el caos</p>
+          </div>
+
+          <div class="team-grid">
+            
+            <!-- MIEMBRO 1 -->
+            <article class="team-card">
+              <span class="grunge-tape">OPERATIVO 01</span>
+              <div class="team-header">
+                <div class="team-avatar" onclick="openImageModal('nazj.png', 'Andres Zavala')" title="Clic para ampliar retrato">
+                  <img src="nazj.png" alt="Andres Zavala" onerror="this.src='image.png'">
+                </div>
+                <div class="team-info">
+                  <h3>Andres Zavala</h3>
+                  <span class="team-role">Lead Developer & Game Director</span>
+                </div>
+              </div>
+              <p class="team-bio">
+                Arquitecto de sistemas de juego y director creativo. Encargado de la programación central en C#, diseño de mecánicas y la estructura técnica de los proyectos del estudio.
               </p>
+            </article>
 
-              <div class="asset-footer-showcase">
-                <a href="https://tombot-studios.itch.io/httpsalive-noise-e5dnotionsiteqecontroller-manual-de-desarrollador-2db4af2" target="_blank" rel="noopener noreferrer" class="comic-btn">
-                  DESCARGAR UNITYPACKAGE ➔
-                </a>
+            <!-- MIEMBRO 2 -->
+            <article class="team-card">
+              <span class="grunge-tape">OPERATIVO 02</span>
+              <div class="team-header">
+                <div class="team-avatar" onclick="openImageModal('efb.png', 'Erendira Flores')" title="Clic para ampliar retrato">
+                  <img src="efb.png" alt="Erendira Flores" onerror="this.src='image.png'">
+                </div>
+                <div class="team-info">
+                  <h3>Erendira Flores</h3>
+                  <span class="team-role">Marketing & Publishing Director</span>
+                </div>
               </div>
-            </div>
-          </article>
+              <p class="team-bio">
+                Estratega de posicionamiento de marca y relaciones comerciales. Dirige la distribución global, campañas de lanzamiento y expansión comercial de los títulos.
+              </p>
+            </article>
+
+            <!-- MIEMBRO 3 -->
+            <article class="team-card">
+              <span class="grunge-tape">OPERATIVO 03</span>
+              <div class="team-header">
+                <div class="team-avatar" onclick="openImageModal('duzf.png', 'Dante Zavala')" title="Clic para ampliar retrato">
+                  <img src="duzf.png" alt="Dante Zavala" onerror="this.src='image.png'">
+                </div>
+                <div class="team-info">
+                  <h3>Dante Zavala</h3>
+                  <span class="team-role">Lead Artist & Audio Director</span>
+                </div>
+              </div>
+              <p class="team-bio">
+                Visionario del apartado visual y sonoro. Da vida a los mundos decadentes del estudio mediante dirección de arte, diseño gráfico estilo cómic y composición musical inmersiva.
+              </p>
+            </article>
+
+            <!-- MIEMBRO 4 -->
+            <article class="team-card">
+              <span class="grunge-tape">OPERATIVO 04</span>
+              <div class="team-header">
+                <div class="team-avatar" onclick="openImageModal('semf.png', 'Saul Flores')" title="Clic para ampliar retrato">
+                  <img src="semf.png" alt="Saul Flores" onerror="this.src='image.png'">
+                </div>
+                <div class="team-info">
+                  <h3>Saul Flores</h3>
+                  <span class="team-role">Community Manager & Social Media Lead</span>
+                </div>
+              </div>
+              <p class="team-bio">
+                Enlace directo con la comunidad de jugadores y desarrolladores. Coordina la comunicación en redes sociales, devlogs y la difusión de actualizaciones en tiempo real.
+              </p>
+            </article>
+
+          </div>
         </div>
       </section>
 
@@ -1691,13 +2094,28 @@
   </main>
 
   <!-- ==========================================================================
-       FOOTER
+       MODAL LIGHTBOX (SURVEILLANCE HUD)
+       ========================================================================== -->
+  <div id="image-lightbox-modal" class="lightbox-modal" onclick="closeImageModal(event)">
+    <div class="lightbox-content" onclick="event.stopPropagation()">
+      <div class="lightbox-header">
+        <span id="lightbox-title">SURVEILLANCE CAM // RETRATO EXPANDIDO</span>
+        <button class="lightbox-close-btn" onclick="closeImageModal()">[ X ] CERRAR</button>
+      </div>
+      <div class="lightbox-img-wrapper">
+        <img id="lightbox-img" src="" alt="Imagen Ampliada">
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       FOOTER CON LOGO REDONDO & DOCK SOCIAL (6 ICONOS)
        ========================================================================== -->
   <footer class="main-footer">
     <div class="footer-hazard-stripe"></div>
     <div class="container">
       
-      <div class="footer-logo-center">
+      <div class="footer-logo-center" onclick="openImageModal('image.png', 'Tombot Studios Logo')" title="Ampliar logo">
         <img src="image.png" alt="Tombot Studios Logo">
       </div>
       
@@ -1707,28 +2125,39 @@
         FORJADO CON CAFÉ NEGRO, CÓDIGO BRUTAL Y ORGULLO INDEPENDIENTE.
       </p>
 
-      <div class="social-links-bar">
-        <a href="https://www.instagram.com/tombotstudios/" target="_blank" rel="noopener noreferrer" class="social-btn" title="Síguenos en Instagram">
-          <svg viewBox="0 0 24 24">
-            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-          </svg>
-          INSTAGRAM
+      <!-- DOCK SOCIAL (6 ICONOS CON FORMATO TÁCTICO) -->
+      <div class="social-links-bar" role="navigation" aria-label="Redes Sociales Oficiales">
+        
+        <!-- INSTAGRAM -->
+        <a href="https://www.instagram.com/tombotstudios/" target="_blank" rel="noopener noreferrer" class="social-icon-btn" title="Instagram Oficial" aria-label="Instagram" onclick="playUIBeep(550)">
+          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
         </a>
 
-        <a href="https://www.facebook.com/profile.php?id=61569450278114" target="_blank" rel="noopener noreferrer" class="social-btn" title="Síguenos en Facebook">
-          <svg viewBox="0 0 24 24">
-            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-          </svg>
-          FACEBOOK
+        <!-- FACEBOOK -->
+        <a href="https://www.facebook.com/profile.php?id=61569450278114" target="_blank" rel="noopener noreferrer" class="social-icon-btn" title="Facebook Oficial" aria-label="Facebook" onclick="playUIBeep(550)">
+          <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
         </a>
 
-        <div class="social-btn is-disabled" title="Canal de TikTok de Tombot Studios (Próximamente)">
-          <svg viewBox="0 0 24 24">
-            <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.24 1.07-.14 1.61.24 1.16 1.18 2.09 2.35 2.3 1.05.21 2.22-.07 2.99-.81.65-.62.99-1.49 1.01-2.37.03-4.14.01-8.28.02-12.42V.02z"/>
-          </svg>
-          TIKTOK
-          <span class="badge-soon">PRÓXIMAMENTE</span>
-        </div>
+        <!-- TIKTOK -->
+        <a href="https://www.tiktok.com/@tombotstudios" target="_blank" rel="noopener noreferrer" class="social-icon-btn" title="TikTok Oficial" aria-label="TikTok" onclick="playUIBeep(550)">
+          <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.24 1.07-.14 1.61.24 1.16 1.18 2.09 2.35 2.3 1.05.21 2.22-.07 2.99-.81.65-.62.99-1.49 1.01-2.37.03-4.14.01-8.28.02-12.42V.02z"/></svg>
+        </a>
+
+        <!-- YOUTUBE -->
+        <a href="https://www.youtube.com/@TombotStudios" target="_blank" rel="noopener noreferrer" class="social-icon-btn" title="Canal Oficial de YouTube" aria-label="YouTube" onclick="playUIBeep(550)">
+          <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        </a>
+
+        <!-- EMAIL -->
+        <a href="mailto:tombotstudios@gmail.com" class="social-icon-btn" title="Contacto vía Email" aria-label="Gmail" onclick="playUIBeep(550)">
+          <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-8V6l8 5 8-5v2z"/></svg>
+        </a>
+
+        <!-- WHATSAPP -->
+        <a href="https://wa.me/523336827305" target="_blank" rel="noopener noreferrer" class="social-icon-btn" title="WhatsApp Oficial (+52 3336827305)" aria-label="WhatsApp" onclick="playUIBeep(550)">
+          <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+        </a>
+
       </div>
 
       <p class="footer-legal">
@@ -1738,10 +2167,89 @@
   </footer>
 
   <!-- ==========================================================================
-       SCRIPTS (PERSISTENCIA Y REACTIVIDAD)
+       SCRIPTS (WEB AUDIO, LIGHTBOX, ACCORDIONS Y PERSISTENCIA)
        ========================================================================== -->
   <script>
-    // 1. Manejo del Like principal
+    let sfxEnabled = true;
+    let audioCtx = null;
+
+    // Sintetizador Web Audio API vintage/industrial
+    function playUIBeep(freq = 580) {
+      if (!sfxEnabled) return;
+      try {
+        if (!audioCtx) {
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'square';
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(freq * 0.5, audioCtx.currentTime + 0.05);
+        
+        gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.05);
+        
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.05);
+      } catch (e) {}
+    }
+
+    // Modal Lightbox táctico
+    function openImageModal(src, title) {
+      playUIBeep(650);
+      const modal = document.getElementById('image-lightbox-modal');
+      const img = document.getElementById('lightbox-img');
+      const titleElem = document.getElementById('lightbox-title');
+      img.src = src;
+      titleElem.textContent = title ? 'SURVEILLANCE CAM // ' + title.toUpperCase() : 'SURVEILLANCE CAM // RETRATO EXPANDIDO';
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeImageModal(e) {
+      playUIBeep(450);
+      const modal = document.getElementById('image-lightbox-modal');
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeImageModal();
+    });
+
+    // Acordeón Devlog en Juegos
+    function toggleDevlogAccordion() {
+      playUIBeep(650);
+      const content = document.getElementById('devlog-content-box');
+      const icon = document.getElementById('accordion-icon');
+      content.classList.toggle('active');
+      if (content.classList.contains('active')) {
+        icon.textContent = '[ - ]';
+      } else {
+        icon.textContent = '[ + ]';
+      }
+    }
+
+    // Acordeón independiente para cada Asset
+    function toggleAssetDevlog(assetId) {
+      playUIBeep(600);
+      const content = document.getElementById('asset-box-' + assetId);
+      const icon = document.getElementById('asset-icon-' + assetId);
+      content.classList.toggle('active');
+      if (content.classList.contains('active')) {
+        icon.textContent = '[ - ]';
+        loadAssetComments(assetId);
+      } else {
+        icon.textContent = '[ + ]';
+      }
+    }
+
+    // Sistema de Like principal
     let likeCount = parseInt(localStorage.getItem('dcb_likes') || '34');
     let isLiked = localStorage.getItem('dcb_user_liked') === 'true';
 
@@ -1750,6 +2258,7 @@
     const likeTextSpan = document.getElementById('like-text');
 
     function updateLikeDisplay() {
+      if (!likeCountSpan || !likeTextSpan) return;
       likeCountSpan.textContent = likeCount;
       if (isLiked) {
         likeBtn.classList.add('liked');
@@ -1762,6 +2271,7 @@
     updateLikeDisplay();
 
     function toggleLike() {
+      playUIBeep(isLiked ? 380 : 780);
       if (!isLiked) {
         likeCount++;
         isLiked = true;
@@ -1774,17 +2284,57 @@
       updateLikeDisplay();
     }
 
-    // 2. Reacciones Rápidas
     function addReaction(type) {
+      playUIBeep(640);
       const el = document.getElementById('react-' + type);
-      let count = parseInt(el.textContent) + 1;
-      el.textContent = count;
+      if (el) {
+        let count = parseInt(el.textContent) + 1;
+        el.textContent = count;
+      }
     }
 
-    // 3. Sistema de Comentarios con LocalStorage
+    // Comentarios independientes por Asset
+    function loadAssetComments(assetId) {
+      const feed = document.getElementById('feed-' + assetId);
+      if (!feed || feed.dataset.loaded) return;
+      feed.dataset.loaded = "true";
+
+      const saved = JSON.parse(localStorage.getItem('asset_comments_' + assetId) || '[]');
+      saved.forEach(c => {
+        feed.insertBefore(createCommentElement(c.author, c.date, c.msg), feed.firstChild);
+      });
+    }
+
+    function postAssetComment(event, assetId) {
+      event.preventDefault();
+      const authorInput = document.getElementById('author-' + assetId);
+      const msgInput = document.getElementById('msg-' + assetId);
+      if (!authorInput || !msgInput) return;
+
+      const author = authorInput.value.trim();
+      const msg = msgInput.value.trim();
+      if (!author || !msg) return;
+
+      const date = "Hoy, " + new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      const feed = document.getElementById('feed-' + assetId);
+      
+      if (feed) {
+        feed.insertBefore(createCommentElement(author, date, msg), feed.firstChild);
+      }
+
+      const saved = JSON.parse(localStorage.getItem('asset_comments_' + assetId) || '[]');
+      saved.unshift({ author, date, msg });
+      localStorage.setItem('asset_comments_' + assetId, JSON.stringify(saved));
+
+      authorInput.value = '';
+      msgInput.value = '';
+    }
+
+    // Comentarios Devlog Juegos
     function loadSavedComments() {
       const saved = JSON.parse(localStorage.getItem('dcb_user_comments') || '[]');
       const feed = document.getElementById('comments-feed');
+      if (!feed) return;
       saved.forEach(c => {
         feed.insertBefore(createCommentElement(c.author, c.date, c.msg), feed.firstChild);
       });
@@ -1807,24 +2357,22 @@
       event.preventDefault();
       const authorInput = document.getElementById('comment-author');
       const msgInput = document.getElementById('comment-msg');
+      if (!authorInput || !msgInput) return;
 
       const author = authorInput.value.trim();
       const msg = msgInput.value.trim();
-
       if (!author || !msg) return;
 
       const date = "Hoy, " + new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-
-      // Añadir al DOM
       const feed = document.getElementById('comments-feed');
-      feed.insertBefore(createCommentElement(author, date, msg), feed.firstChild);
+      if (feed) {
+        feed.insertBefore(createCommentElement(author, date, msg), feed.firstChild);
+      }
 
-      // Guardar
       const saved = JSON.parse(localStorage.getItem('dcb_user_comments') || '[]');
       saved.unshift({ author, date, msg });
       localStorage.setItem('dcb_user_comments', JSON.stringify(saved));
 
-      // Limpiar formulario
       authorInput.value = '';
       msgInput.value = '';
     }
