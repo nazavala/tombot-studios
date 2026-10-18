@@ -173,7 +173,6 @@
       opacity: 0.75;
     }
 
-    /* Viñeta de bordes oscuros */
     body::after {
       content: "";
       position: fixed;
@@ -292,7 +291,7 @@
       text-transform: uppercase;
     }
 
-    /* BOTÓN HAMBURGUESA TÁCTICO */
+    /* BOTÓN HAMBURGUESA */
     .hamburger-btn {
       display: inline-flex;
       align-items: center;
@@ -445,7 +444,6 @@
       margin-bottom: 0.5rem;
     }
 
-    /* Tarjetas de Selección de Tema */
     .theme-card-option {
       background: #0b0d13;
       border: 1px solid #282f3e;
@@ -502,7 +500,6 @@
       font-weight: bold;
     }
 
-    /* Muestrario de Colores (Swatches) */
     .theme-swatches {
       display: flex;
       gap: 0.45rem;
@@ -1662,12 +1659,12 @@
     }
 
     /* ==========================================================================
-       FOOTER & DOCK DE REDES SOCIALES
+       FOOTER SIN LOGO & CON DOCK DE REDES SOCIALES
        ========================================================================== */
     .main-footer {
       background: #060709;
       border-top: 2px solid #1a1e27;
-      padding: 45px 0 calc(35px + env(safe-area-inset-bottom)) 0;
+      padding: 40px 0 calc(35px + env(safe-area-inset-bottom)) 0;
       text-align: center;
       margin-top: auto;
       position: relative;
@@ -1682,38 +1679,13 @@
       background: repeating-linear-gradient(90deg, var(--accent-primary), var(--accent-primary) 15px, transparent 15px, transparent 30px);
     }
 
-    .footer-logo-center {
-      width: 65px;
-      height: 65px;
-      border: 2px solid var(--accent-primary);
-      background: #000;
-      margin: 0 auto 1.2rem auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      border-radius: 50%;
-      cursor: pointer;
-      transition: transform 0.15s ease;
-    }
-
-    .footer-logo-center:hover {
-      transform: scale(1.08);
-    }
-
-    .footer-logo-center img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
     .footer-studio-name {
       font-family: var(--font-title);
-      font-size: 2.2rem;
+      font-size: 2.3rem;
       letter-spacing: 2px;
       color: #ffffff;
-      margin-bottom: 0.3rem;
+      margin-top: 0.5rem;
+      margin-bottom: 0.4rem;
     }
 
     .footer-quote {
@@ -1733,7 +1705,7 @@
       justify-content: center;
       align-items: center;
       gap: 0.75rem;
-      margin: 1.5rem auto 1.2rem auto;
+      margin: 0 auto 1.2rem auto;
       padding: 0.5rem 0.8rem;
       background: #0d0f14;
       border: 1px solid #232833;
@@ -2457,16 +2429,13 @@
   </div>
 
   <!-- ==========================================================================
-       FOOTER CON LOGO REDONDO & DOCK SOCIAL (6 ICONOS)
+       FOOTER SIN LOGO (DISEÑO LIMPIO & DOCK DE REDES SOCIALES)
        ========================================================================== -->
   <footer class="main-footer">
     <div class="footer-hazard-stripe"></div>
     <div class="container">
       
-      <div class="footer-logo-center" onclick="openImageModal('image.png', 'Tombot Studios Logo')" title="Ampliar logo">
-        <img src="image.png" alt="Tombot Studios Logo">
-      </div>
-      
+      <!-- LOGO ELIMINADO PARA MÁXIMO EQUILIBRIO VISUAL -->
       <h3 class="footer-studio-name">TOMBOT STUDIOS</h3>
       
       <p class="footer-quote">
@@ -2584,7 +2553,6 @@
       });
     }
 
-    // Cargar tema guardado al iniciar
     function initTheme() {
       const savedTheme = localStorage.getItem('tombot_grunge_theme') || 'rust';
       setTheme(savedTheme);
@@ -2612,7 +2580,6 @@
       document.body.style.overflow = '';
     }
 
-    // Cierre con tecla Escape (Tanto Lightbox como Drawer)
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') {
         closeImageModal();
