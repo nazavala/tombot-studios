@@ -12,41 +12,31 @@
 
   <style>
     /* ==========================================================================
-       VARIABLES Y PALETAS (GRUNGE INDUSTRIAL // ASBESTOS & RUST)
+       VARIABLES Y PALETAS DINÁMICAS (GRUNGE INDUSTRIAL // HUD SUITE)
        ========================================================================== */
-    :root {
-      /* PALETA 1: "RUST & INDUSTRIAL ASPHALT" (Por defecto) */
+    :root, body[data-theme="rust"] {
+      /* TEMA 1: "RUST & INDUSTRIAL ASPHALT" (Por defecto) */
       --bg-base: #0a0b0e;
       --bg-surface: #13161c;
       --bg-surface-elevated: #1a1e27;
       --dark-ink: #050608;
       
-      --accent-primary: #d99637;      /* Mostaza industrial desgastado */
+      --accent-primary: #d99637;      /* Mostaza industrial */
       --accent-primary-hover: #f0aa46;
-      --accent-secondary: #3d7982;    /* Pátina / cerceta corroído */
+      --accent-secondary: #3d7982;    /* Pátina / cerceta */
       --accent-secondary-hover: #4e95a0;
-      --accent-rust: #ab3326;         /* Óxido y sangre coagulada */
+      --accent-rust: #ab3326;         /* Óxido / sangre */
       --accent-rust-hover: #c44032;
 
-      --newsprint-bg: #c8beab;        /* Papel manchado / cartón de dossier */
-      --newsprint-ink: #100f0e;       /* Tinta de imprenta clandestina */
+      --newsprint-bg: #c8beab;        /* Papel dossier manchado */
+      --newsprint-ink: #100f0e;
       --newsprint-sub: #544e45;
 
-      /* Jerarquía Tipográfica */
-      --font-display: 'Teko', sans-serif;
-      --font-title: 'Bebas Neue', sans-serif;
-      --font-typewriter: 'Special Elite', monospace;
-      --font-tech: 'Share Tech Mono', monospace;
-
-      /* Bordes y Estructura Grunge */
-      --grunge-border: 2px solid #282d38;
-      --grunge-border-light: 1px solid rgba(217, 150, 55, 0.35);
-      --grunge-shadow: 5px 5px 0px rgba(0, 0, 0, 0.9);
-      --grunge-shadow-heavy: 8px 8px 0px #000000;
+      --theme-name: "RUST & ASPHALT";
     }
 
-    /* PALETA 2: "ACID TOXIC / SLUDGE PUNK" */
-    body:has(#theme-toggle:checked) {
+    /* TEMA 2: "ACID TOXIC / SLUDGE PUNK" */
+    body[data-theme="acid"] {
       --bg-base: #09070c;
       --bg-surface: #120f18;
       --bg-surface-elevated: #1a1624;
@@ -56,18 +46,91 @@
       --accent-primary-hover: #b5f731;
       --accent-secondary: #c93b68;    /* Magenta aerosol punk */
       --accent-secondary-hover: #de4777;
-      --accent-rust: #298d9e;         /* Cian de desecho químico */
+      --accent-rust: #298d9e;         /* Cian tóxico */
       --accent-rust-hover: #33a7bb;
 
-      --newsprint-bg: #d3d8c8;        /* Papel tóxico */
+      --newsprint-bg: #d3d8c8;        /* Papel irradiado */
       --newsprint-ink: #0f0f12;
       --newsprint-sub: #4b5043;
 
-      --grunge-border: 2px solid #2b2336;
-      --grunge-border-light: 1px solid rgba(163, 230, 32, 0.35);
+      --theme-name: "ACID PUNK";
     }
 
-    /* Reset & Base */
+    /* TEMA 3: "BLOOD & CINDER / DARK NOIR" */
+    body[data-theme="blood"] {
+      --bg-base: #080708;
+      --bg-surface: #141012;
+      --bg-surface-elevated: #1e1518;
+      --dark-ink: #040304;
+      
+      --accent-primary: #e63946;      /* Carmesí sangre */
+      --accent-primary-hover: #ff4d5e;
+      --accent-secondary: #f4a261;    /* Brasa incandescente */
+      --accent-secondary-hover: #f7b27d;
+      --accent-rust: #8b1e22;         /* Sangre coagulada */
+      --accent-rust-hover: #a82429;
+
+      --newsprint-bg: #d8ccd0;        /* Papel ceniza */
+      --newsprint-ink: #12070b;
+      --newsprint-sub: #5a4b51;
+
+      --theme-name: "BLOOD & CINDER";
+    }
+
+    /* TEMA 4: "MILITARY RECON / DESERT OPS" */
+    body[data-theme="military"] {
+      --bg-base: #0b0d09;
+      --bg-surface: #131711;
+      --bg-surface-elevated: #1a2017;
+      --dark-ink: #050604;
+      
+      --accent-primary: #c4b065;      /* Caqui del desierto */
+      --accent-primary-hover: #d6c276;
+      --accent-secondary: #6e8253;    /* Verde oliva táctico */
+      --accent-secondary-hover: #7f975f;
+      --accent-rust: #8c5234;         /* Arcilla / cañón */
+      --accent-rust-hover: #a35f3d;
+
+      --newsprint-bg: #ccc9ba;        /* Papel militar */
+      --newsprint-ink: #0e110c;
+      --newsprint-sub: #4d5145;
+
+      --theme-name: "MILITARY RECON";
+    }
+
+    /* TEMA 5: "CYBER TERMINAL / CLANDESTINE NET" */
+    body[data-theme="cyber"] {
+      --bg-base: #04070d;
+      --bg-surface: #0a101b;
+      --bg-surface-elevated: #10192a;
+      --dark-ink: #020306;
+      
+      --accent-primary: #00f0ff;      /* Cian fosforescente */
+      --accent-primary-hover: #33f3ff;
+      --accent-secondary: #c724b1;    /* Neón violeta */
+      --accent-secondary-hover: #d638c1;
+      --accent-rust: #ff0055;         /* Láser de advertencia */
+      --accent-rust-hover: #ff2a73;
+
+      --newsprint-bg: #c4d7de;        /* Pantalla CRT fría */
+      --newsprint-ink: #040810;
+      --newsprint-sub: #45525c;
+
+      --theme-name: "CYBER TERMINAL";
+    }
+
+    /* Estructura Universal */
+    :root {
+      --font-display: 'Teko', sans-serif;
+      --font-title: 'Bebas Neue', sans-serif;
+      --font-typewriter: 'Special Elite', monospace;
+      --font-tech: 'Share Tech Mono', monospace;
+
+      --grunge-border: 2px solid #282d38;
+      --grunge-shadow: 5px 5px 0px rgba(0, 0, 0, 0.9);
+      --grunge-shadow-heavy: 8px 8px 0px #000000;
+    }
+
     *, *::before, *::after {
       margin: 0;
       padding: 0;
@@ -96,7 +159,7 @@
       transition: background-color 0.25s ease, color 0.25s ease;
     }
 
-    /* TEXTURA PROCEDURAL DE RUIDO Y SCANLINES */
+    /* GRANO PROCEDURAL Y SCANLINES CRT */
     body::before {
       content: "";
       position: fixed;
@@ -110,7 +173,7 @@
       opacity: 0.75;
     }
 
-    /* Viñeteado perimetral */
+    /* Viñeta de bordes oscuros */
     body::after {
       content: "";
       position: fixed;
@@ -132,7 +195,7 @@
     }
 
     /* ==========================================================================
-       HEADER PRINCIPAL CON LOGOTIPO REDONDO
+       HEADER PRINCIPAL CON BOTÓN DE MENÚ HAMBURGUESA
        ========================================================================== */
     .main-header {
       background: var(--dark-ink);
@@ -141,6 +204,7 @@
       top: 0;
       z-index: 1000;
       box-shadow: 0 4px 20px rgba(0,0,0,0.8);
+      transition: border-color 0.25s ease;
     }
 
     .hazard-top-bar {
@@ -153,6 +217,7 @@
         #000 10px,
         #000 20px
       );
+      transition: background 0.25s ease;
     }
 
     .navbar {
@@ -216,6 +281,7 @@
       line-height: 0.9;
       text-shadow: 2px 2px 0px #000;
       white-space: nowrap;
+      transition: color 0.25s ease;
     }
 
     .logo-sub {
@@ -226,51 +292,232 @@
       text-transform: uppercase;
     }
 
-    /* Switch Industrial */
-    .theme-switch-wrapper {
-      display: flex;
+    /* BOTÓN HAMBURGUESA TÁCTICO */
+    .hamburger-btn {
+      display: inline-flex;
       align-items: center;
-      gap: 0.8rem;
-      background: #101217;
-      border: 1px solid #2a303d;
-      padding: 0.4rem 0.9rem;
+      gap: 0.7rem;
+      background: #11141c;
+      color: var(--accent-primary);
+      border: 1px solid var(--accent-primary);
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      font-family: var(--font-title);
+      font-size: 1.25rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      box-shadow: 3px 3px 0px #000;
+      clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
+      transition: all 0.15s ease;
+      touch-action: manipulation;
       user-select: none;
-      box-shadow: inset 0 0 8px rgba(0,0,0,0.7);
       flex-shrink: 0;
     }
 
-    .theme-label-txt {
+    .hamburger-btn:hover {
+      background: var(--accent-primary);
+      color: #000;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.9);
+    }
+
+    .hamburger-btn:active {
+      transform: translateY(1px);
+    }
+
+    .hamburger-icon {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 18px;
+      height: 14px;
+    }
+
+    .hamburger-icon span {
+      display: block;
+      height: 2px;
+      width: 100%;
+      background: currentColor;
+      transition: transform 0.2s ease, background-color 0.2s ease;
+    }
+
+    /* ==========================================================================
+       GAVETA LATERAL DE TEMAS (OFF-CANVAS DRAWER)
+       ========================================================================== */
+    .drawer-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(4px);
+      z-index: 10000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+
+    .drawer-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .theme-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 360px;
+      max-width: 88vw;
+      background: var(--bg-surface);
+      border-left: 2px solid var(--accent-primary);
+      box-shadow: -8px 0 25px rgba(0, 0, 0, 0.9);
+      z-index: 10001;
+      transform: translateX(100%);
+      transition: transform 0.25s cubic-bezier(0.1, 0.9, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+    }
+
+    .theme-drawer.active {
+      transform: translateX(0);
+    }
+
+    .drawer-header {
+      background: #080a0e;
+      padding: 1.4rem;
+      border-bottom: 1px solid #282e3d;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .drawer-badge {
       font-family: var(--font-tech);
-      font-size: 0.85rem;
+      font-size: 0.78rem;
       letter-spacing: 1.5px;
-      color: var(--accent-primary);
+      color: var(--accent-secondary);
       text-transform: uppercase;
+      display: block;
+      margin-bottom: 0.2rem;
+    }
+
+    .drawer-title {
+      font-family: var(--font-title);
+      font-size: 1.7rem;
+      letter-spacing: 1.5px;
+      color: #fff;
       line-height: 1;
     }
 
-    .theme-pill-btn {
-      width: 44px;
-      height: 22px;
-      background: #000;
-      border: 1px solid var(--accent-primary);
+    .drawer-close-btn {
+      background: var(--accent-rust);
+      color: #fff;
+      border: none;
+      font-family: var(--font-tech);
+      font-size: 1.05rem;
+      padding: 0.35rem 0.7rem;
       cursor: pointer;
+      font-weight: bold;
+      clip-path: polygon(4px 0, 100% 0, 100% calc(100% - 4px), calc(100% - 4px) 100%, 0 100%, 0 4px);
+      transition: background 0.15s ease;
+    }
+
+    .drawer-close-btn:hover {
+      background: var(--accent-rust-hover);
+    }
+
+    .drawer-body {
+      padding: 1.4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      flex-grow: 1;
+    }
+
+    .drawer-instruction {
+      font-family: var(--font-typewriter);
+      font-size: 0.95rem;
+      color: #8c97a8;
+      line-height: 1.4;
+      border-left: 2px solid var(--accent-primary);
+      padding-left: 0.8rem;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Tarjetas de Selección de Tema */
+    .theme-card-option {
+      background: #0b0d13;
+      border: 1px solid #282f3e;
+      padding: 1rem 1.1rem;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      transition: all 0.15s ease;
       position: relative;
-      display: inline-block;
+      user-select: none;
+      clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
     }
 
-    .theme-pill-btn::after {
-      content: '';
-      position: absolute;
-      top: 2px;
-      left: 2px;
-      width: 16px;
-      height: 16px;
+    .theme-card-option:hover {
+      border-color: var(--accent-primary);
+      background: #11151f;
+      transform: translateX(-3px);
+    }
+
+    .theme-card-option.active {
+      border-color: var(--accent-primary);
+      background: #141824;
+      box-shadow: inset 3px 0 0 var(--accent-primary), 0 0 15px rgba(0,0,0,0.6);
+    }
+
+    .theme-opt-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .theme-opt-name {
+      font-family: var(--font-title);
+      font-size: 1.35rem;
+      letter-spacing: 1.2px;
+      color: #fff;
+    }
+
+    .theme-opt-badge {
+      font-family: var(--font-tech);
+      font-size: 0.72rem;
+      letter-spacing: 1px;
+      padding: 0.15rem 0.45rem;
+      background: #1b202c;
+      color: #9aa5b8;
+      border: 1px solid #303748;
+    }
+
+    .theme-card-option.active .theme-opt-badge {
       background: var(--accent-primary);
-      transition: transform 0.15s ease-in-out, background 0.15s ease;
+      color: #000;
+      border-color: var(--accent-primary);
+      font-weight: bold;
     }
 
-    body:has(#theme-toggle:checked) .theme-pill-btn::after {
-      transform: translateX(22px);
+    /* Muestrario de Colores (Swatches) */
+    .theme-swatches {
+      display: flex;
+      gap: 0.45rem;
+    }
+
+    .swatch {
+      width: 22px;
+      height: 14px;
+      border: 1px solid rgba(0,0,0,0.6);
+    }
+
+    .theme-opt-desc {
+      font-size: 0.88rem;
+      color: #7b8596;
+      line-height: 1.35;
     }
 
     /* ==========================================================================
@@ -784,7 +1031,6 @@
       display: block;
     }
 
-    /* Galería HUD Devlog */
     .devlog-header {
       background: var(--bg-surface);
       border-left: 4px solid var(--accent-primary);
@@ -1332,7 +1578,7 @@
     }
 
     /* ==========================================================================
-       MODAL LIGHTBOX (SURVEILLANCE HUD)
+       MODAL LIGHTBOX
        ========================================================================== */
     .lightbox-modal {
       display: none;
@@ -1482,7 +1728,6 @@
       padding: 0 1rem;
     }
 
-    /* DOCK SOCIAL COMPACTO (6 ICONOS) */
     .social-links-bar {
       display: inline-flex;
       justify-content: center;
@@ -1517,7 +1762,7 @@
       color: #000;
       border-color: var(--accent-primary);
       transform: translateY(-2px);
-      box-shadow: 0 4px 10px rgba(217, 150, 55, 0.35);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
     }
 
     .social-icon-btn:active {
@@ -1566,11 +1811,17 @@
       .navbar {
         height: auto;
         padding: 0.6rem 0;
-        flex-wrap: wrap;
+        flex-wrap: nowrap;
       }
 
       .logo-title {
-        font-size: 1.6rem;
+        font-size: 1.45rem;
+      }
+
+      .hamburger-btn {
+        padding: 0.45rem 0.75rem;
+        font-size: 1.05rem;
+        gap: 0.5rem;
       }
 
       .tabs-list {
@@ -1648,21 +1899,114 @@
         display: none;
       }
 
-      .theme-switch-wrapper {
-        padding: 0.35rem 0.6rem;
-        gap: 0.5rem;
+      .hamburger-text {
+        display: none;
       }
 
-      .theme-label-txt {
-        font-size: 0.75rem;
+      .hamburger-btn {
+        padding: 0.55rem 0.7rem;
       }
     }
   </style>
 </head>
-<body>
+<body data-theme="rust">
 
-  <!-- CONTROL DE PALETA (CSS LOGIC) -->
-  <input type="checkbox" id="theme-toggle" class="logic-input">
+  <!-- ==========================================================================
+       GAVETA LATERAL DE CONFIGURACIÓN DE PALETAS (DRAWER)
+       ========================================================================== -->
+  <div id="drawer-overlay" class="drawer-overlay" onclick="toggleThemeDrawer()"></div>
+
+  <aside id="theme-drawer" class="theme-drawer" aria-label="Selector de Paletas Grunge">
+    <div class="drawer-header">
+      <div>
+        <span class="drawer-badge">HUD SYSTEM // INTERFAZ</span>
+        <h3 class="drawer-title">PALETAS GRUNGE</h3>
+      </div>
+      <button class="drawer-close-btn" onclick="toggleThemeDrawer()" title="Cerrar">[ X ]</button>
+    </div>
+
+    <div class="drawer-body">
+      <p class="drawer-instruction">
+        Selecciona un esquema cromático táctico. La configuración se almacena en la memoria del sistema.
+      </p>
+
+      <!-- TEMA 1 -->
+      <div class="theme-card-option active" data-theme-id="rust" onclick="setTheme('rust')">
+        <div class="theme-opt-header">
+          <span class="theme-opt-name">01 // RUST & ASPHALT</span>
+          <span class="theme-opt-badge">ACTIVO</span>
+        </div>
+        <div class="theme-swatches">
+          <span class="swatch" style="background:#0a0b0e;"></span>
+          <span class="swatch" style="background:#d99637;"></span>
+          <span class="swatch" style="background:#3d7982;"></span>
+          <span class="swatch" style="background:#ab3326;"></span>
+        </div>
+        <p class="theme-opt-desc">Mostaza de arcade retro, chapa oxidada y asfalto carbón profundo.</p>
+      </div>
+
+      <!-- TEMA 2 -->
+      <div class="theme-card-option" data-theme-id="acid" onclick="setTheme('acid')">
+        <div class="theme-opt-header">
+          <span class="theme-opt-name">02 // ACID PUNK</span>
+          <span class="theme-opt-badge">STANDBY</span>
+        </div>
+        <div class="theme-swatches">
+          <span class="swatch" style="background:#09070c;"></span>
+          <span class="swatch" style="background:#a3e620;"></span>
+          <span class="swatch" style="background:#c93b68;"></span>
+          <span class="swatch" style="background:#298d9e;"></span>
+        </div>
+        <p class="theme-opt-desc">Verde tóxico radiactivo, aerosol fucsia y desechos químicos de los 90.</p>
+      </div>
+
+      <!-- TEMA 3 -->
+      <div class="theme-card-option" data-theme-id="blood" onclick="setTheme('blood')">
+        <div class="theme-opt-header">
+          <span class="theme-opt-name">03 // BLOOD & CINDER</span>
+          <span class="theme-opt-badge">STANDBY</span>
+        </div>
+        <div class="theme-swatches">
+          <span class="swatch" style="background:#080708;"></span>
+          <span class="swatch" style="background:#e63946;"></span>
+          <span class="swatch" style="background:#f4a261;"></span>
+          <span class="swatch" style="background:#8b1e22;"></span>
+        </div>
+        <p class="theme-opt-desc">Carmín visceral, brasas incandescentes y noir callejero implacable.</p>
+      </div>
+
+      <!-- TEMA 4 -->
+      <div class="theme-card-option" data-theme-id="military" onclick="setTheme('military')">
+        <div class="theme-opt-header">
+          <span class="theme-opt-name">04 // MILITARY RECON</span>
+          <span class="theme-opt-badge">STANDBY</span>
+        </div>
+        <div class="theme-swatches">
+          <span class="swatch" style="background:#0b0d09;"></span>
+          <span class="swatch" style="background:#c4b065;"></span>
+          <span class="swatch" style="background:#6e8253;"></span>
+          <span class="swatch" style="background:#8c5234;"></span>
+        </div>
+        <p class="theme-opt-desc">Caqui de infiltración, camuflaje oliva militar y arcilla del páramo.</p>
+      </div>
+
+      <!-- TEMA 5 -->
+      <div class="theme-card-option" data-theme-id="cyber" onclick="setTheme('cyber')">
+        <div class="theme-opt-header">
+          <span class="theme-opt-name">05 // CYBER TERMINAL</span>
+          <span class="theme-opt-badge">STANDBY</span>
+        </div>
+        <div class="theme-swatches">
+          <span class="swatch" style="background:#04070d;"></span>
+          <span class="swatch" style="background:#00f0ff;"></span>
+          <span class="swatch" style="background:#c724b1;"></span>
+          <span class="swatch" style="background:#ff0055;"></span>
+        </div>
+        <p class="theme-opt-desc">Cian electromagnético, neón magenta y pantalla de mainframe clandestino.</p>
+      </div>
+
+    </div>
+  </aside>
 
   <!-- CONTROL DE PESTAÑAS (CSS PURO) -->
   <input type="radio" name="site_tabs" id="tab-studio" class="logic-input" checked>
@@ -1671,7 +2015,7 @@
   <input type="radio" name="site_tabs" id="tab-team" class="logic-input">
 
   <!-- ==========================================================================
-       HEADER PRINCIPAL CON LOGO REDONDO & MODO GRUNGE
+       HEADER PRINCIPAL CON BOTÓN DE MENÚ
        ========================================================================== -->
   <header class="main-header">
     <div class="hazard-top-bar"></div>
@@ -1686,11 +2030,15 @@
         </div>
       </label>
 
-      <!-- Interruptor Grunge -->
-      <div class="theme-switch-wrapper" title="Alternar entre paleta Rust 80s y Acid Punk 90s">
-        <span class="theme-label-txt">MODO GRUNGE</span>
-        <label for="theme-toggle" class="theme-pill-btn" onclick="playUIBeep(480)"></label>
-      </div>
+      <!-- BOTÓN HAMBURGUESA / GAVETA -->
+      <button class="hamburger-btn" onclick="toggleThemeDrawer()" title="Abrir selector de paletas" aria-label="Menú de temas">
+        <span class="hamburger-icon">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+        <span class="hamburger-text">TEMAS // HUD</span>
+      </button>
     </div>
   </header>
 
@@ -2125,7 +2473,6 @@
         FORJADO CON CAFÉ NEGRO, CÓDIGO BRUTAL Y ORGULLO INDEPENDIENTE.
       </p>
 
-      <!-- DOCK SOCIAL (6 ICONOS CON FORMATO TÁCTICO) -->
       <div class="social-links-bar" role="navigation" aria-label="Redes Sociales Oficiales">
         
         <!-- INSTAGRAM -->
@@ -2167,7 +2514,7 @@
   </footer>
 
   <!-- ==========================================================================
-       SCRIPTS (WEB AUDIO, LIGHTBOX, ACCORDIONS Y PERSISTENCIA)
+       SCRIPTS (TEMAS, WEB AUDIO, LIGHTBOX, ACCORDIONS Y PERSISTENCIA)
        ========================================================================== -->
   <script>
     let sfxEnabled = true;
@@ -2199,7 +2546,54 @@
       } catch (e) {}
     }
 
-    // Modal Lightbox táctico
+    // ==========================================
+    // SISTEMA DE GAVETA DE TEMAS (DRAWER)
+    // ==========================================
+    const themeDrawer = document.getElementById('theme-drawer');
+    const drawerOverlay = document.getElementById('drawer-overlay');
+
+    function toggleThemeDrawer() {
+      playUIBeep(520);
+      const isActive = themeDrawer.classList.contains('active');
+      if (isActive) {
+        themeDrawer.classList.remove('active');
+        drawerOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+      } else {
+        themeDrawer.classList.add('active');
+        drawerOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function setTheme(themeName) {
+      playUIBeep(720);
+      document.body.setAttribute('data-theme', themeName);
+      localStorage.setItem('tombot_grunge_theme', themeName);
+
+      // Actualizar tarjeta activa en el Drawer
+      document.querySelectorAll('.theme-card-option').forEach(card => {
+        const badge = card.querySelector('.theme-opt-badge');
+        if (card.dataset.themeId === themeName) {
+          card.classList.add('active');
+          if (badge) badge.textContent = 'ACTIVO';
+        } else {
+          card.classList.remove('active');
+          if (badge) badge.textContent = 'STANDBY';
+        }
+      });
+    }
+
+    // Cargar tema guardado al iniciar
+    function initTheme() {
+      const savedTheme = localStorage.getItem('tombot_grunge_theme') || 'rust';
+      setTheme(savedTheme);
+    }
+    initTheme();
+
+    // ==========================================
+    // LIGHTBOX MODAL
+    // ==========================================
     function openImageModal(src, title) {
       playUIBeep(650);
       const modal = document.getElementById('image-lightbox-modal');
@@ -2218,11 +2612,17 @@
       document.body.style.overflow = '';
     }
 
+    // Cierre con tecla Escape (Tanto Lightbox como Drawer)
     document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') closeImageModal();
+      if (e.key === 'Escape') {
+        closeImageModal();
+        if (themeDrawer.classList.contains('active')) toggleThemeDrawer();
+      }
     });
 
-    // Acordeón Devlog en Juegos
+    // ==========================================
+    // ACORDEÓN DEVLOG JUEGOS
+    // ==========================================
     function toggleDevlogAccordion() {
       playUIBeep(650);
       const content = document.getElementById('devlog-content-box');
@@ -2235,7 +2635,9 @@
       }
     }
 
-    // Acordeón independiente para cada Asset
+    // ==========================================
+    // ACORDEÓN POR ASSET
+    // ==========================================
     function toggleAssetDevlog(assetId) {
       playUIBeep(600);
       const content = document.getElementById('asset-box-' + assetId);
@@ -2249,7 +2651,9 @@
       }
     }
 
-    // Sistema de Like principal
+    // ==========================================
+    // LIKES Y REACCIONES
+    // ==========================================
     let likeCount = parseInt(localStorage.getItem('dcb_likes') || '34');
     let isLiked = localStorage.getItem('dcb_user_liked') === 'true';
 
@@ -2293,7 +2697,9 @@
       }
     }
 
-    // Comentarios independientes por Asset
+    // ==========================================
+    // COMENTARIOS EN LOCALSTORAGE (JUEGOS Y ASSETS)
+    // ==========================================
     function loadAssetComments(assetId) {
       const feed = document.getElementById('feed-' + assetId);
       if (!feed || feed.dataset.loaded) return;
@@ -2330,7 +2736,6 @@
       msgInput.value = '';
     }
 
-    // Comentarios Devlog Juegos
     function loadSavedComments() {
       const saved = JSON.parse(localStorage.getItem('dcb_user_comments') || '[]');
       const feed = document.getElementById('comments-feed');
@@ -2364,6 +2769,7 @@
       if (!author || !msg) return;
 
       const date = "Hoy, " + new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
       const feed = document.getElementById('comments-feed');
       if (feed) {
         feed.insertBefore(createCommentElement(author, date, msg), feed.firstChild);
